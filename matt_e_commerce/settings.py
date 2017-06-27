@@ -37,6 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'accounts',
+    'django_forms_bootstrap',
+    'products',
+    'payments',
+    'django_gravatar',
+    'cart',
+    'storages',
+    'rest_framework',
+    'categories'
 
 ]
 
@@ -63,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -114,6 +123,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+# Email Settings
+DEFAULT_FROM_EMAIL = 'richecommerce@example.com'
+
+# To use Django's Console email backend
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),

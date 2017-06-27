@@ -1,2 +1,2 @@
-# matt-e-commerce
-Matthew Altomare
+# rich-e-commerce
+Richard Dalton
