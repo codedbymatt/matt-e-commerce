@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = "qik+7k74tx_%\=f)n40n24rykz%@lb7k@u#oh1d_1aps2y3%be\="
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', True)
@@ -44,12 +44,14 @@ INSTALLED_APPS = [
     'cart',
     'storages',
     'rest_framework',
-    'categories'
+    'categories',
+    "django.contrib.sites",
+    'dashing',
 
 ]
 
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -124,11 +126,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-# Email Settings
-DEFAULT_FROM_EMAIL = 'richecommerce@example.com'
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailAuth'
+]
 
+# Email Settings
 # To use Django's Console email backend
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 25
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_USE_TLS = False
+# DEFAULT_FROM_EMAIL = 'No Reply <NoReply@shotbymatt.com>'
+
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
@@ -137,3 +149,47 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STRIPE_PUBLIC_KEY = "pk_test_OK7JzXqDyPKkjwDC00D7uFLQ"
+STRIPE_SECRET_KEY = "sk_test_g87dcf48YDcBuURtUk6EBOJ1"
+
+# STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+   os.path.join(BASE_DIR, "static"),
+)
+
+# To run the SMTP debugger in terminal
+# python -m smtpd -n -c DebuggingServer localhost:1025
+# And use the following settings.
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = 1025
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_USE_TLS = False
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    'PAGE_SIZE': 10
+}
+
+# DJSTRIPE_PLANS = {
+#     "monthly": {
+#         "stripe_plan_id": "pro-monthly",
+#         "name": "Web App Pro ($24.99/month)",
+#         "description": "The monthly subscription plan to WebApp",
+#         "price": 2499,  # $24.99
+#         "currency": "usd",
+#         "interval": "month"
+#     },
+#     "yearly": {
+#         "stripe_plan_id": "pro-yearly",
+#         "name": "Web App Pro ($199/year)",
+#         "description": "The annual subscription plan to WebApp",
+#         "price": 19900,  # $199.00
+#         "currency": "usd",
+#         "interval": "year"
+#     }
+# }

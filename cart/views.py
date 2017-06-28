@@ -14,9 +14,7 @@ from .serializers import UserSerializer
 from rest_framework import viewsets
 from .serializers import CartItemSerializer
 
-
-stripe.api_key = settings.STRIPE_SECRET
-
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 @login_required(login_url="/accounts/login")
@@ -56,18 +54,16 @@ def user_cart(request):
     args = {'form': form,
             'items': cartItems,
             'total': total,
-            'publishable': settings.STRIPE_PUBLISHABLE}
+            'publishable': settings.STRIPE_PUBLIC_KEY}
     args.update(csrf(request))
 
     return render(request, 'cart.html', args)
 
 
-
-
 @login_required(login_url="/accounts/login")
 def add_to_cart(request, id):
     product = get_object_or_404(Product, pk=id)
-    quantity=int(request.POST.get('quantity'))
+    quantity = int(request.POST.get('quantity'))
 
     try:
         cartItem = CartItem.objects.get(user=request.user, product=product)

@@ -1,13 +1,15 @@
-from django.contrib import messages, auth
-from django.contrib.auth.decorators import login_required
-from payments.forms import MakePaymentForm
-from django.shortcuts import render, get_object_or_404, redirect, reverse
-from django.template.context_processors import csrf
-from django.conf import settings
-from products.models import Product
 import stripe
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.shortcuts import render, get_object_or_404, redirect
+from django.template.context_processors import csrf
 
-stripe.api_key = settings.STRIPE_SECRET
+from payments.forms import MakePaymentForm
+from products.models import Product
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 @login_required(login_url="/accounts/login")
@@ -18,7 +20,7 @@ def buy_now(request, id):
             try:
                 product = get_object_or_404(Product, pk=id)
                 customer = stripe.Charge.create(
-                    amount= int(product.price * 100),
+                    amount=int(product.price * 100),
                     currency="EUR",
                     description=product.name,
                     card=form.cleaned_data['stripe_id'],
@@ -38,7 +40,7 @@ def buy_now(request, id):
         form = MakePaymentForm()
         product = get_object_or_404(Product, pk=id)
 
-    args = {'form': form, 'publishable': settings.STRIPE_PUBLISHABLE, 'product': product}
+    args = {'form': form, 'publishable': settings.STRIPE_PUBLIC_KEY, 'product': product}
     args.update(csrf(request))
 
     return render(request, 'pay.html', args)

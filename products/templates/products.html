@@ -18,10 +18,9 @@
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
-                <td><a href="#" )>Buy Now</a></td>
-                {#                    <td><a href="{% url 'add_to_cart' product.id %}")>Add To Cart</a></td>#}
+                <td><a href="{% url 'buy_now_stripe' product.id %}">Buy Now</a></td>
                 <td>
-                    <form method="post" action="#">
+                    <form method="post" action="{% url 'add_to_cart' product.id %}">
                         {% csrf_token %}
                         Quantity
                         <input name='quantity' type="number" min="1" max="999">
