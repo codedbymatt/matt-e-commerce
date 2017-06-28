@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from matt_e_commerce.passwords import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,7 +47,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'categories',
     "django.contrib.sites",
-    'dashing',
 
 ]
 
@@ -126,21 +126,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'accounts.backends.EmailAuth'
-]
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'accounts.backends.EmailAuth'
+# ]
 
-# Email Settings
-# To use Django's Console email backend
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = 25
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_USE_TLS = False
-# DEFAULT_FROM_EMAIL = 'No Reply <NoReply@shotbymatt.com>'
-
+SITE_ID = 1
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
@@ -158,15 +149,16 @@ STATICFILES_DIRS = (
    os.path.join(BASE_DIR, "static"),
 )
 
-# To run the SMTP debugger in terminal
-# python -m smtpd -n -c DebuggingServer localhost:1025
-# And use the following settings.
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = 1025
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD = ''
 # EMAIL_USE_TLS = False
+# EMAIL_HOST = 'smtp.shotbymatt.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'matt@shotbymatt.com'
+# EMAIL_HOST_PASSWORD = email_password
+# DEFAULT_FROM_EMAIL = 'NOREPLY@shotbymatt.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+DEFAULT_FROM_EMAIL = 'richecommerce@example.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -174,22 +166,3 @@ REST_FRAMEWORK = {
     ],
     'PAGE_SIZE': 10
 }
-
-# DJSTRIPE_PLANS = {
-#     "monthly": {
-#         "stripe_plan_id": "pro-monthly",
-#         "name": "Web App Pro ($24.99/month)",
-#         "description": "The monthly subscription plan to WebApp",
-#         "price": 2499,  # $24.99
-#         "currency": "usd",
-#         "interval": "month"
-#     },
-#     "yearly": {
-#         "stripe_plan_id": "pro-yearly",
-#         "name": "Web App Pro ($199/year)",
-#         "description": "The annual subscription plan to WebApp",
-#         "price": 19900,  # $199.00
-#         "currency": "usd",
-#         "interval": "year"
-#     }
-# }

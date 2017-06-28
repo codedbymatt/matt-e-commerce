@@ -6,3 +6,4 @@ media
 env.sh
 secretkeys
 settings.py
+matt_e_commerce/passwords.py
