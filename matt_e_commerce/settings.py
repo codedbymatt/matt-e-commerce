@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "qik+7k74tx_%\=f)n40n24rykz%@lb7k@u#oh1d_1aps2y3%be\="
+SECRET_KEY = "SECRET_KEY"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', True)
 
-ALLOWED_HOSTS = ['51.255.83.181']
+ALLOWED_HOSTS = ['51.255.83.181', 'codedbymatt.com', '127.0.0.1']
 
 # Application definition
 
@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'categories',
     "django.contrib.sites",
+    'bootstrap3',
 
 ]
-
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -66,7 +66,7 @@ ROOT_URLCONF = 'matt_e_commerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,12 +141,12 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STRIPE_PUBLIC_KEY = "pk_test_OK7JzXqDyPKkjwDC00D7uFLQ"
-STRIPE_SECRET_KEY = "sk_test_g87dcf48YDcBuURtUk6EBOJ1"
+STRIPE_PUBLIC_KEY = "STRIPE_PUBLIC_KEY"
+STRIPE_SECRET_KEY = "STRIPE_SECRET_KEY"
 
 # STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-   os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static"),
 )
 
 # EMAIL_USE_TLS = False
