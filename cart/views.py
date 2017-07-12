@@ -47,7 +47,7 @@ def user_cart(request):
             messages.error(request, "We were unable to take a payment with that card!")
     else:
         if len(cartItems) == 0:
-            return render(request, 'empty_cart.html')
+            return render(request, 'empty_checkout.html')
 
         form = MakePaymentForm()
 
@@ -57,7 +57,7 @@ def user_cart(request):
             'publishable': settings.STRIPE_PUBLIC_KEY}
     args.update(csrf(request))
 
-    return render(request, 'cart.html', args)
+    return render(request, 'checkout.html', args)
 
 
 @login_required(login_url="/accounts/login")
