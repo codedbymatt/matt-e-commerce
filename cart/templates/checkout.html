@@ -3,13 +3,13 @@
 {% block head_css %}
 
     <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="{% static 'assets/vendor/jquery-ui/themes/base/jquery-ui.min.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/vendor/chosen/chosen.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/jquery-ui/themes/base/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/chosen/chosen.css' %}">
 
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="{% static 'assets/vendor/dzsparallaxer/dzsparallaxer.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/vendor/dzsparallaxer/dzsscroller/scroller.css'%}">
-    <link rel="stylesheet" href="{% static 'assets/vendor/dzsparallaxer/advancedscroller/plugin.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/dzsparallaxer/dzsparallaxer.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/dzsparallaxer/dzsscroller/scroller.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/dzsparallaxer/advancedscroller/plugin.css' %}">
 
 
 
@@ -20,7 +20,7 @@
 <section class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll loaded dzsprx-readyall"
          data-options='{direction: "fromtop", animation_duration: 25, direction: "reverse"}'>
     <div class="divimage dzsparallaxer--target w-100 g-bg-pos-top-center"
-         style="height: 140%; background-image: url(assets/img-temp/1920x1080/img3.jpg);"></div>
+         style="height: 140%; background-image: url({% static 'assets/img-temp/1920x1080/img3.jpg'%})"></div>
 
     <div class="container g-color-white g-pt-100 g-pb-40">
         <div class="g-mb-50">
@@ -105,7 +105,8 @@
                                 <tr class="g-brd-bottom g-brd-gray-light-v3">
                                     <td class="text-left g-py-25">
                                         <img class="d-inline-block g-width-100 mr-4"
-                                             src="assets/img-temp/150x150/img6.jpg" alt="Image Description">
+                                             src="{% static 'assets/img-temp/150x150/img6.jpg' %}"
+                                             alt="Image Description">
                                         <div class="d-inline-block align-middle">
                                             <h4 class="h6 g-color-black">Sneaker</h4>
                                             <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-line-height-1_6 mb-0">
@@ -139,7 +140,8 @@
                                 <tr class="g-brd-bottom g-brd-gray-light-v3">
                                     <td class="text-left g-py-25">
                                         <img class="d-inline-block g-width-100 mr-4"
-                                             src="assets/img-temp/150x150/img3.jpg" alt="Image Description">
+                                             src="{% static 'assets/img-temp/150x150/img3.jpg' %}"
+                                             alt="Image Description">
                                         <div class="d-inline-block align-middle">
                                             <h4 class="h6 g-color-black">Chukka Shoes</h4>
                                             <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-line-height-1_6 mb-0">
@@ -173,7 +175,8 @@
                                 <tr>
                                     <td class="text-left g-pt-25">
                                         <img class="d-inline-block g-width-100 mr-4"
-                                             src="assets/img-temp/150x150/img7.jpg" alt="Image Description">
+                                             src="{% static 'assets/img-temp/150x150/img7.jpg' %}"
+                                             alt="Image Description">
                                         <div class="d-inline-block align-middle">
                                             <h4 class="h6 g-color-black">Desk Clock</h4>
                                             <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-line-height-1_6 mb-0">
@@ -729,7 +732,8 @@
                                             <!-- Product -->
                                             <li class="d-flex justify-content-start">
                                                 <img class="g-width-100 g-height-100 mr-3"
-                                                     src="assets/img-temp/150x150/img6.jpg" alt="Image Description">
+                                                     src="{% static 'assets/img-temp/150x150/img6.jpg' %}"
+                                                     alt="Image Description">
                                                 <div class="d-block">
                                                     <h4 class="h6 g-color-black">Sneaker</h4>
                                                     <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-line-height-1_4 mb-1">
@@ -745,7 +749,8 @@
                                             <!-- Product -->
                                             <li class="d-flex justify-content-start g-brd-top g-brd-gray-light-v3 pt-4 mt-4">
                                                 <img class="g-width-100 g-height-100 mr-3"
-                                                     src="assets/img-temp/150x150/img3.jpg" alt="Image Description">
+                                                     src="{% static 'assets/img-temp/150x150/img3.jpg' %}"
+                                                     alt="Image Description">
                                                 <div class="d-block">
                                                     <h4 class="h6 g-color-black">Chukka Shoes</h4>
                                                     <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-line-height-1_4 mb-1">
@@ -761,7 +766,8 @@
                                             <!-- Product -->
                                             <li class="d-flex justify-content-start g-brd-top g-brd-gray-light-v3 pt-4 mt-4">
                                                 <img class="g-width-100 g-height-100 mr-3"
-                                                     src="assets/img-temp/150x150/img7.jpg" alt="Image Description">
+                                                     src="{% static 'assets/img-temp/150x150/img7.jpg' %}"
+                                                     alt="Image Description">
                                                 <div class="d-block">
                                                     <h4 class="h6 g-color-black">Desk Clock</h4>
                                                     <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-line-height-1_4 mb-1">
@@ -808,7 +814,7 @@
                                         <i class="fa" data-check-icon="&#xf00c"></i>
                                     </div>
                                     Pay with
-                                    <img class="g-width-70 ml-2" src="assets/img-temp/200x55/img1.jpg"
+                                    <img class="g-width-70 ml-2" src="{% static 'assets/img-temp/200x55/img1.jpg' %}"
                                          alt="Image Description">
                                 </label>
                             </li>
@@ -820,7 +826,7 @@
                                         <i class="fa" data-check-icon="&#xf00c"></i>
                                     </div>
                                     Pay with Credit Card
-                                    <img class="g-width-50 ml-2" src="assets/img-temp/200x55/img2.jpg"
+                                    <img class="g-width-50 ml-2" src="{% static 'assets/img-temp/200x55/img2.jpg' %}"
                                          alt="Image Description">
                                 </label>
                             </li>
@@ -927,7 +933,8 @@
                                             <!-- Product -->
                                             <li class="d-flex justify-content-start">
                                                 <img class="g-width-100 g-height-100 mr-3"
-                                                     src="assets/img-temp/150x150/img6.jpg" alt="Image Description">
+                                                     src="{% static 'assets/img-temp/150x150/img6.jpg' %}"
+                                                     alt="Image Description">
                                                 <div class="d-block">
                                                     <h4 class="h6 g-color-black">Sneaker</h4>
                                                     <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-line-height-1_4 mb-1">
@@ -943,7 +950,8 @@
                                             <!-- Product -->
                                             <li class="d-flex justify-content-start g-brd-top g-brd-gray-light-v3 pt-4 mt-4">
                                                 <img class="g-width-100 g-height-100 mr-3"
-                                                     src="assets/img-temp/150x150/img3.jpg" alt="Image Description">
+                                                     src="{% static 'assets/img-temp/150x150/img3.jpg' %}"
+                                                     alt="Image Description">
                                                 <div class="d-block">
                                                     <h4 class="h6 g-color-black">Chukka Shoes</h4>
                                                     <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-line-height-1_4 mb-1">
@@ -959,7 +967,8 @@
                                             <!-- Product -->
                                             <li class="d-flex justify-content-start g-brd-top g-brd-gray-light-v3 pt-4 mt-4">
                                                 <img class="g-width-100 g-height-100 mr-3"
-                                                     src="assets/img-temp/150x150/img7.jpg" alt="Image Description">
+                                                     src="{% static 'assets/img-temp/150x150/img7.jpg' %}"
+                                                     alt="Image Description">
                                                 <div class="d-block">
                                                     <h4 class="h6 g-color-black">Desk Clock</h4>
                                                     <ul class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-line-height-1_4 mb-1">
