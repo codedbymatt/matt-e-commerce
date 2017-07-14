@@ -9,8 +9,8 @@
   transition-duration: .3s;
 
   &--hover {
-  	&:hover {
-  		box-shadow: 0 20px 25px -12px rgba($g-color-black, .15);
-  	}
+    &:hover {
+      box-shadow: 0 20px 25px -12px rgba($g-color-black, .15);
+    }
   }
 }

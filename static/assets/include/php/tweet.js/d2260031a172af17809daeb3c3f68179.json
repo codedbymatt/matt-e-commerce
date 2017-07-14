@@ -1,1 +1,8 @@
-{"errors":[{"code":34,"message":"Sorry, that page does not exist."}]}
+{
+  "errors": [
+    {
+      "code": 34,
+      "message": "Sorry, that page does not exist."
+    }
+  ]
+}

@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('products', '0007_remove_product_category'),
         ('categories', '0002_auto_20170327_2218'),

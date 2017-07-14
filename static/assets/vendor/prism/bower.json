@@ -1,8 +1,8 @@
 {
   "name": "prism",
   "main": [
-      "prism.js",
-      "themes/prism.css"
+    "prism.js",
+    "themes/prism.css"
   ],
   "homepage": "http://prismjs.com",
   "authors": "Lea Verou",

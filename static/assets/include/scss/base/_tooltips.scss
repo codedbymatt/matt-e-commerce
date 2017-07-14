@@ -22,7 +22,7 @@
 
         &:after {
           top: 100%;
-          border-top: 4px solid rgba(0,0,0,.9);
+          border-top: 4px solid rgba(0, 0, 0, .9);
           border-right: 4px solid transparent;
           border-left: 4px solid transparent;
         }
@@ -35,7 +35,7 @@
 
         &:after {
           bottom: 100%;
-          border-bottom: 4px solid rgba(0,0,0,.9);
+          border-bottom: 4px solid rgba(0, 0, 0, .9);
           border-right: 4px solid transparent;
           border-left: 4px solid transparent;
         }
@@ -78,7 +78,7 @@
 
         &:after {
           right: -4px;
-          border-left: 4px solid rgba(0,0,0,.9);
+          border-left: 4px solid rgba(0, 0, 0, .9);
         }
       }
 
@@ -88,7 +88,7 @@
 
         &:after {
           left: -4px;
-          border-right: 4px solid rgba(0,0,0,.9);
+          border-right: 4px solid rgba(0, 0, 0, .9);
         }
       }
     }

@@ -34,41 +34,39 @@
   background-color: transparent;
   z-index: 1;
 
-	&::after {
-		content: "";
-		position: absolute;
-		left: 50%;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
     bottom: -5px;
     margin-left: -5px;
     border: {
-			style: solid;
-	    color: $g-color-primary transparent;
-	    width: 5px 5px 0;
+      style: solid;
+      color: $g-color-primary transparent;
+      width: 5px 5px 0;
     }
-	}
+  }
 }
 
 .u-progress__pointer-v3 {
-	position: relative;
+  position: relative;
   float: right;
   white-space: nowrap;
 
-	&::after {
-		content: "";
-		position: absolute;
-		top: 0;
-		right: 0;
-		margin-top: -10px;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: -10px;
     margin-right: -5px;
     border: {
-			style: solid;
-	    color: $g-color-primary transparent;
-	    width: 5px 5px 0;
+      style: solid;
+      color: $g-color-primary transparent;
+      width: 5px 5px 0;
     }
-	}
+  }
 }
-
-
 
 //
 // Vertical Progress Bars
@@ -79,11 +77,10 @@
   flex-flow: column nowrap;
   justify-content: flex-end;
 }
+
 .u-progress-bar-vertical-v1 {
   height: 200px;
 }
-
-
 
 //
 // Imports

@@ -15,23 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from home.views import get_index
-from accounts import urls as accounts_urls
-from accounts import reset_urls as reset_urls
-from products import urls as products_urls
-from categories import urls as categories_urls
-from payments import urls as payments_urls
-from cart import urls as cart_urls
 from django.views import static
-from .settings import MEDIA_ROOT
-from dashing.utils import router
-
-
-from django.conf.urls import url, include
 from rest_framework import routers
-from products import views as product_views
-from cart import views as cart_views
 
+from accounts import reset_urls as reset_urls
+from accounts import urls as accounts_urls
+from cart import urls as cart_urls
+from cart import views as cart_views
+from categories import urls as categories_urls
+from home.views import get_index
+from payments import urls as payments_urls
+from products import urls as products_urls
+from products import views as product_views
+from .settings import MEDIA_ROOT
 
 router = routers.DefaultRouter()
 router.register(r'products', product_views.ProductViewSet)

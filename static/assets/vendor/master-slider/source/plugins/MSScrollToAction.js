@@ -1,82 +1,83 @@
 /**
  * Master Slider Scroll To Action Plugin.
- * 
+ *
  * @description This plugins adds page scrolling actions to the layer actions list.
  * @version  1.0.0
  * @author Averta
  * @package MasterSlider jQuery
  */
 
-;(function($, document, window){
+;(function ($, document, window) {
 
-	// check if master slider is available
-	if ( !window.MasterSlider ) {
-		return;
-	}
+    // check if master slider is available
+    if (!window.MasterSlider) {
+        return;
+    }
 
-	var ScrollToAction = function ( slider ) {
-		this.slider = slider;
-		slider.api.addEventListener(MSSliderEvent.INIT, this.init, this);
-	};
+    var ScrollToAction = function (slider) {
+        this.slider = slider;
+        slider.api.addEventListener(MSSliderEvent.INIT, this.init, this);
+    };
 
-	ScrollToAction.name = 'MSScrollToAction';
-	var p = ScrollToAction.prototype;
+    ScrollToAction.name = 'MSScrollToAction';
+    var p = ScrollToAction.prototype;
 
-	/**
-	 * initiate the plugin
-	 */
-	p.init = function (){
-		var api = this.slider.api;
-		
-		// define actions
-		api.scrollToEnd = _scrollToEnd;
-		api.scrollTo = _scrollTo;
-	};
+    /**
+     * initiate the plugin
+     */
+    p.init = function () {
+        var api = this.slider.api;
 
-	/**
-	 * destroy the plugin
-	 */
-	p.destroy = function(){};
+        // define actions
+        api.scrollToEnd = _scrollToEnd;
+        api.scrollTo = _scrollTo;
+    };
 
-	/**
-	 * Scroll window to the target element in page
-	 * @param {Number} duration animation duration (seconds)
-	 */
-	var _scrollTo = function ( target, duration ) {
-		var sliderEle = this.slider.$element,
-			target = $(target).eq(0);
+    /**
+     * destroy the plugin
+     */
+    p.destroy = function () {
+    };
 
-		if ( target.length === 0 ) {
-			return;
-		}
-		console.log(target.offset().top, duration )
+    /**
+     * Scroll window to the target element in page
+     * @param {Number} duration animation duration (seconds)
+     */
+    var _scrollTo = function (target, duration) {
+        var sliderEle = this.slider.$element,
+            target = $(target).eq(0);
 
-		if( duration == null ) {
-			duration = 1.4;
-		}
+        if (target.length === 0) {
+            return;
+        }
+        console.log(target.offset().top, duration)
 
-		$('html, body').animate({
-			scrollTop: target.offset().top
-		}, duration * 1000, 'easeInOutQuad');
-	};
+        if (duration == null) {
+            duration = 1.4;
+        }
 
-	/**
-	 * Scroll window to the bottom of slider
-	 * @param {Number} duration animation duration (seconds)
-	 */
-	var _scrollToEnd = function ( duration ) {
-		var sliderEle = this.slider.$element;
+        $('html, body').animate({
+            scrollTop: target.offset().top
+        }, duration * 1000, 'easeInOutQuad');
+    };
 
-		if( duration == null ) {
-			duration = 1.4;
-		}
+    /**
+     * Scroll window to the bottom of slider
+     * @param {Number} duration animation duration (seconds)
+     */
+    var _scrollToEnd = function (duration) {
+        var sliderEle = this.slider.$element;
 
-		$('html, body').animate({
-			scrollTop: sliderEle.offset().top + sliderEle.outerHeight(false)
-		}, duration * 1000, 'easeInOutQuad');
-	}
+        if (duration == null) {
+            duration = 1.4;
+        }
 
-	// install plugin to master slider
-	MasterSlider.registerPlugin( ScrollToAction );
+        $('html, body').animate({
+            scrollTop: sliderEle.offset().top + sliderEle.outerHeight(false)
+        }, duration * 1000, 'easeInOutQuad');
+    }
+
+    // install plugin to master slider
+    MasterSlider.registerPlugin(ScrollToAction);
 
 })(jQuery, document, window);

@@ -1,7 +1,6 @@
 /*------------------------------------
   Headers
 ------------------------------------*/
-
 /* Import */
 @import "header-togglers";
 @import "header-fullscreen";
@@ -144,6 +143,7 @@
   position: relative;
   z-index: 1;
 }
+
 .u-header__logo {
   position: relative;
   z-index: 1;
@@ -172,14 +172,16 @@
 .js-header-change-moment.g-bg-white--shift {
   background-color: $g-color-white;
 }
+
 .js-header-change-moment.g-bg-light-semi-transparent--shift {
-  background-color: rgba(255,255,255, .9);
+  background-color: rgba(255, 255, 255, .9);
 }
 
 // BG Dark
 .js-header-change-moment.g-bg-black--shift {
   background-color: $g-color-black;
 }
+
 .js-header-change-moment.g-bg-dark-semi-transparent--shift {
   background-color: rgba($g-color-black, .9);
 }
@@ -188,6 +190,7 @@
 .js-header-change-moment.g-bg-primary--shift {
   background-color: $g-color-primary;
 }
+
 .js-header-change-moment.g-bg-primary-semi-transparent--shift {
   background-color: rgba($g-color-primary, .9);
 }
@@ -318,7 +321,7 @@
         top: 100%;
       }
       &-top--sm {
-        bottom:  auto;
+        bottom: auto;
         top: 0;
       }
       &-bottom--sm {

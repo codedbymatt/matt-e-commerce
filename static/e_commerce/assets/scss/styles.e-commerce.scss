@@ -1,7 +1,6 @@
 //
 // Variables and Mixins
 //
-
 @import "variables.e-commerce";
 @import "../../../assets/include/scss/unify";
 
@@ -15,7 +14,7 @@ p {
 
 .u-carousel-indicators-v1,
 .u-carousel-indicators-v1--white {
-	li {
+  li {
     &.slick-active {
       span {
         background-color: $g-color-primary !important;

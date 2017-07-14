@@ -6,106 +6,106 @@
  *
  */
 ;(function ($) {
-  'use strict';
+    'use strict';
 
-  $.HSCore.components.HSValidation = {
-    /**
-     *
-     *
-     * @var Object _baseConfig
-     */
-    _baseConfig: {},
+    $.HSCore.components.HSValidation = {
+        /**
+         *
+         *
+         * @var Object _baseConfig
+         */
+        _baseConfig: {},
 
-    /**
-     *
-     *
-     * @var jQuery pageCollection
-     */
-    pageCollection: $(),
+        /**
+         *
+         *
+         * @var jQuery pageCollection
+         */
+        pageCollection: $(),
 
-    /**
-     * Initialization of Validation wrapper.
-     *
-     * @param String selector (optional)
-     * @param Object config (optional)
-     *
-     * @return jQuery pageCollection - collection of initialized items.
-     */
+        /**
+         * Initialization of Validation wrapper.
+         *
+         * @param String selector (optional)
+         * @param Object config (optional)
+         *
+         * @return jQuery pageCollection - collection of initialized items.
+         */
 
-    init: function (selector, config) {
+        init: function (selector, config) {
 
-      this.collection = selector && $(selector).length ? $(selector) : $();
-      if (!$(selector).length) return;
+            this.collection = selector && $(selector).length ? $(selector) : $();
+            if (!$(selector).length) return;
 
-      this.config = config && $.isPlainObject(config) ?
-        $.extend({}, this._baseConfig, config) : this._baseConfig;
+            this.config = config && $.isPlainObject(config) ?
+                $.extend({}, this._baseConfig, config) : this._baseConfig;
 
-      this.config.itemSelector = selector;
+            this.config.itemSelector = selector;
 
-      this.initValidation();
+            this.initValidation();
 
-      return this.pageCollection;
+            return this.pageCollection;
 
-    },
+        },
 
-    initValidation: function () {
-      //Variables
-      var $self = this,
-        collection = $self.pageCollection;
+        initValidation: function () {
+            //Variables
+            var $self = this,
+                collection = $self.pageCollection;
 
-      //Actions
-      this.collection.each(function (i, el) {
-        //Variables
-        var $this = $(el);
+            //Actions
+            this.collection.each(function (i, el) {
+                //Variables
+                var $this = $(el);
 
-        if($this.hasClass('js-step-form')) {
-          $.validator.setDefaults({
-            ignore: ':hidden:not(.active select)'
-          });
-        } else {
-          $.validator.setDefaults({
-            ignore: ':hidden:not(select)'
-          });
+                if ($this.hasClass('js-step-form')) {
+                    $.validator.setDefaults({
+                        ignore: ':hidden:not(.active select)'
+                    });
+                } else {
+                    $.validator.setDefaults({
+                        ignore: ':hidden:not(select)'
+                    });
+                }
+
+                $this.validate({
+                    errorPlacement: $self.errorPlacement,
+                    highlight: $self.highlight,
+                    unhighlight: $self.unHighlight
+                });
+
+                $('select').change(function () {
+                    $(this).valid();
+                });
+
+                //Actions
+                collection = collection.add($this);
+            });
+        },
+
+        errorPlacement: function (error, element) {
+            var $this = $(element),
+                errorMsgClasses = $this.data('msg-classes');
+
+            error.addClass(errorMsgClasses);
+            error.appendTo(element.parents('.form-group'));
+        },
+
+        highlight: function (element) {
+            var $this = $(element),
+                errorClass = $this.data('error-class');
+
+            $this.parents('.form-group').addClass(errorClass);
+        },
+
+        unHighlight: function (element) {
+            var $this = $(element),
+                errorClass = $this.data('error-class'),
+                successClass = $this.data('success-class');
+
+            $this.parents('.form-group').removeClass(errorClass).addClass(successClass);
         }
 
-        $this.validate({
-          errorPlacement: $self.errorPlacement,
-          highlight: $self.highlight,
-          unhighlight: $self.unHighlight
-        });
-
-        $('select').change(function(){
-          $(this).valid();
-        });
-
-        //Actions
-        collection = collection.add($this);
-      });
-    },
-
-    errorPlacement: function (error, element) {
-      var $this = $(element),
-        errorMsgClasses = $this.data('msg-classes');
-
-      error.addClass(errorMsgClasses);
-      error.appendTo(element.parents('.form-group'));
-    },
-
-    highlight: function (element) {
-      var $this = $(element),
-        errorClass = $this.data('error-class');
-
-      $this.parents('.form-group').addClass(errorClass);
-    },
-
-    unHighlight: function (element) {
-      var $this = $(element),
-        errorClass = $this.data('error-class'),
-        successClass = $this.data('success-class');
-
-      $this.parents('.form-group').removeClass(errorClass).addClass(successClass);
-    }
-
-  };
+    };
 
 })(jQuery);

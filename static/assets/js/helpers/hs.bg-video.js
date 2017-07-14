@@ -6,18 +6,18 @@
  *
  */
 ;(function ($) {
-  'use strict';
+    'use strict';
 
-  $.HSCore.helpers.HSBgVideo = {
-    /**
-     * Rating.
-     *
-     * @return undefined
-     */
-    init: function (el) {
-      var $selector = $(el);
+    $.HSCore.helpers.HSBgVideo = {
+        /**
+         * Rating.
+         *
+         * @return undefined
+         */
+        init: function (el) {
+            var $selector = $(el);
 
-      $selector.hsBgVideo();
-    }
-  };
+            $selector.hsBgVideo();
+        }
+    };
 })(jQuery);

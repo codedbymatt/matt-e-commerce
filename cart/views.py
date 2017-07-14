@@ -1,18 +1,17 @@
-from django.shortcuts import render, get_object_or_404, redirect, reverse
-
-from .models import CartItem
-from django.contrib.auth.decorators import login_required
-from products.models import Product
-from payments.forms import MakePaymentForm
-from django.template.context_processors import csrf
-from django.contrib import messages
-from django.conf import settings
 import stripe
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .serializers import UserSerializer
-
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.template.context_processors import csrf
 from rest_framework import viewsets
+
+from payments.forms import MakePaymentForm
+from products.models import Product
+from .models import CartItem
 from .serializers import CartItemSerializer
+from .serializers import UserSerializer
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 

@@ -1,8 +1,10 @@
 from __future__ import unicode_literals
 
-from django.db import models
-from products.models import Product
 from django.contrib.auth.models import User
+from django.db import models
+
+from products.models import Product
+
 
 # Create your models here.
 class CartItem(models.Model):

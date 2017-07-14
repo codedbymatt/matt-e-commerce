@@ -1,31 +1,18 @@
 //
 // Settings
 //
-
 @import "settings/variables";
-
-
-
 //
 // Tools
 //
-
 @import "tools/mixins";
-
-
-
 //
 // Core
 //
-
 @import "core/style";
-
-
-
 //
 // Base
 //
-
 @import "base/alerts";
 @import "base/arrows";
 @import "base/badges/badges";
@@ -50,26 +37,18 @@
 @import "base/searchforms/searchforms";
 @import "base/dropdown";
 @import "base/compressed-form";
-
-
 // Buttons
 @import "base/buttons/buttons";
-
 // Icons
 @import "base/icons/icons";
-
 // Box shadows
 @import "base/box-shadows/box-shadows";
-
 // Breadcrumbs
 @import "base/breadcrumbs/breadcrumbs";
-
 // Dot line
 @import "base/dot-line/dot-line";
-
 // Progress bars
 @import "base/progress-bars/progress-bars";
-
 // Headings
 @import "base/headings/headings";
 @import "base/labels";
@@ -96,7 +75,6 @@
 @import "base/navigation/navigation";
 @import "base/dropdowns/dropdowns";
 @import "base/bg-overlays";
-
 //
 // Forms
 @import "base/form-controls/style";
@@ -108,64 +86,36 @@
 @import "base/form-controls/sliders/sliders";
 @import "base/form-controls/datepickers/datepickers";
 @import "base/form-controls/quantity";
-
 //
 // Carousel indicators
 @import "base/carousel-indicators/carousel-indicators";
-
-
-
 //
 // Blocks
 //
-
 @import "blocks/info";
-
-
-
 //
 // Vendors
 //
-
 @import "vendors/vendor";
-
-
-
 //
 // Themes
 //
-
-
 //
 // Custom
 //
-
 @import "custom/custom";
-
-
-
 //
 // Others
 //
-
 @import "js";
-
-
-
 //
 // Demo
 //
-
 @import "demo/demo";
-
-
-
 //
 // Globals
 //
-
 @import "globals/globals";
-
 // Background Styles
 @import "globals/bg-attachments";
 @import "globals/bg-color-gradients";
@@ -178,10 +128,8 @@
 @import "globals/bg-positions";
 @import "globals/bg-repeat";
 @import "globals/bg-sizes";
-
 // Fill
 @import "globals/fill-colors";
-
 // Border styles
 @import "globals/borders";
 @import "globals/border-none";
@@ -193,7 +141,6 @@
 @import "globals/border-colors";
 @import "globals/border-color-socials";
 @import "globals/border-color-gradients";
-
 // Typography
 @import "globals/typo-font-families";
 @import "globals/typo-font-sizes";
@@ -206,15 +153,12 @@
 @import "globals/typo-list-styles";
 @import "globals/typo-text-styles";
 @import "globals/quotes";
-
 // Positions
 @import "globals/positions";
 @import "globals/position-spaces";
-
 // Alignments
 @import "globals/block-alignments";
 @import "globals/verical-alignments";
-
 // Others
 @import "globals/blur";
 @import "globals/box-shadow";
@@ -226,19 +170,18 @@
 @import "globals/opacities";
 @import "globals/z-index";
 @import "globals/overlays";
-@import "globals/absolute-reset"; /* O */
+@import "globals/absolute-reset";
+/* O */
 @import "globals/resize";
 @import "globals/placeholder";
-
 // Colors
 @import "globals/colors";
 @import "globals/color-socials";
-@import "globals/color-gradients"; // Z
-
+@import "globals/color-gradients";
+// Z
 // Widths & Heighs
 @import "globals/widths";
 @import "globals/heights";
-
 // Spaces (Margins & Paddings)
 @import "globals/margins";
 @import "globals/paddings";

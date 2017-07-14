@@ -6,31 +6,29 @@
 //
 
 .u-progress {
-	display: block;
-	width: 100%;
+  display: block;
+  width: 100%;
   height: 12px;
   overflow: hidden;
   background-color: $g-color-gray-light-v4;
-	border: none;
-	outline: none;
-	appearance: none;
+  border: none;
+  outline: none;
+  appearance: none;
 
-	&::-webkit-progress-bar {
-		background-color: $g-color-gray-light-v4;
-	}
+  &::-webkit-progress-bar {
+    background-color: $g-color-gray-light-v4;
+  }
 
-	&::-ms-fill {
-		background-color: $g-color-primary;
-	}
-	&::-webkit-progress-value {
-		background-color: $g-color-primary;
-	}
-	&::-moz-progress-bar {
-		background-color: $g-color-primary;
-	}
+  &::-ms-fill {
+    background-color: $g-color-primary;
+  }
+  &::-webkit-progress-value {
+    background-color: $g-color-primary;
+  }
+  &::-moz-progress-bar {
+    background-color: $g-color-primary;
+  }
 }
-
-
 
 //
 // Progress Bars Additional BG colors

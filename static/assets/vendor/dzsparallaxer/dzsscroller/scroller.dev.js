@@ -10,12 +10,12 @@
 
 window.dzsscr_self_options = {};
 
-(function(window,document) {
+(function (window, document) {
 
     var prefix = "", _addEventListener, onwheel, support;
 
     // detect event model
-    if ( window.addEventListener ) {
+    if (window.addEventListener) {
         _addEventListener = "addEventListener";
     } else {
         _addEventListener = "attachEvent";
@@ -27,17 +27,17 @@ window.dzsscr_self_options = {};
         document.onmousewheel !== undefined ? "mousewheel" : // Webkit and IE support at least "mousewheel"
             "DOMMouseScroll"; // let's assume that remaining browsers are older Firefox
 
-    window.addWheelListener = function( elem, callback, useCapture ) {
-        _addWheelListener( elem, support, callback, useCapture );
+    window.addWheelListener = function (elem, callback, useCapture) {
+        _addWheelListener(elem, support, callback, useCapture);
 
         // handle MozMousePixelScroll in older Firefox
-        if( support == "DOMMouseScroll" ) {
-            _addWheelListener( elem, "MozMousePixelScroll", callback, useCapture );
+        if (support == "DOMMouseScroll") {
+            _addWheelListener(elem, "MozMousePixelScroll", callback, useCapture);
         }
     };
 
-    function _addWheelListener( elem, eventName, callback, useCapture ) {
-        elem[ _addEventListener ]( prefix + eventName, support == "wheel" ? callback : function( originalEvent ) {
+    function _addWheelListener(elem, eventName, callback, useCapture) {
+        elem[_addEventListener](prefix + eventName, support == "wheel" ? callback : function (originalEvent) {
             !originalEvent && ( originalEvent = window.event );
 
             // create a normalized event object
@@ -49,7 +49,7 @@ window.dzsscr_self_options = {};
                 deltaMode: originalEvent.type == "MozMousePixelScroll" ? 0 : 1,
                 deltaX: 0,
                 deltaZ: 0,
-                preventDefault: function() {
+                preventDefault: function () {
                     originalEvent.preventDefault ?
                         originalEvent.preventDefault() :
                         originalEvent.returnValue = false;
@@ -57,24 +57,24 @@ window.dzsscr_self_options = {};
             };
 
             // calculate deltaY (and deltaX) according to the event
-            if ( support == "mousewheel" ) {
-                event.deltaY = - 1/40 * originalEvent.wheelDelta;
+            if (support == "mousewheel") {
+                event.deltaY = -1 / 40 * originalEvent.wheelDelta;
                 // Webkit also support wheelDeltaX
-                originalEvent.wheelDeltaX && ( event.deltaX = - 1/40 * originalEvent.wheelDeltaX );
+                originalEvent.wheelDeltaX && ( event.deltaX = -1 / 40 * originalEvent.wheelDeltaX );
             } else {
                 event.deltaY = originalEvent.detail;
             }
 
             // it's time to fire the callback
-            return callback( event );
+            return callback(event);
 
-        }, useCapture || false );
+        }, useCapture || false);
     }
 
-})(window,document);
+})(window, document);
 
-(function($) {
-    $.fn.scroller = function(o) {
+(function ($) {
+    $.fn.scroller = function (o) {
 
         var defaults = {
             type: 'normal', // -- normal or scrollTop
@@ -87,8 +87,8 @@ window.dzsscr_self_options = {};
             settings_fadeoutonleave: 'off',
             settings_replacewheelxwithy: 'off',
             settings_refresh: 0// -- refresh dimensions  every x secs
-            ,settings_autoheight: 'default'
-            ,settings_autoheight_from_first_item: 'off',
+            , settings_autoheight: 'default'
+            , settings_autoheight_from_first_item: 'off',
             settings_forcesameheight: 'off',
             settings_fullwidth: 'off',
             settings_hidedefaultsidebars: 'off',
@@ -123,27 +123,26 @@ window.dzsscr_self_options = {};
             , extra_html_scrollbarx: '' // -- use a element from the DOM instead of the window element
         };
 
-        if(typeof o =='undefined'){
-            if(typeof $(this).attr('data-options')!='undefined' && $(this).attr('data-options')!=''){
+        if (typeof o == 'undefined') {
+            if (typeof $(this).attr('data-options') != 'undefined' && $(this).attr('data-options') != '') {
                 var aux = $(this).attr('data-options');
                 aux = 'window.dzsscr_self_options = ' + aux;
                 eval(aux);
-                o = $.extend({},window.dzsscr_self_options);
+                o = $.extend({}, window.dzsscr_self_options);
                 window.dzsscr_self_options = $.extend({}, {});
             }
         }
         o = $.extend(defaults, o);
 
 
-        if(typeof o =='undefined'){
-            if(typeof $(this).attr('data-options')!='undefined'  && $(this).attr('data-options')!=''){
+        if (typeof o == 'undefined') {
+            if (typeof $(this).attr('data-options') != 'undefined' && $(this).attr('data-options') != '') {
                 var aux = $(this).attr('data-options');
                 aux = 'var aux_opts = ' + aux;
                 eval(aux);
                 o = aux_opts;
             }
         }
-
 
 
         o.settings_refresh = parseInt(o.settings_refresh, 10);
@@ -154,41 +153,41 @@ window.dzsscr_self_options = {};
 
 
         Math.linearTween = function (t, b, c, d) {
-            return c*t/d + b;
+            return c * t / d + b;
         };
-        Math.easeIn = function(t, b, c, d) {
+        Math.easeIn = function (t, b, c, d) {
 
-            return -c *(t/=d)*(t-2) + b;
+            return -c * (t /= d) * (t - 2) + b;
 
         };
 
         Math.easeOutQuad = function (t, b, c, d) {
             //console.info('ceva');
             t /= d;
-            return -c * t*(t-2) + b;
+            return -c * t * (t - 2) + b;
         };
         Math.easeInOutSine = function (t, b, c, d) {
-            return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b;
+            return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
         };
 
 
         Math.easeInCirc = function (t, b, c, d) {
             t /= d;
-            return -c * (Math.sqrt(1 - t*t) - 1) + b;
+            return -c * (Math.sqrt(1 - t * t) - 1) + b;
         };
 
         Math.easeInQuart = function (t, b, c, d) {
             t /= d;
-            return c*t*t*t*t + b;
+            return c * t * t * t * t + b;
         };
 
 
-        this.each(function() {
+        this.each(function () {
 
             //console.log(this);
             var totalWidth = 0
-                ,totalWidth_for_scrollbar = 0 // -- the scrollbar might be aligned by a different height
-                ;
+                , totalWidth_for_scrollbar = 0 // -- the scrollbar might be aligned by a different height
+            ;
             //total width of the container, this is usually taken from the css of the div
             var totalHeight = 0;
             var comWidth = 0;
@@ -197,16 +196,16 @@ window.dzsscr_self_options = {};
 
 
             var last_totalHeight = 0
-                ,last_comHeight = 0
-                ;
+                , last_comHeight = 0
+            ;
 
             var ww = 0
             var wh = 0;
             //subdiv of the container ( real content )
             var _outer = null
-                ,_scrollbar = null
-                ,_inner = null
-                ;
+                , _scrollbar = null
+                , _inner = null
+            ;
             var _inner_autoheight = false;
             var cthis_autoheight = false;
             // subdiv of the container
@@ -240,10 +239,10 @@ window.dzsscr_self_options = {};
             var scrollbary_draglocaly = 0;
 
             var _window_object = $(window)
-                ,_scrollTop_height_indicator = null
-                ,comHeight_surplus = 0
+                , _scrollTop_height_indicator = null
+                , comHeight_surplus = 0
 
-                ;
+            ;
 
             var viewIndexX = 0;
             var viewIndexY = 0;
@@ -259,7 +258,7 @@ window.dzsscr_self_options = {};
                 , secondCon_ch
                 , secondCon_viX
                 , secondCon_viY
-                ;
+            ;
             var _realparent;
 
             var scrollbufferX = false;
@@ -274,32 +273,32 @@ window.dzsscr_self_options = {};
             var duration_smoothing = 60;
 
             var inter_reset
-                ,inter_hidescrollbar
-                ;
+                , inter_hidescrollbar
+            ;
 
 
             var action_handle_frame = null
-                ,action_handle_wheel_end = null
-                ,action_animate_scrollbar_end = null
-                ;
+                , action_handle_wheel_end = null
+                , action_animate_scrollbar_end = null
+            ;
 
             var swipe_maintarget
-                ,swipe_maintargettotalwidth = 0
-                ,swipe_maintargettotalheight = 0
-                ,swipe_maintargettotalclipwidth = 0
-                ,swipe_maintargettotalclipheight = 0
-                ,swipe_maintargetoriginalposx = 0
-                ,swipe_maintargetoriginalposy = 0
-                ,swipe_maintargettargetposx = 0
-                ,swipe_maintargettargetposy = 0
-                ,swipe_originalposx
-                ,swipe_originalposy
-                ,swipe_touchdownposx
-                ,swipe_touchdownposy
-                ,swipe_touchupposx
-                ,swipe_touchupposy
-                ,swipe_dragging = false
-                ;
+                , swipe_maintargettotalwidth = 0
+                , swipe_maintargettotalheight = 0
+                , swipe_maintargettotalclipwidth = 0
+                , swipe_maintargettotalclipheight = 0
+                , swipe_maintargetoriginalposx = 0
+                , swipe_maintargetoriginalposy = 0
+                , swipe_maintargettargetposx = 0
+                , swipe_maintargettargetposy = 0
+                , swipe_originalposx
+                , swipe_originalposy
+                , swipe_touchdownposx
+                , swipe_touchdownposy
+                , swipe_touchupposx
+                , swipe_touchupposy
+                , swipe_dragging = false
+            ;
 
             var debug_var = true;
 
@@ -307,40 +306,40 @@ window.dzsscr_self_options = {};
             var slideshow_operation = "plus";
 
             var stop_enter_frame = false
-                ,suspend_enter_frame = false
-                ,inter_suspend_enter_frame
-                ;
+                , suspend_enter_frame = false
+                , inter_suspend_enter_frame
+            ;
 
 
             // --- easing params
 
             var duration_viy = 1.8
-                ,duration_vix = 20
-                ;
+                , duration_vix = 20
+            ;
 
             var target_viy = 0
-                ,target_vix = 0
-                ,target_vix_sc = 0
-                ,target_bo = 0
-                ;
+                , target_vix = 0
+                , target_vix_sc = 0
+                , target_bo = 0
+            ;
 
             var begin_viy = 0
-                ,begin_vix = 0
-                ,begin_vix_sc = 0
-                ,begin_bo = 0
-                ;
+                , begin_vix = 0
+                , begin_vix_sc = 0
+                , begin_bo = 0
+            ;
 
             var finish_viy = 0
-                ,finish_vix = 0
-                ,finish_vix_sc = 0
-                ,finish_bo = 0
-                ;
+                , finish_vix = 0
+                , finish_vix_sc = 0
+                , finish_bo = 0
+            ;
 
             var change_viy = 0
-                ,change_vix = 0
-                ,change_vix_sc = 0
-                ,change_bo = 0
-                ;
+                , change_vix = 0
+                , change_vix_sc = 0
+                , change_bo = 0
+            ;
 
 
             var backup_duration_viy = 0;
@@ -351,9 +350,7 @@ window.dzsscr_self_options = {};
             var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
 
 
-
-
-            if(cthis.hasClass('dzsscr-inited')){
+            if (cthis.hasClass('dzsscr-inited')) {
                 return false;
             }
 
@@ -365,67 +362,66 @@ window.dzsscr_self_options = {};
 
 
                 //console.log(totalWidth, cthis, cthis.width()); return;
-                if(o.totalWidth==undefined){
+                if (o.totalWidth == undefined) {
                     totalWidth = cthis.width();
-                }else{
+                } else {
                     totalWidth = o.totalWidth;
                 }
-                if(o.totalHeight==undefined){
+                if (o.totalHeight == undefined) {
                     totalHeight = cthis.height();
-                }else{
+                } else {
                     totalHeight = o.totalHeight;
                 }
 
                 totalWidth_for_scrollbar = totalWidth;
 
-                if(o.settings_skin=='skin_luna'){
-                    totalWidth_for_scrollbar-=4;
+                if (o.settings_skin == 'skin_luna') {
+                    totalWidth_for_scrollbar -= 4;
                 }
 
 
-                if(o.replace_window_object){
+                if (o.replace_window_object) {
                     _window_object = o.replace_window_object;
                 }
 
 
-                if(o.settings_scrollTop_height_indicator && o.settings_scrollTop_height_indicator.outerHeight){
+                if (o.settings_scrollTop_height_indicator && o.settings_scrollTop_height_indicator.outerHeight) {
                     _scrollTop_height_indicator = o.settings_scrollTop_height_indicator;
                 }
 
-                if(o.settings_comHeight_surplus && o.settings_comHeight_surplus>0){
+                if (o.settings_comHeight_surplus && o.settings_comHeight_surplus > 0) {
                     comHeight_surplus = o.settings_comHeight_surplus;
                 }
 
                 duration_viy = parseFloat(o.easing_duration);
 
 
-
-                if(o.type=='normal') {
+                if (o.type == 'normal') {
                     _inner = cthis.find('.inner').eq(0);
                 }
 
-                var cclass=String(cthis.attr('class'));
+                var cclass = String(cthis.attr('class'));
 
 
-                if(cclass.indexOf("skin_")==-1){
+                if (cclass.indexOf("skin_") == -1) {
                     cthis.addClass(o.settings_skin);
                 }
-                cclass=String(cthis.attr('class'));
+                cclass = String(cthis.attr('class'));
 
                 var regex_skin = new RegExp('(skin_.*?)\\b');
                 var regex_skin_arr = regex_skin.exec(cclass);
 
                 //console.info(cclass,regex_skin_arr);
 
-                if(regex_skin_arr && regex_skin_arr[1]){
+                if (regex_skin_arr && regex_skin_arr[1]) {
                     o.settings_skin = regex_skin_arr[1];
 
                 }
 
                 //console.info(o.settings_skin);
 
-                if(o.type=='normal'){
-                    if(_inner.parent().hasClass('scroller')==false){
+                if (o.type == 'normal') {
+                    if (_inner.parent().hasClass('scroller') == false) {
 
                         _inner.wrap('<div class="scroller"></div>')
                     }
@@ -433,30 +429,29 @@ window.dzsscr_self_options = {};
                 }
 
 
-                if(o.settings_skin=='skin_luna'){
+                if (o.settings_skin == 'skin_luna') {
 
                 }
 
 
-
                 //console.info(cthis, _outer, is_ios(), is_android(), is_touch_device(), o.settings_disableSpecialIosFeatures);
-                if ( (is_touch_device()) && o.settings_disableSpecialIosFeatures != 'on') {
+                if ((is_touch_device()) && o.settings_disableSpecialIosFeatures != 'on') {
 //                    console.info('hmm');
 
                     //-- we dont need easing scrolling on mobiles as the scrolling is already eased
-                    if(o.type=='scrollTop'){
+                    if (o.type == 'scrollTop') {
                         return false;
                     }
-                    if(_outer){
+                    if (_outer) {
                         _outer.css('overflow', 'auto');
                     }
 
-                    if(o.touch_leave_native_scrollbar=='on'){
+                    if (o.touch_leave_native_scrollbar == 'on') {
                         return false;
                     }
 
                     //_outer.css('--webkit', 'auto');
-                    if(o.secondCon){
+                    if (o.secondCon) {
                         //o.secondCon.parent() is the clip
                         o.secondCon.parent().css('overflow', 'auto');
                     }
@@ -465,25 +460,25 @@ window.dzsscr_self_options = {};
                 } else {
                 }
 
-                if(o.type=='scrollTop'){
+                if (o.type == 'scrollTop') {
                     //console.info(cthis, cthis.scrollTop);
                     cthis.addClass('scroller-con type-scrollTop');
                     $('html').css('overflow-y', 'hidden');
 
-                    setTimeout(function(){
+                    setTimeout(function () {
                         //cthis.scrollTop(300);
                         //$(window).scrollTop(300);
-                    },1000)
+                    }, 1000)
 
-                    $(document).delegate('a[href^=#]','click', function(){
+                    $(document).delegate('a[href^=#]', 'click', function () {
 
                         var _t23 = $(this);
-                        if($(_t23.attr('href')).length>0){
+                        if ($(_t23.attr('href')).length > 0) {
                             //console.log($(_t23.attr('href')));
 
-                            if($('.scroller-con.type-scrollTop').get(0) && $('.scroller-con.type-scrollTop').get(0).api_scrolly_to){
+                            if ($('.scroller-con.type-scrollTop').get(0) && $('.scroller-con.type-scrollTop').get(0).api_scrolly_to) {
 
-                                var aux = $(_t23.attr('href')).offset().top-100;
+                                var aux = $(_t23.attr('href')).offset().top - 100;
                                 $('.scroller-con.type-scrollTop').get(0).api_scrolly_to(aux);
                             }
                         }
@@ -491,24 +486,24 @@ window.dzsscr_self_options = {};
                         return false;
                     })
 
-                    cthis.bind('mousedown',function(e){
-                        if(e.which==2){
-                            if(!mode_scrollTop_sw_middlemousescrolling){
+                    cthis.bind('mousedown', function (e) {
+                        if (e.which == 2) {
+                            if (!mode_scrollTop_sw_middlemousescrolling) {
                                 mode_scrollTop_sw_middlemousescrolling = true;
-                            }else{
+                            } else {
 
                                 mode_scrollTop_sw_middlemousescrolling = false;
                             }
-                        }else{
+                        } else {
 
                             mode_scrollTop_sw_middlemousescrolling = false;
                         }
                     })
-                    cthis.bind('mousemove',function(e){
+                    cthis.bind('mousemove', function (e) {
                         //console.info(e.clientY, cthis.height(),wh);
 
-                        if(mode_scrollTop_sw_middlemousescrolling){
-                            viewIndexY = -(e.clientY/wh * (cthis.height()-wh));
+                        if (mode_scrollTop_sw_middlemousescrolling) {
+                            viewIndexY = -(e.clientY / wh * (cthis.height() - wh));
                             //console.info('animateScrollbar from handle_frame()');
                             animateScrollbar();
                         }
@@ -517,18 +512,17 @@ window.dzsscr_self_options = {};
                     })
 
 
-
-                    $('body').bind('keydown', function(e){
+                    $('body').bind('keydown', function (e) {
                         //console.info(e)
 
-                        if(e.keyCode==38){
+                        if (e.keyCode == 38) {
 
                             viewIndexY += 30;
 
                             animateScrollbar();
                         }
 
-                        if(e.keyCode==40){
+                        if (e.keyCode == 40) {
 
                             viewIndexY -= 30;
 
@@ -547,29 +541,28 @@ window.dzsscr_self_options = {};
                 _scrollbar = _realparent.children('.scrollbar').eq(0);
 
 
-                if(is_touch_device()){
+                if (is_touch_device()) {
                     _scrollbar.addClass('easing');
                 }
 
-                if(_inner && (_inner.get(0).style.height=='' || _inner.get(0).style.height=='auto')){
+                if (_inner && (_inner.get(0).style.height == '' || _inner.get(0).style.height == 'auto')) {
                     _inner_autoheight = true;
                 }
 
-                if(o.settings_autoheight=='auto'){
-                    if(cthis.get(0).style.height=='' || cthis.get(0).style.height=='auto'){
+                if (o.settings_autoheight == 'auto') {
+                    if (cthis.get(0).style.height == '' || cthis.get(0).style.height == 'auto') {
                         cthis_autoheight = true;
                     }
                 }
-                if(o.settings_autoheight=='on'){
+                if (o.settings_autoheight == 'on') {
                     cthis_autoheight = true;
                 }
-                if(o.settings_autoheight=='off'){
+                if (o.settings_autoheight == 'off') {
                     cthis_autoheight = false;
                 }
 
 
                 //console.info(o.settings_autoheight, cthis_autoheight);
-
 
 
                 calculateDims();
@@ -583,14 +576,13 @@ window.dzsscr_self_options = {};
                 }
 
 
-
                 if (percomWidth == 0) {
                     percomWidth = comWidth + 50;
                 }
-                if ( (cthis.hasClass('is-touch') ) && o.settings_disableSpecialIosFeatures == 'off') {
+                if ((cthis.hasClass('is-touch') ) && o.settings_disableSpecialIosFeatures == 'off') {
                     //console.log(cthis, totalWidth, percomWidth);
                     //console.log(cthis, totalWidth, percomWidth);
-                    if(_outer){
+                    if (_outer) {
                         _outer.css({
                             'overflow': 'auto'
                         })
@@ -608,34 +600,32 @@ window.dzsscr_self_options = {};
                     cthis.get(0).api_scrolly_to = scrolly_to;
                     cthis.get(0).api_toggle_resize = calculateDims;
                     cthis.get(0).api_get_view_index_y = get_view_index_y;
-                    cthis.get(0).api_set_action_handle_frame = function(arg){
+                    cthis.get(0).api_set_action_handle_frame = function (arg) {
                         action_handle_frame = arg;
                     };
-                    cthis.get(0).api_set_action_animate_scrollbar_end = function(arg){
+                    cthis.get(0).api_set_action_animate_scrollbar_end = function (arg) {
                         action_animate_scrollbar_end = arg;
                     };
-                    cthis.get(0).api_block_scroll = function(arg){
+                    cthis.get(0).api_block_scroll = function (arg) {
                         scrolling_blocked = true;
                     };
-                    cthis.get(0).api_unblock_scroll = function(arg){
+                    cthis.get(0).api_unblock_scroll = function (arg) {
                         scrolling_blocked = false;
                     };
-                    cthis.get(0).api_set_action_handle_wheel_end = function(arg){
+                    cthis.get(0).api_set_action_handle_wheel_end = function (arg) {
                         action_handle_wheel_end = arg;
                     };
-                    cthis.get(0).api_set_window_object = function(arg){
+                    cthis.get(0).api_set_window_object = function (arg) {
 
                         _window_object = arg;
                     };
-                    cthis.get(0).api_set_scrollTop_height_indicator = function(arg){
+                    cthis.get(0).api_set_scrollTop_height_indicator = function (arg) {
 
                         _scrollTop_height_indicator = arg;
 
 
-
-
                     };
-                    cthis.get(0).api_comHeight_surplus = function(arg){
+                    cthis.get(0).api_comHeight_surplus = function (arg) {
 
                         comHeight_surplus = arg;
                     };
@@ -643,8 +633,6 @@ window.dzsscr_self_options = {};
                     /*
                      */
                 }
-
-
 
 
                 if (o.settings_refresh > 0) {
@@ -668,16 +656,16 @@ window.dzsscr_self_options = {};
                 cthis.addClass('dzsscr-inited');
             }
 
-            function suspend_enter_frame_func(){
+            function suspend_enter_frame_func() {
                 //console.info('suspend_enter_frame_func()');
                 suspend_enter_frame = true;
             }
 
-            function get_view_index_y(){
+            function get_view_index_y() {
                 return viewIndexY;
             }
 
-            function destroy(){
+            function destroy() {
 
                 //console.info(_inner);
                 //if(o.type=='normal'){
@@ -690,28 +678,27 @@ window.dzsscr_self_options = {};
                 // -- continue DESTROY FUNCTION
             }
 
-            function handle_frame(){
+            function handle_frame() {
 
 
-
-                if(suspend_enter_frame==false){
+                if (suspend_enter_frame == false) {
                     //console.info(suspend_enter_frame);
-                    if(o.settings_slideshow>0){
+                    if (o.settings_slideshow > 0) {
 
-                        viewIndexX=null;
-                        if(slideshow_reachedend){
-                            slideshow_reachedend=false;
-                            if(slideshow_operation=='plus'){
-                                slideshow_operation='minus';
-                            }else{
-                                slideshow_operation='plus';
+                        viewIndexX = null;
+                        if (slideshow_reachedend) {
+                            slideshow_reachedend = false;
+                            if (slideshow_operation == 'plus') {
+                                slideshow_operation = 'minus';
+                            } else {
+                                slideshow_operation = 'plus';
                             }
                         }
 
-                        if(slideshow_operation=='plus'){
-                            scrollIndexX+= o.settings_slideshow;
-                        }else{
-                            scrollIndexX-= o.settings_slideshow;
+                        if (slideshow_operation == 'plus') {
+                            scrollIndexX += o.settings_slideshow;
+                        } else {
+                            scrollIndexX -= o.settings_slideshow;
                         }
 
                         //console.info('animateScrollbar from handle_frame()');
@@ -720,11 +707,11 @@ window.dzsscr_self_options = {};
                     }
 
 
-                    if(o.enable_easing=='on'){
+                    if (o.enable_easing == 'on') {
 
-                        if(is_android() || is_ios()){
+                        if (is_android() || is_ios()) {
 
-                        }else{
+                        } else {
 
                             if (dir_ver) {
                                 //console.info(target_viy);
@@ -738,21 +725,21 @@ window.dzsscr_self_options = {};
                                 //console.info(target_viy);
 
                                 //console.log(o.easing_type);
-                                if(o.easing_type=='easeIn'){
+                                if (o.easing_type == 'easeIn') {
 
                                     target_viy = Number(Math.easeIn(1, begin_viy, change_viy, duration_viy).toFixed(4));
                                 }
-                                if(o.easing_type=='easeInCirc'){
+                                if (o.easing_type == 'easeInCirc') {
 
-                                    if(is_safari){
+                                    if (is_safari) {
                                         target_viy = Number(Math.easeInCirc(1, begin_viy, change_viy, duration_viy).toFixed(0));
-                                    }else{
+                                    } else {
                                         target_viy = Number(Math.easeInCirc(1, begin_viy, change_viy, duration_viy).toFixed(4));
                                     }
 
                                 }
 
-                                if(isNaN(target_viy)){
+                                if (isNaN(target_viy)) {
                                     target_viy = 0;
                                 }
 
@@ -760,14 +747,14 @@ window.dzsscr_self_options = {};
                                 //console.info(target_viy);
                                 //if(cthis.hasClass('debug-target')){ console.info(target_viy); };
 
-                                if(o.type=='normal'){
+                                if (o.type == 'normal') {
 
                                     _inner.css({
-                                        'top': parseInt(target_viy,10)
+                                        'top': parseInt(target_viy, 10)
                                     })
                                 }
 
-                                if(o.type=='scrollTop'){
+                                if (o.type == 'scrollTop') {
 
 
                                     //if(is_safari()){
@@ -784,14 +771,13 @@ window.dzsscr_self_options = {};
                                     //console.info(_window_object);
 
 
-
-                                    if(o.settings_scrollTop_animate_top_instead_of_scroll=='on'){
+                                    if (o.settings_scrollTop_animate_top_instead_of_scroll == 'on') {
 
                                         _window_object.css({
-                                            'top': parseInt(target_viy,10)
+                                            'top': parseInt(target_viy, 10)
                                         })
 
-                                    }else{
+                                    } else {
 
                                         _window_object.scrollTop(-target_viy);
                                     }
@@ -804,29 +790,28 @@ window.dzsscr_self_options = {};
 
 
                                 begin_vix = target_vix;
-                                change_vix= finish_vix - begin_vix;
+                                change_vix = finish_vix - begin_vix;
 
 
                                 target_vix = Number(Math.easeIn(1, begin_vix, change_vix, duration_viy).toFixed(4));
 
                                 //console.info(target_vix,duration_viy);
-                                if(o.type=='normal'){
+                                if (o.type == 'normal') {
 
                                     _inner.css({
-                                        'left': parseInt(target_vix,10)
+                                        'left': parseInt(target_vix, 10)
                                     })
                                 }
 
 
-
-                                if(o.secondCon) {
+                                if (o.secondCon) {
 
 
                                     //console.info(finish_vix_sc);
                                     begin_vix_sc = target_vix_sc;
-                                    change_vix_sc= finish_vix_sc - begin_vix_sc;
-                                    target_vix_sc = Number(Math.easeIn(1, begin_vix_sc, change_vix_sc, duration_viy/1.5).toFixed(4));
-                                    if(isNaN(target_vix_sc)){
+                                    change_vix_sc = finish_vix_sc - begin_vix_sc;
+                                    target_vix_sc = Number(Math.easeIn(1, begin_vix_sc, change_vix_sc, duration_viy / 1.5).toFixed(4));
+                                    if (isNaN(target_vix_sc)) {
                                         target_vix_sc = 0;
                                     }
 
@@ -836,34 +821,31 @@ window.dzsscr_self_options = {};
                                     if (o.enable_easing_for_second_con == 'on') {
 
                                         o.secondCon.css({
-                                            'left': parseInt(target_vix_sc,10)
+                                            'left': parseInt(target_vix_sc, 10)
                                         })
                                     }
                                 }
 
-                                if(o.type=='scrollTop'){
+                                if (o.type == 'scrollTop') {
 
                                     $(window).scrollTop(-target_vix);
                                 }
-
-
 
 
                             }
                         }
 
 
-
                     }
 
 
-                    if(action_handle_frame){
+                    if (action_handle_frame) {
                         action_handle_frame();
                     }
                 }
 
 
-                if(stop_enter_frame){
+                if (stop_enter_frame) {
                     return false;
                 }
 
@@ -871,14 +853,13 @@ window.dzsscr_self_options = {};
             }
 
 
-            function inter_hidescrollbar_func(){
+            function inter_hidescrollbar_func() {
                 cthis.removeClass('scrollbar-active');
 
-                if(o.settings_show_sidebar_on_right_side_mouse=='on'){
+                if (o.settings_show_sidebar_on_right_side_mouse == 'on') {
                     //console.info(mousex, mousey, cthis.offset().left, cthis.width());
 
-                    if(mousex>cthis.offset().left + cthis.width()-100 && mousex<=cthis.offset().left + cthis.width() && mousey>cthis.offset().top && mousey<=cthis.offset().top + cthis.height()){
-
+                    if (mousex > cthis.offset().left + cthis.width() - 100 && mousex <= cthis.offset().left + cthis.width() && mousey > cthis.offset().top && mousey <= cthis.offset().top + cthis.height()) {
 
 
                         clearTimeout(inter_hidescrollbar);
@@ -890,16 +871,16 @@ window.dzsscr_self_options = {};
 
             }
 
-            function handle_touchStart(e){
+            function handle_touchStart(e) {
                 //console.info('touchstart', e.target, e.currentTarget, e.currentTarget == _inner.get(0));
 
 
-                if(e.currentTarget == _inner.get(0)){
-                    inner_dragging=true;
+                if (e.currentTarget == _inner.get(0)) {
+                    inner_dragging = true;
                 }
 
-                if(o.secondCon && e.currentTarget == o.secondCon.get(0)){
-                    sc_dragging=true;
+                if (o.secondCon && e.currentTarget == o.secondCon.get(0)) {
+                    sc_dragging = true;
                 }
 
                 //return;
@@ -911,98 +892,99 @@ window.dzsscr_self_options = {};
                 swipe_maintargettotalclipheight = comHeight;
                 swipe_maintargetoriginalposx = parseInt(swipe_maintarget.css('left'), 10);
                 swipe_maintargetoriginalposy = parseInt(swipe_maintarget.css('top'), 10);
-                if(e.type=='touchstart'){
+                if (e.type == 'touchstart') {
                     swipe_touchdownposx = e.originalEvent.touches[0].pageX;
                     swipe_touchdownposy = e.originalEvent.touches[0].pageY;
-                }else{
+                } else {
                     swipe_touchdownposx = e.pageX;
                     swipe_touchdownposy = e.pageY;
                 }
 
                 swipe_dragging = true;
 
-                o.settings_slideshow=0;
+                o.settings_slideshow = 0;
 
 
-                if(e.type=='touchstart'){
+                if (e.type == 'touchstart') {
 
-                }else{
+                } else {
                     cthis.addClass('closedhand');
                     return false;
                 }
             }
-            function handle_touchMove(e){
+
+            function handle_touchMove(e) {
 
                 //console.info(e.type);
 
-                if(swipe_dragging==false){
+                if (swipe_dragging == false) {
 
-                }else{
-                    if(dir_hor){
+                } else {
+                    if (dir_hor) {
                         //console.log('ceva');
 
-                        if(e.type=='touchmove'){
+                        if (e.type == 'touchmove') {
                             swipe_touchupposx = e.originalEvent.touches[0].pageX;
-                        }else{
+                        } else {
                             swipe_touchupposx = e.pageX;
                         }
 
                         //console.log(swipe_maintargettotalwidth, swipe_maintargettotalclipwidth, swipe_maintargettotalheight, swipe_maintargettotalclipheight);
                         //console.info(swipe_maintargetoriginalposy, swipe_touchupposy, swipe_touchdownposy)
                         swipe_maintargettargetposx = swipe_maintargetoriginalposx + (swipe_touchupposx - swipe_touchdownposx);
-                        if(swipe_maintargettargetposx>0){
-                            swipe_maintargettargetposx/=2;
+                        if (swipe_maintargettargetposx > 0) {
+                            swipe_maintargettargetposx /= 2;
                         }
-                        if(swipe_maintargettargetposx<-swipe_maintargettotalclipwidth+swipe_maintargettotalwidth){
-                            swipe_maintargettargetposx = swipe_maintargettargetposx-((swipe_maintargettargetposx+swipe_maintargettotalclipwidth-swipe_maintargettotalwidth)/2);
+                        if (swipe_maintargettargetposx < -swipe_maintargettotalclipwidth + swipe_maintargettotalwidth) {
+                            swipe_maintargettargetposx = swipe_maintargettargetposx - ((swipe_maintargettargetposx + swipe_maintargettotalclipwidth - swipe_maintargettotalwidth) / 2);
                         }
                         //console.log(swipe_maintargettargetposy);
 
                         swipe_maintarget.css('left', swipe_maintargettargetposx);
 
-                        if(swipe_maintargettargetposx>0){
+                        if (swipe_maintargettargetposx > 0) {
                             swipe_maintargettargetposx = 0;
                         }
-                        if(swipe_maintargettargetposx<-swipe_maintargettotalclipwidth+swipe_maintargettotalwidth){
-                            swipe_maintargettargetposx = swipe_maintargettargetposx-(swipe_maintargettargetposx+swipe_maintargettotalclipwidth-swipe_maintargettotalwidth);
+                        if (swipe_maintargettargetposx < -swipe_maintargettotalclipwidth + swipe_maintargettotalwidth) {
+                            swipe_maintargettargetposx = swipe_maintargettargetposx - (swipe_maintargettargetposx + swipe_maintargettotalclipwidth - swipe_maintargettotalwidth);
                         }
                     }
-                    if(dir_ver){
-                        if(e.type=='touchmove'){
+                    if (dir_ver) {
+                        if (e.type == 'touchmove') {
                             swipe_touchupposy = e.originalEvent.touches[0].pageY;
-                        }else{
+                        } else {
                             swipe_touchupposy = e.pageY;
                         }
                         //console.info(swipe_maintargetoriginalposy, swipe_touchupposy, swipe_touchdownposy)
                         swipe_maintargettargetposy = swipe_maintargetoriginalposy + (swipe_touchupposy - swipe_touchdownposy);
-                        if(swipe_maintargettargetposy>0){
-                            swipe_maintargettargetposy/=2;
+                        if (swipe_maintargettargetposy > 0) {
+                            swipe_maintargettargetposy /= 2;
                         }
-                        if(swipe_maintargettargetposy<-swipe_maintargettotalclipheight+swipe_maintargettotalheight){
-                            swipe_maintargettargetposy = swipe_maintargettargetposy-((swipe_maintargettargetposy+swipe_maintargettotalclipheight-swipe_maintargettotalheight)/2);
+                        if (swipe_maintargettargetposy < -swipe_maintargettotalclipheight + swipe_maintargettotalheight) {
+                            swipe_maintargettargetposy = swipe_maintargettargetposy - ((swipe_maintargettargetposy + swipe_maintargettotalclipheight - swipe_maintargettotalheight) / 2);
                         }
                         //console.log(swipe_maintargettargetposy);
 
                         swipe_maintarget.css('top', swipe_maintargettargetposy);
 
-                        if(swipe_maintargettargetposy>0){
+                        if (swipe_maintargettargetposy > 0) {
                             swipe_maintargettargetposy = 0;
                         }
-                        if(swipe_maintargettargetposy<-swipe_maintargettotalclipheight+swipe_maintargettotalheight){
-                            swipe_maintargettargetposy = swipe_maintargettargetposy-(swipe_maintargettargetposy+swipe_maintargettotalclipheight-swipe_maintargettotalheight);
+                        if (swipe_maintargettargetposy < -swipe_maintargettotalclipheight + swipe_maintargettotalheight) {
+                            swipe_maintargettargetposy = swipe_maintargettargetposy - (swipe_maintargettargetposy + swipe_maintargettotalclipheight - swipe_maintargettotalheight);
                         }
                     }
 
-                    if(e.type=='touchmove'){
+                    if (e.type == 'touchmove') {
 
-                    }else{
+                    } else {
 
-                        if(dir_hor){
+                        if (dir_hor) {
                             aux = swipe_maintargettargetposx / -(swipe_maintargettotalclipwidth - swipe_maintargettotalwidth);
                             //console.log(aux, swipe_maintargettargetposx);
                             updateX(aux);
                         }
-                        if(dir_ver){
+                        if (dir_ver) {
                             aux = swipe_maintargettargetposy / -(swipe_maintargettotalclipheight - swipe_maintargettotalheight);
                             //console.log(aux);
                             updateY(aux);
@@ -1012,15 +994,17 @@ window.dzsscr_self_options = {};
                     return false;
                 }
             }
-            function handle_touchEnd(e){
 
-                inner_dragging=false;
-                sc_dragging=false;
+            function handle_touchEnd(e) {
+
+                inner_dragging = false;
+                sc_dragging = false;
                 swipe_dragging = false;
                 cthis.removeClass('closedhand');
 
                 var aux = 0;
             }
+
             function updateX(arg, otherargs) {
 
 
@@ -1028,7 +1012,7 @@ window.dzsscr_self_options = {};
                 //updateX based on a perchange 0.314
 
                 var margs = {
-                    'secondCon_targetX' : ''
+                    'secondCon_targetX': ''
                 }
 
 
@@ -1050,6 +1034,7 @@ window.dzsscr_self_options = {};
                 //console.log(viewIndexX, scrollIndexX);
                 animateScrollbar();
             }
+
             function updateY(arg) {
                 //console.info('updateY('+arg+')');
                 //updateX based on a perchange 0.314
@@ -1064,12 +1049,13 @@ window.dzsscr_self_options = {};
                 //console.log(viewIndexX, scrollIndexX);
                 animateScrollbar();
             }
-            function scrollx_to(arg){
+
+            function scrollx_to(arg) {
 
                 //console.log(arg);
                 //if argument is bigger then 1 then the user wants a pixel based jump
 
-                if(arg>1){
+                if (arg > 1) {
                     arg = arg / (comWidth - totalWidth);
                 }
 
@@ -1077,35 +1063,36 @@ window.dzsscr_self_options = {};
                 scrollIndexX = arg * (totalWidth_for_scrollbar - scrollbarx_psize);
 
                 //console.info(o.secondCon);
-                if(o.secondCon!=null){
+                if (o.secondCon != null) {
                     secondCon_viX = arg * -(secondCon_cw - secondCon_tw);
                 }
 
                 //console.log(viewIndexX, scrollIndexX);
                 animateScrollbar();
             }
-            function scrolly_to(arg, pargs){
+
+            function scrolly_to(arg, pargs) {
 
                 //console.log('scrolly_to()', arg);
                 //if argument is bigger then 1 then the user wants a pixel based jump
 
                 var margs = {
 
-                    'show_scrollbar' : true
+                    'show_scrollbar': true
                 };
 
-                if(pargs){
-                    margs = $.extend(margs,pargs);
+                if (pargs) {
+                    margs = $.extend(margs, pargs);
                 }
 
-                if(arg>1){
+                if (arg > 1) {
                     arg = arg / (comHeight - totalHeight);
                 }
 
                 viewIndexY = arg * -(comHeight - totalHeight);
                 scrollIndexY = arg * (totalHeight - scrollbary_psize);
 
-                if(o.secondCon!=null){
+                if (o.secondCon != null) {
                     secondCon_viY = arg * -(secondCon_ch - secondCon_th);
                 }
 
@@ -1114,18 +1101,18 @@ window.dzsscr_self_options = {};
 
 
                 //console.info(margs);
-                if(margs.show_scrollbar){
+                if (margs.show_scrollbar) {
 
                     clearTimeout(inter_hidescrollbar);
                     inter_hidescrollbar = setTimeout(inter_hidescrollbar_func, 1000);
                     cthis.addClass('scrollbar-active');
                 }
             }
+
             function calculateDims() {
                 //console.info('scroller - calculateDims()');
                 ww = $(window).width();
                 wh = $(window).height();
-
 
 
                 if (o.settings_makeFunctional == true) {
@@ -1154,16 +1141,16 @@ window.dzsscr_self_options = {};
 
                 //console.log(cthis, cthis.outerWidth());
 
-                if (o.totalWidth != undefined){
+                if (o.totalWidth != undefined) {
                     totalWidth = o.totalWidth;
-                }else{
+                } else {
                     totalWidth = cthis.outerWidth(false);
                 }
 
-                if (o.totalHeight != undefined && o.totalHeight!=0){
+                if (o.totalHeight != undefined && o.totalHeight != 0) {
                     totalHeight = o.totalHeight;
-                }else{
-                    if(cthis.height()!=0){
+                } else {
+                    if (cthis.height() != 0) {
                         totalHeight = cthis.outerHeight(false);
                     }
                 }
@@ -1171,8 +1158,8 @@ window.dzsscr_self_options = {};
 
                 totalWidth_for_scrollbar = totalWidth;
 
-                if(o.settings_skin=='skin_luna'){
-                    totalWidth_for_scrollbar-=4;
+                if (o.settings_skin == 'skin_luna') {
+                    totalWidth_for_scrollbar -= 4;
                 }
 
 
@@ -1183,29 +1170,28 @@ window.dzsscr_self_options = {};
                 }
 
 
-                if(o.type=='scrollTop'){
+                if (o.type == 'scrollTop') {
 
 
                     totalHeight = $(window).height();
                     comHeight = cthis.outerHeight();
 
-                    if(_scrollTop_height_indicator && _scrollTop_height_indicator.outerHeight){
+                    if (_scrollTop_height_indicator && _scrollTop_height_indicator.outerHeight) {
                         comHeight = _scrollTop_height_indicator.outerHeight() + comHeight_surplus;
                     }
 
 
-
                     //console.info(comHeight,last_comHeight);
-                    if(Math.abs(comHeight-last_comHeight)>99){
+                    if (Math.abs(comHeight - last_comHeight) > 99) {
 
                         viewIndexY = (scrollIndexY / (-(wh - scrollbary_psize))) * (comHeight - wh);
-                        if(comHeight<last_comHeight){
+                        if (comHeight < last_comHeight) {
                             //scrollIndexY = viewIndexY / (comHeight - totalHeight) * -(totalHeight - scrollbary_psize);
                             //console.info("ALCEVA", comHeight, wh, viewIndexY);;
-                            if(comHeight< wh){
-                                viewIndexY=0;
-                                scrollIndexY=0;
-                            }else{
+                            if (comHeight < wh) {
+                                viewIndexY = 0;
+                                scrollIndexY = 0;
+                            } else {
 
                                 //console.info('handle_wheel from hier')
                                 handle_wheel();
@@ -1224,7 +1210,6 @@ window.dzsscr_self_options = {};
                 //console.info(viewIndexY);
 
 
-
                 //console.log(cthis, totalWidth);
 
                 if (o.secondCon != null) {
@@ -1238,7 +1223,7 @@ window.dzsscr_self_options = {};
 
 
                 //return;
-                if (is_ie() && version_ie() == 7){
+                if (is_ie() && version_ie() == 7) {
                     cthis.css('overflow', 'visible');
                 }
 
@@ -1250,11 +1235,8 @@ window.dzsscr_self_options = {};
                  */
 
 
-
-
-
                 //console.info(_inner);
-                if(_inner){
+                if (_inner) {
                     comWidth = _inner.width();
                     comHeight = _inner.outerHeight();
 
@@ -1267,7 +1249,7 @@ window.dzsscr_self_options = {};
                         });
 
 //                    console.info(comWidth);
-                        if(_inner_autoheight){
+                        if (_inner_autoheight) {
                             _inner.height(comHeight);
                         }
                         _inner.css({
@@ -1277,12 +1259,11 @@ window.dzsscr_self_options = {};
                 }
 
 
-
-                if(_inner && cthis_autoheight){
+                if (_inner && cthis_autoheight) {
                     cthis.height(_inner.height());
                 }
 
-                if(_inner && _inner.hasClass('calculate-inner')){
+                if (_inner && _inner.hasClass('calculate-inner')) {
                     //_inner.wrap('<div class="calculate-inner-con"></div>');
                     //
                     //_inner.parent().width(100000);
@@ -1294,21 +1275,17 @@ window.dzsscr_self_options = {};
                 }
 
                 //totalHeight = cthis.height();
-                if(o.type=='scrollTop'){
+                if (o.type == 'scrollTop') {
 
                     var sw_wasstatic = false;
-                    if(cthis.css('position')=='static'){
-                        sw_wasstatic=true;
+                    if (cthis.css('position') == 'static') {
+                        sw_wasstatic = true;
                         //cthis.css('position','relative');
                         //setTimeout(calculateDims,100);
                     }
 
 
-
                     //console.info(cthis, comHeight, totalHeight, $(window).height());
-
-
-
 
 
                 }
@@ -1325,7 +1302,7 @@ window.dzsscr_self_options = {};
                 }
 
                 //determining the direction ------------
-                if (comHeight <= totalHeight ) {
+                if (comHeight <= totalHeight) {
                     dir_ver = false;
                 } else {
                     dir_ver = true;
@@ -1340,7 +1317,6 @@ window.dzsscr_self_options = {};
                 }
 
 
-
                 if (o.force_onlyy == 'on') {
                     dir_hor = false;
                 }
@@ -1348,43 +1324,41 @@ window.dzsscr_self_options = {};
                     dir_ver = false;
                 }
 
-                if(o.type=='scrollTop'){
-                    dir_ver=true;
+                if (o.type == 'scrollTop') {
+                    dir_ver = true;
 
 
-
-                    if(comHeight<=totalHeight){
-                        dir_ver=false;
+                    if (comHeight <= totalHeight) {
+                        dir_ver = false;
                     }
                 }
 
 
-                if(dir_hor==true){
+                if (dir_hor == true) {
 
                     cthis.addClass('dir-hor');
-                }else{
+                } else {
 
                     cthis.removeClass('dir-hor');
                 }
 
-                if(dir_ver==true){
+                if (dir_ver == true) {
 
                     cthis.addClass('dir-ver');
-                }else{
+                } else {
 
                     cthis.removeClass('dir-ver');
                 }
 
 
-
-                if(dir_hor==false && scrollbarx!=undefined){
+                if (dir_hor == false && scrollbarx != undefined) {
                     scrollbarx.remove();
                     scrollbarx_bg.remove();
                     scrollbarx = undefined;
                     scrollbarx_bg = undefined;
                 }
 
-                if(dir_ver==false && scrollbary!=undefined){
+                if (dir_ver == false && scrollbary != undefined) {
                     scrollbary.remove();
                     scrollbary_bg.remove();
                     scrollbary = undefined;
@@ -1393,10 +1367,10 @@ window.dzsscr_self_options = {};
 
 //                console.info(dir_hor, dir_ver);
 
-                if (dir_ver == false && dir_hor == false){
+                if (dir_ver == false && dir_hor == false) {
                     cthis.addClass('no-need-for-nav');
                     return;
-                }else{
+                } else {
 
                     cthis.removeClass('no-need-for-nav');
                 }
@@ -1404,8 +1378,6 @@ window.dzsscr_self_options = {};
 
                 var auxperc = 0;
                 var auxpery = 0;
-
-
 
 
                 if (o.settings_scrollbar == 'on') {
@@ -1419,27 +1391,23 @@ window.dzsscr_self_options = {};
 
                         var aux = '<div class="scrollbarx">';
 
-                        aux+='';
+                        aux += '';
 
                         //console.info(o.settings_skin);
-                        if(o.settings_skin=='skin_luna' || o.settings_skin=='skin_cerc'){
-                            aux+='<svg class="arrow-left" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="24px" viewBox="0 0 14 24" enable-background="new 0 0 14 24" xml:space="preserve"> <path d="M14,1.996c0,0.208-0.08,0.393-0.241,0.553L4.306,12l9.454,9.451C13.92,21.611,14,21.795,14,22.004s-0.08,0.393-0.241,0.553 l-1.203,1.203c-0.16,0.16-0.345,0.24-0.553,0.24s-0.393-0.08-0.553-0.24L0.241,12.553C0.08,12.393,0,12.208,0,12 s0.08-0.393,0.241-0.553L11.45,0.24C11.61,0.08,11.795,0,12.003,0s0.393,0.08,0.553,0.24l1.203,1.203C13.92,1.603,14,1.788,14,1.996 z"/> </svg><svg class="arrow-right" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="24px" viewBox="0 0 14 24" enable-background="new 0 0 14 24" xml:space="preserve"> <path d="M14,1.996c0,0.208-0.08,0.393-0.241,0.553L4.306,12l9.454,9.451C13.92,21.611,14,21.795,14,22.004s-0.08,0.393-0.241,0.553 l-1.203,1.203c-0.16,0.16-0.345,0.24-0.553,0.24s-0.393-0.08-0.553-0.24L0.241,12.553C0.08,12.393,0,12.208,0,12 s0.08-0.393,0.241-0.553L11.45,0.24C11.61,0.08,11.795,0,12.003,0s0.393,0.08,0.553,0.24l1.203,1.203C13.92,1.603,14,1.788,14,1.996 z"/> </svg>';
+                        if (o.settings_skin == 'skin_luna' || o.settings_skin == 'skin_cerc') {
+                            aux += '<svg class="arrow-left" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="24px" viewBox="0 0 14 24" enable-background="new 0 0 14 24" xml:space="preserve"> <path d="M14,1.996c0,0.208-0.08,0.393-0.241,0.553L4.306,12l9.454,9.451C13.92,21.611,14,21.795,14,22.004s-0.08,0.393-0.241,0.553 l-1.203,1.203c-0.16,0.16-0.345,0.24-0.553,0.24s-0.393-0.08-0.553-0.24L0.241,12.553C0.08,12.393,0,12.208,0,12 s0.08-0.393,0.241-0.553L11.45,0.24C11.61,0.08,11.795,0,12.003,0s0.393,0.08,0.553,0.24l1.203,1.203C13.92,1.603,14,1.788,14,1.996 z"/> </svg><svg class="arrow-right" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="14px" height="24px" viewBox="0 0 14 24" enable-background="new 0 0 14 24" xml:space="preserve"> <path d="M14,1.996c0,0.208-0.08,0.393-0.241,0.553L4.306,12l9.454,9.451C13.92,21.611,14,21.795,14,22.004s-0.08,0.393-0.241,0.553 l-1.203,1.203c-0.16,0.16-0.345,0.24-0.553,0.24s-0.393-0.08-0.553-0.24L0.241,12.553C0.08,12.393,0,12.208,0,12 s0.08-0.393,0.241-0.553L11.45,0.24C11.61,0.08,11.795,0,12.003,0s0.393,0.08,0.553,0.24l1.203,1.203C13.92,1.603,14,1.788,14,1.996 z"/> </svg>';
                         }
 
 
-                        aux+= o.extra_html_scrollbarx;
+                        aux += o.extra_html_scrollbarx;
 
-                        aux+='</div>';
+                        aux += '</div>';
 
                         _scrollbar.append(aux);
 
 
-
-
-
                     }
                 }
-
 
 
                 if (scrollbary == undefined && dir_ver) {
@@ -1459,22 +1427,21 @@ window.dzsscr_self_options = {};
                     }
 
 
-
-                    scrollbary_bg.mousedown(function(event) {
+                    scrollbary_bg.mousedown(function (event) {
                         scrollbary_pressed = true;
-                        o.settings_slideshow=0;
+                        o.settings_slideshow = 0;
                         scrollbary_draglocaly = mousey - scrollbary.offset().top + cthis.offset().top;
-                        if(o.type=='scrollTop'){
+                        if (o.type == 'scrollTop') {
                             scrollbary_draglocaly = mousey - scrollbary.offset().top + $(window).scrollTop();
                         }
                         return false;
                     });
-                    scrollbary.mousedown(function(event) {
+                    scrollbary.mousedown(function (event) {
                         scrollbary_pressed = true;
-                        o.settings_slideshow=0;
+                        o.settings_slideshow = 0;
                         //console.log(mousey, scrollbary.offset().top, cthis.offset().top);
                         scrollbary_draglocaly = mousey - scrollbary.offset().top + cthis.offset().top;
-                        if(o.type=='scrollTop'){
+                        if (o.type == 'scrollTop') {
                             scrollbary_draglocaly = mousey - scrollbary.offset().top + $(window).scrollTop();
                         }
                         return false;
@@ -1503,17 +1470,17 @@ window.dzsscr_self_options = {};
                     }
 
 
-                    scrollbarx.mousedown(function(event) {
+                    scrollbarx.mousedown(function (event) {
                         scrollbarx_pressed = true;
-                        o.settings_slideshow=0;
+                        o.settings_slideshow = 0;
                         //scrollbarx_dragx = parseInt($(this).css('left'));
                         scrollbarx_draglocalx = mousex - scrollbarx.offset().left + cthis.offset().left;
                         return false;
                     });
 
-                    scrollbarx_bg.mousedown(function(event) {
+                    scrollbarx_bg.mousedown(function (event) {
                         scrollbarx_pressed = true;
-                        o.settings_slideshow=0;
+                        o.settings_slideshow = 0;
                         return false;
                     });
                 }
@@ -1575,7 +1542,7 @@ window.dzsscr_self_options = {};
                  */
                 //console.info(viewIndexY, 'animateScrollbar from handle_frame()');
 
-                var args={
+                var args = {
                     do_not_clear_suspend_enter_frame: 'on'
                 }
                 animateScrollbar(args);
@@ -1584,6 +1551,7 @@ window.dzsscr_self_options = {};
                 }
 
             }
+
             function scrollToTop() {
                 //console.info('scrollToTop()');
                 viewIndexY = 0;
@@ -1591,6 +1559,7 @@ window.dzsscr_self_options = {};
                 //console.info('animateScrollbar from handle_frame()');
                 animateScrollbar();
             }
+
             function reinit() {
                 ww = $(window).width();
                 wh = $(window).height();
@@ -1602,12 +1571,11 @@ window.dzsscr_self_options = {};
             cthis.get(0).api_handle_wheel = handle_wheel;
 
 
-            if (o.settings_scrollbyhover != 'on' && ( cthis.hasClass('is-touch')==false || o.settings_disableSpecialIosFeatures == 'on')){
+            if (o.settings_scrollbyhover != 'on' && ( cthis.hasClass('is-touch') == false || o.settings_disableSpecialIosFeatures == 'on')) {
 
 
-
-                if(o.type=='scrollTop'){
-                    if ($(window)[0].addEventListener){
+                if (o.type == 'scrollTop') {
+                    if ($(window)[0].addEventListener) {
                         $(window)[0].addEventListener('DOMMouseScroll', handle_wheel, false);
                         //console.info($('iframe[src*="vimeo.com"]'));
                         //$('iframe[src*="vimeo.com"]').contents().find("body").bind('mousewheel', function(e, delta) {
@@ -1619,35 +1587,32 @@ window.dzsscr_self_options = {};
                         //$('body').find('iframe').bind('wheel', function(){
                         //    console.log('ffwheel');
                         //})
-                    }else{
+                    } else {
                     }
                     $(window)[0].onmousewheel = handle_wheel;
 
                     //addWheelListener( window, function( e ) { console.log( e.deltaY ); e.preventDefault(); } );
-                }else{
+                } else {
 
-                    if (cthis[0].addEventListener){
+                    if (cthis[0].addEventListener) {
                         cthis[0].addEventListener('DOMMouseScroll', handle_wheel, false);
-                    }else{
+                    } else {
                     }
                     cthis[0].onmousewheel = handle_wheel;
                 }
 
 
-
-
 //            console.info(o.secondCon);
 //            secondCon_enable_mouse_scroll
 
-                if(o.secondCon){
-                    if (o.secondCon[0].addEventListener){
+                if (o.secondCon) {
+                    if (o.secondCon[0].addEventListener) {
                         o.secondCon[0].addEventListener('DOMMouseScroll', handle_wheel, false);
                     }
                     o.secondCon[0].onmousewheel = handle_wheel;
                 }
 
             }
-
 
 
             /*
@@ -1659,16 +1624,18 @@ window.dzsscr_self_options = {};
              */
 
 
-            function handle_wheel(e){
+            function handle_wheel(e) {
                 //console.info('handle_wheel()', e, e.deltaY);
 
                 var _t = $(this);
 
-                if(o.type=='scrollTop'){
+                if (o.type == 'scrollTop') {
                     _t = cthis;
                 }
 
-                if(scrolling_blocked){ return; }
+                if (scrolling_blocked) {
+                    return;
+                }
 
                 scrollbufferX = false;
                 scrollbufferY = false;
@@ -1680,10 +1647,9 @@ window.dzsscr_self_options = {};
                 var the_event = e || window.event;
 
 
-                if(the_event && the_event.target && cthis.has($(the_event.target)).length<1){
+                if (the_event && the_event.target && cthis.has($(the_event.target)).length < 1) {
                     //return;
                 }
-
 
 
                 auxdeltax = return_deltax(the_event);
@@ -1696,11 +1662,11 @@ window.dzsscr_self_options = {};
                 //console.info(isChrome, isSafari, is_firefox());
 
                 //console.info(o.settings_multiplier, auxdeltay, o.settings_chrome_multiplier);
-                if(isChrome){
+                if (isChrome) {
                     auxdeltax *= o.settings_chrome_multiplier;
                     auxdeltay *= o.settings_chrome_multiplier;
                 }
-                if(isSafari){
+                if (isSafari) {
                     //==hack safari detets chrome too..
                     auxdeltax = return_deltax(the_event);
                     auxdeltay = return_deltay(the_event);
@@ -1710,16 +1676,16 @@ window.dzsscr_self_options = {};
                 //console.log(auxdeltay);
 
                 //console.info(is_firefox(), auxdeltay);
-                if(is_firefox()){
+                if (is_firefox()) {
                     auxdeltax *= o.settings_firefox_multiplier;
                     auxdeltay *= o.settings_firefox_multiplier;
                 }
-                if(is_opera()){
+                if (is_opera()) {
                     auxdeltax *= o.settings_opera_multiplier;
                     auxdeltay *= o.settings_opera_multiplier;
                 }
 
-                if(is_ie()){
+                if (is_ie()) {
                     auxdeltax = 0;
                     auxdeltay = return_delta(the_event);
 
@@ -1732,7 +1698,7 @@ window.dzsscr_self_options = {};
                 //console.info(o.settings_multiplier, auxdeltay);
 
                 //console.info(navigator.userAgent, auxdeltay, e.axis, is_ie(), version_ie(), getInternetExplorerVersion());
-                if(getInternetExplorerVersion()>=11){
+                if (getInternetExplorerVersion() >= 11) {
                     auxdeltax = 0;
                     auxdeltay = return_delta(the_event);
 
@@ -1743,23 +1709,21 @@ window.dzsscr_self_options = {};
                     //console.info(auxdeltay);
                 }
                 //console.log(deltaY, delta);
-                if (o.settings_replacewheelxwithy == 'on' && auxdeltax==0){
+                if (o.settings_replacewheelxwithy == 'on' && auxdeltax == 0) {
                     auxdeltax = auxdeltay;
                 }
 
 
-
-
-                if(isNaN(auxdeltax)){
+                if (isNaN(auxdeltax)) {
                     auxdeltax = 0;
                 }
-                if(isNaN(auxdeltay)){
+                if (isNaN(auxdeltay)) {
                     auxdeltay = 0;
                 }
 
                 //console.info('final deltaY', auxdeltay);
 
-                if(cthis.get(0)==_t.get(0) || (o.secondCon && o.secondCon.get(0)==_t.get(0))){
+                if (cthis.get(0) == _t.get(0) || (o.secondCon && o.secondCon.get(0) == _t.get(0))) {
 
                     if (dir_ver) {
 
@@ -1784,9 +1748,9 @@ window.dzsscr_self_options = {};
                                 secondCon_viX = 0;
                             }
 
-                            if(isNaN(secondCon_viX)){
+                            if (isNaN(secondCon_viX)) {
                                 secondCon_viX = lastNonNaNX_sc;
-                            }else{
+                            } else {
                                 lastNonNaNX_sc = secondCon_viX
                             }
 
@@ -1802,14 +1766,14 @@ window.dzsscr_self_options = {};
 
                 //console.info('animateScrollbar from handle_frame()');
                 animateScrollbar({
-                    animate_sc_based_on_main_scroll : "on"
+                    animate_sc_based_on_main_scroll: "on"
                 });
 
-                if(dir_hor==false){
+                if (dir_hor == false) {
                     scrollbufferX = true;
                 }
 
-                if(dir_ver==false){
+                if (dir_ver == false) {
                     scrollbufferY = true;
                 }
 
@@ -1819,26 +1783,26 @@ window.dzsscr_self_options = {};
 
                 //console.log(auxdeltax);
                 //if scrollbuffer Y is true then we can scroll on
-                if (auxdeltay !=0 && scrollbufferY == false) {
-                    if((is_ie8())==false){
+                if (auxdeltay != 0 && scrollbufferY == false) {
+                    if ((is_ie8()) == false) {
                         the_event.stopPropagation();
                         the_event.preventDefault();
-                    }else{
+                    } else {
                         return false;
                     }
                 }
-                if (auxdeltax !=0 && scrollbufferX == false) {
-                    if((is_ie8())==false){
+                if (auxdeltax != 0 && scrollbufferX == false) {
+                    if ((is_ie8()) == false) {
                         the_event.stopPropagation();
                         the_event.preventDefault();
-                    }else{
+                    } else {
                         return false;
                     }
                 }
 
                 //console.info('scrollbar active from scroll',auxdeltay,auxdeltax);
 
-                if(auxdeltax!=0 || auxdeltay!=0){
+                if (auxdeltax != 0 || auxdeltay != 0) {
 
                     clearTimeout(inter_hidescrollbar);
                     inter_hidescrollbar = setTimeout(inter_hidescrollbar_func, 1000);
@@ -1847,18 +1811,17 @@ window.dzsscr_self_options = {};
 
                 //console.info('action_handle_wheel_end', action_handle_wheel_end);
 
-                if(action_handle_wheel_end){
+                if (action_handle_wheel_end) {
 
                     action_handle_wheel_end(e, auxdeltax, auxdeltay);
                 }
 
 
-                if(o.type=='scrollTop'){
-                    if(is_safari()){
+                if (o.type == 'scrollTop') {
+                    if (is_safari()) {
                         return false;
                     }
                 }
-
 
 
                 //console.log(return_delta(the_event),return_deltax(the_event),return_deltay(the_event));
@@ -1872,8 +1835,8 @@ window.dzsscr_self_options = {};
 
             }
 
-            function return_delta(e){
-                if(!(e)){
+            function return_delta(e) {
+                if (!(e)) {
                     return 0;
                 }
 
@@ -1888,23 +1851,21 @@ window.dzsscr_self_options = {};
                 }
 
 
-
-                if (e.originalEvent != undefined && e.originalEvent.detail!=undefined) {
+                if (e.originalEvent != undefined && e.originalEvent.detail != undefined) {
                     return e.originalEvent.detail * -40;
                 }
 
             }
 
-            function return_deltax(e)
-            {
-                if(!(e)){
+            function return_deltax(e) {
+                if (!(e)) {
                     return 0;
                 }
 
-                if(is_firefox()){
-                    if(e.axis==1){
+                if (is_firefox()) {
+                    if (e.axis == 1) {
                         return e.detail;
-                    }else{
+                    } else {
                         return 0;
                     }
                 }
@@ -1922,14 +1883,15 @@ window.dzsscr_self_options = {};
                 }
 
             }
-            function return_deltay(e){
-                if(!(e)){
+
+            function return_deltay(e) {
+                if (!(e)) {
                     return 0;
                 }
-                if(is_firefox()){
-                    if(e.axis==2){
+                if (is_firefox()) {
+                    if (e.axis == 2) {
                         return e.detail;
-                    }else{
+                    } else {
                         return 0;
                     }
                 }
@@ -1948,16 +1910,16 @@ window.dzsscr_self_options = {};
 
             }
 
-            if ((cthis.hasClass('is-touch')==false) || o.settings_disableSpecialIosFeatures == 'on') {
-                $(document).mousemove(function(e) {
+            if ((cthis.hasClass('is-touch') == false) || o.settings_disableSpecialIosFeatures == 'on') {
+                $(document).mousemove(function (e) {
                     mousex = (e.pageX - cthis.offset().left);
                     mousey = (e.pageY - cthis.offset().top);
-                    if(o.type=='scrollTop'){
+                    if (o.type == 'scrollTop') {
                         mousey = (e.pageY - $(window).scrollTop());
                     }
                     //console.info(mousey);
 
-                    if (o.settings_scrollbyhover == 'on' && (mousex < 0 || mousey < 0 || mousex > totalWidth + 20 || mousey > totalHeight + 20)){
+                    if (o.settings_scrollbyhover == 'on' && (mousex < 0 || mousey < 0 || mousex > totalWidth + 20 || mousey > totalHeight + 20)) {
                         return;
                     }
                     if (dir_ver == true && (scrollbary_pressed == true || o.settings_scrollbyhover == 'on')) {
@@ -2023,11 +1985,10 @@ window.dzsscr_self_options = {};
                     }
 
 
-                    if(o.settings_show_sidebar_on_right_side_mouse=='on'){
+                    if (o.settings_show_sidebar_on_right_side_mouse == 'on') {
                         //console.info(mousex, mousey, cthis.offset().left, cthis.width());
 
-                        if(mousex>cthis.offset().left + cthis.width()-100 && mousex<=cthis.offset().left + cthis.width() && mousey>cthis.offset().top && mousey<=cthis.offset().top + cthis.height()){
-
+                        if (mousex > cthis.offset().left + cthis.width() - 100 && mousex <= cthis.offset().left + cthis.width() && mousey > cthis.offset().top && mousey <= cthis.offset().top + cthis.height()) {
 
 
                             clearTimeout(inter_hidescrollbar);
@@ -2043,19 +2004,19 @@ window.dzsscr_self_options = {};
 
             //console.info(o.settings_enable_drag_on_desktops_too);
 
-            if(o.settings_enable_drag_on_desktops_too=='on'){
+            if (o.settings_enable_drag_on_desktops_too == 'on') {
 
                 cthis.addClass('swipe-enabled');
 
 
-                if(_inner){
+                if (_inner) {
                     _inner.bind('mousedown', handle_touchStart);
                     $(document).bind('mousemove', handle_touchMove);
                     $(document).bind('mouseup', handle_touchEnd);
                 }
 
 
-                if(o.secondCon){
+                if (o.secondCon) {
 
                     o.secondCon.bind('touchstart', handle_touchStart);
                     o.secondCon.bind('touchend', handle_touchEnd);
@@ -2063,45 +2024,46 @@ window.dzsscr_self_options = {};
             }
 
             if (( cthis.hasClass('is-touch') == false) || o.settings_disableSpecialIosFeatures == 'on') {
-                $(document).mouseup(function(event) {
+                $(document).mouseup(function (event) {
                     //console.log('mouseup')
 
                     scrollbary_pressed = false;
                     scrollbarx_pressed = false;
-                    if(_scrollbar){
+                    if (_scrollbar) {
 
                         _scrollbar.removeClass('dragging');
                     }
                     cthis.removeClass('dragging');
                 })
-            }else{
+            } else {
                 cthis.addClass('swipe-enabled');
 
-                if(_inner){
+                if (_inner) {
                     _inner.bind('touchstart', handle_touchStart);
                     _inner.bind('touchmove', handle_touchMove);
                     _inner.bind('touchend', handle_touchEnd);
                 }
 
 
-                if(o.secondCon){
+                if (o.secondCon) {
 
                     o.secondCon.bind('touchstart', handle_touchStart);
                     o.secondCon.bind('touchend', handle_touchEnd);
                 }
             }
-            function animateScrollbarTop(){
+            function animateScrollbarTop() {
 
             }
+
             function animateScrollbar(pargs) {
 
                 //console.info(pargs);
                 var margs = {
-                    'animate_inner' : "on"
-                    ,'animate_sc' : "on"
-                    ,'animate_sc_based_on_main_scroll' : "off"
-                    ,'force_no_easing': 'off'
-                    ,'do_not_clear_suspend_enter_frame' : 'off'
+                    'animate_inner': "on"
+                    , 'animate_sc': "on"
+                    , 'animate_sc_based_on_main_scroll': "off"
+                    , 'force_no_easing': 'off'
+                    , 'do_not_clear_suspend_enter_frame': 'off'
                 };
                 margs = $.extend(margs, pargs);
 
@@ -2110,18 +2072,20 @@ window.dzsscr_self_options = {};
 
                     //console.info(viewIndexY, comHeight, totalHeight, cthis.outerHeight(), wh);
 
-                    if (viewIndexY > 0){
+                    if (viewIndexY > 0) {
                         viewIndexY = 0;
                     }
 
-                    if(o.type=='scrollTop'){
+                    if (o.type == 'scrollTop') {
                         totalHeight = wh;
                     }
-                    if (viewIndexY < -(comHeight - totalHeight)){
+                    if (viewIndexY < -(comHeight - totalHeight)) {
                         viewIndexY = -(comHeight - totalHeight);
                     }
                     //console.info(viewIndexY);
-                    if(isNaN(viewIndexY)){ viewIndexY = 0; }
+                    if (isNaN(viewIndexY)) {
+                        viewIndexY = 0;
+                    }
                     if (scrollIndexY < 0) {
                         scrollIndexY = 0;
                         scrollbufferY = true;
@@ -2132,47 +2096,46 @@ window.dzsscr_self_options = {};
                     }
                     if (scrollbary) {
                         //console.log(viewIndexY, comHeight);
-                        if(cthis.hasClass('easing')){
+                        if (cthis.hasClass('easing')) {
                             //console.log('ceva');
                             //clearTimeout(inter_reset); inter_reset = setTimeout(function(){animateScrollbarTop();}, 50);
-                        }else{
+                        } else {
                             //animateScrollbarTop();
 
                         }
 
                         //console.info(viewIndexY);
-                        if(o.type=='normal'){
-                            if(o.enable_easing!='on'){
+                        if (o.type == 'normal') {
+                            if (o.enable_easing != 'on') {
                                 _inner.css({
                                     'top': viewIndexY
                                 })
-                            }else{
+                            } else {
                                 finish_viy = viewIndexY;
                             }
                         }
 
                         //console.info(viewIndexY);
 
-                        if(o.type=='scrollTop'){
+                        if (o.type == 'scrollTop') {
                             //console.info(margs,viewIndexY, duration_viy);
-                            if(o.enable_easing!='on' || margs.force_no_easing=='on'){
+                            if (o.enable_easing != 'on' || margs.force_no_easing == 'on') {
                                 $(window).scrollTop(-viewIndexY);
                                 backup_duration_viy = duration_viy;
                                 duration_viy = 0;
                                 finish_viy = viewIndexY;
 
-                                setTimeout(function(){
+                                setTimeout(function () {
                                     duration_viy = backup_duration_viy;
-                                },100);
+                                }, 100);
 
-                            }else{
+                            } else {
                                 finish_viy = viewIndexY;
 
                                 //console.info('IT MAKES IT HERE')
                                 _window_object.data('targettop', finish_viy);
                             }
                         }
-
 
 
                         scrollbary.css({
@@ -2188,23 +2151,23 @@ window.dzsscr_self_options = {};
 //console.log(scrollbarx);
                 if (dir_hor) {
 //                    console.info(viewIndexX, scrollIndexX);
-                    if(viewIndexX==null){
+                    if (viewIndexX == null) {
 //                        viewIndexY = mousey / totalHeight * (totalHeight - comHeight);
 //                        console.info(scrollIndexX, scrollbarx_psize, totalWidth)
 
-                        viewIndexX =  scrollIndexX / (totalWidth - scrollbarx_psize ) * (totalWidth - comWidth)
+                        viewIndexX = scrollIndexX / (totalWidth - scrollbarx_psize ) * (totalWidth - comWidth)
 //                        scrollIndexX = mousex / totalWidth * (totalWidth - scrollbarx_psize);
 //                        viewIndexX = mousex / totalWidth * (totalWidth - comWidth);
                     }
-                    if (viewIndexX < -(comWidth - totalWidth)){
+                    if (viewIndexX < -(comWidth - totalWidth)) {
                         viewIndexX = -(comWidth - totalWidth);
                     }
-                    if (viewIndexX > 0){
+                    if (viewIndexX > 0) {
                         viewIndexX = 0;
                     }
-                    if(isNaN(viewIndexX)){
-                        viewIndexX=lastNonNaNX;
-                    }else{
+                    if (isNaN(viewIndexX)) {
+                        viewIndexX = lastNonNaNX;
+                    } else {
 
                         lastNonNaNX = viewIndexX;
                     }
@@ -2212,16 +2175,14 @@ window.dzsscr_self_options = {};
 
                     //console.info(viewIndexX, comWidth-totalWidth);
 
-                    var rat = -viewIndexX/(comWidth-totalWidth);
+                    var rat = -viewIndexX / (comWidth - totalWidth);
 
-                    if(margs.animate_sc_based_on_main_scroll=='on'){
+                    if (margs.animate_sc_based_on_main_scroll == 'on') {
 
                         secondCon_viX = rat * -(secondCon_cw - secondCon_tw);
 
                         //console.info(secondCon_viX);
                     }
-
-
 
 
                     //console.info(o.secondCon,secondCon_viX);
@@ -2240,25 +2201,24 @@ window.dzsscr_self_options = {};
 
 
                     //console.log(viewIndexX);
-                    if (scrollIndexX < 0){
+                    if (scrollIndexX < 0) {
                         scrollIndexX = 0;
                         scrollbufferX = true;
                         slideshow_reachedend = true;
                     }
-                    if (scrollIndexX > (totalWidth_for_scrollbar - scrollbarx_psize)){
+                    if (scrollIndexX > (totalWidth_for_scrollbar - scrollbarx_psize)) {
                         scrollIndexX = (totalWidth_for_scrollbar - scrollbarx_psize);
                         scrollbufferX = true;
                         slideshow_reachedend = true;
                     }
 
 
-
                     if (scrollbarx) {
                         //console.log(viewIndexY, comHeight);
-                        if(cthis.hasClass('easing')){
+                        if (cthis.hasClass('easing')) {
                             //console.log('ceva');
                             //clearTimeout(inter_reset); inter_reset = setTimeout(function(){animateScrollbarTop();}, 50);
-                        }else{
+                        } else {
                             //animateScrollbarTop();
 
                         }
@@ -2269,34 +2229,34 @@ window.dzsscr_self_options = {};
                         //console.info(_inner);
 
                         //console.info(viewIndexX);
-                        if(o.type=='normal'){
-                            if(o.enable_easing!='on'){
+                        if (o.type == 'normal') {
+                            if (o.enable_easing != 'on') {
                                 _inner.css({
                                     'left': viewIndexX
                                 })
-                            }else{
+                            } else {
                                 finish_vix = viewIndexX;
                             }
                         }
 
-                        if(o.type=='scrollTop'){
-                            if(o.enable_easing!='on'){
+                        if (o.type == 'scrollTop') {
+                            if (o.enable_easing != 'on') {
                                 $(window).scrollLeft(-viewIndexX);
-                            }else{
+                            } else {
                                 finish_vix = viewIndexX;
                             }
                         }
 
-                        if(o.secondCon){
+                        if (o.secondCon) {
 
                             //console.info(o.enable_easing_for_second_con);
 
-                            if(o.enable_easing_for_second_con!='on'){
+                            if (o.enable_easing_for_second_con != 'on') {
 
                                 o.secondCon.css({
-                                    'left' : secondCon_viX
+                                    'left': secondCon_viX
                                 })
-                            }else{
+                            } else {
 
                                 finish_vix_sc = secondCon_viX;
                             }
@@ -2315,19 +2275,17 @@ window.dzsscr_self_options = {};
 
                 }
 
-                if(margs.do_not_clear_suspend_enter_frame=='off'){
+                if (margs.do_not_clear_suspend_enter_frame == 'off') {
 
-                    suspend_enter_frame=false;
+                    suspend_enter_frame = false;
                     clearTimeout(inter_suspend_enter_frame);
                     inter_suspend_enter_frame = setTimeout(suspend_enter_frame_func, 1000);
                 }
 
 
-                if(action_animate_scrollbar_end){
+                if (action_animate_scrollbar_end) {
 
-                    var args = {
-
-                    };
+                    var args = {};
 
                     args.totalWidth = totalWidth;
                     args.comWidth = comWidth;
@@ -2336,19 +2294,14 @@ window.dzsscr_self_options = {};
                     args = $.extend(args, margs);
 
 
-
-
-
                     action_animate_scrollbar_end(args);
                 }
-
-
 
 
             }
 
             if (o.settings_fadeoutonleave == 'on' && (is_ios() == false || o.settings_disableSpecialIosFeatures == 'on')) {
-                cthis.mouseleave(function(e) {
+                cthis.mouseleave(function (e) {
                     //console.log('mouseleave');
                     scrollbary.animate({
                         'opacity': 0
@@ -2367,24 +2320,25 @@ window.dzsscr_self_options = {};
 
 //            console.info(is_ios());
 
-            if ( (cthis.hasClass('is-touch')) && o.settings_disableSpecialIosFeatures !='on') {
+            if ((cthis.hasClass('is-touch')) && o.settings_disableSpecialIosFeatures != 'on') {
                 setInterval(ios_handle_frame, 80);
 //                setInterval(debug_func, 500);
 
             }
-            function debug_func(){
+            function debug_func() {
                 debug_var = true;
             }
+
             function ios_handle_frame() {
                 //console.info('ios_handle_frame');
 //                return;
                 //only for ios, calculate
-                var cthis_touch_comwidth =0;
-                var cthis_touch_left =0;
-                var cthis_touch_comheight =0;
+                var cthis_touch_comwidth = 0;
+                var cthis_touch_left = 0;
+                var cthis_touch_comheight = 0;
                 var cthis_touch_top = 0;
 
-                if(_inner){
+                if (_inner) {
                     cthis_touch_comwidth = _inner.width() - cthis.width();
                     cthis_touch_left = _inner.position().left;
                     cthis_touch_comheight = _inner.height() - cthis.height();
@@ -2395,8 +2349,8 @@ window.dzsscr_self_options = {};
                 var scpar = null;
 
 
-                if(o.secondCon){
-                    sc= o.secondCon;
+                if (o.secondCon) {
+                    sc = o.secondCon;
                     scpar = sc.parent();
 
 //                    console.info(scpar.outerWidth());
@@ -2408,19 +2362,18 @@ window.dzsscr_self_options = {};
                 }
 
 
-
 //                console.info(iL, iW, totalWidth, scrollbarx_psize, scrollIndexX, scrollIndexY);
 
 //                scrollIndexX = secondCon_viX *  ((-(secondCon_tw - scrollbarx_psize))) * (secondCon_cw - secondCon_tw));
 
 
-                if(debug_var && cthis[0] == document.getElementById('scrollc3')){
+                if (debug_var && cthis[0] == document.getElementById('scrollc3')) {
 
 //                    console.info(inner_dragging, cthis_touch_comwidth, cthis.width(), _inner.width(), _inner.position().top, _outer.position().top);
                     debug_var = false;
                 }
 
-                if(inner_dragging){
+                if (inner_dragging) {
 
 //                    console.info(cthis_touch_left, cthis_touch_comwidth, totalWidth, scrollbarx_psize);
                     scrollIndexX = ( (-cthis_touch_left) / cthis_touch_comwidth) * (totalWidth - scrollbarx_psize);
@@ -2430,7 +2383,7 @@ window.dzsscr_self_options = {};
                         'animate_inner': "off"
                     }
 
-                    if(sc){
+                    if (sc) {
                         secondCon_viX = -(((scrollIndexX / (secondCon_tw - scrollbarx_psize)) * (secondCon_cw - secondCon_tw)));
                     }
 //                    console.info('inner', scrollIndexX, secondCon_viX, secondCon_cw, secondCon_tw);
@@ -2440,9 +2393,8 @@ window.dzsscr_self_options = {};
                 }
 
 
-
-                if(sc_dragging){
-                    scrollIndexX =  ( (-sc_touch_left) / sc_touch_comwidth) * (totalWidth - scrollbarx_psize);
+                if (sc_dragging) {
+                    scrollIndexX = ( (-sc_touch_left) / sc_touch_comwidth) * (totalWidth - scrollbarx_psize);
                     viewIndexX = scrollIndexX / totalWidth * (totalWidth - comWidth)
                     var args = {
                         'animate_sc': "off"
@@ -2462,19 +2414,21 @@ window.dzsscr_self_options = {};
             return this;
         });
     };
-    window.dzsscr_init = function(selector, settings) {
-        if(typeof(settings)!="undefined" && typeof(settings.init_each)!="undefined" && settings.init_each==true ){
+    window.dzsscr_init = function (selector, settings) {
+        if (typeof(settings) != "undefined" && typeof(settings.init_each) != "undefined" && settings.init_each == true) {
             var element_count = 0;
-            for (var e in settings) { element_count++; }
-            if(element_count==1){
+            for (var e in settings) {
+                element_count++;
+            }
+            if (element_count == 1) {
                 settings = undefined;
             }
 
-            $(selector).each(function(){
+            $(selector).each(function () {
                 var _t = $(this);
                 _t.scroller(settings)
             });
-        }else{
+        } else {
             $(selector).scroller(settings);
         }
 
@@ -2519,11 +2473,13 @@ function is_opera() {
 }
 ;
 function is_chrome() {
-    return /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);;
+    return /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    ;
 }
 ;
 function is_safari() {
-    return  /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);;
+    return /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+    ;
 }
 ;
 function version_ie() {
@@ -2533,7 +2489,7 @@ function version_ie() {
 function version_firefox() {
     if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
         var aversion = new Number(RegExp.$1);
-        return(aversion);
+        return (aversion);
     }
     ;
 }
@@ -2541,7 +2497,7 @@ function version_firefox() {
 function version_opera() {
     if (/Opera[\/\s](\d+\.\d+)/.test(navigator.userAgent)) {
         var aversion = new Number(RegExp.$1);
-        return(aversion);
+        return (aversion);
     }
     ;
 }
@@ -2559,41 +2515,36 @@ function is_ie9() {
     return false;
 }
 
-function getInternetExplorerVersion()
-{
+function getInternetExplorerVersion() {
     var rv = -1;
-    if (navigator.appName == 'Microsoft Internet Explorer')
-    {
+    if (navigator.appName == 'Microsoft Internet Explorer') {
         var ua = navigator.userAgent;
-        var re  = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+        var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
         if (re.exec(ua) != null)
-            rv = parseFloat( RegExp.$1 );
+            rv = parseFloat(RegExp.$1);
     }
-    else if (navigator.appName == 'Netscape')
-    {
+    else if (navigator.appName == 'Netscape') {
         var ua = navigator.userAgent;
-        var re  = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
+        var re = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
         if (re.exec(ua) != null)
-            rv = parseFloat( RegExp.$1 );
+            rv = parseFloat(RegExp.$1);
     }
     return rv;
 }
 
-window.requestAnimFrame = (function(){
-    return  window.requestAnimationFrame       ||
+window.requestAnimFrame = (function () {
+    return window.requestAnimationFrame ||
         window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame    ||
-        function( callback ){
+        window.mozRequestAnimationFrame ||
+        function (callback) {
             window.setTimeout(callback, 1000 / 60);
         };
 })();
 
 
-
-
-jQuery(document).ready(function($){
+jQuery(document).ready(function ($) {
     dzsscr_init('.scroller-con.auto-init', {init_each: true});
 });
-jQuery(window).load(function(){
+jQuery(window).load(function () {
     dzsscr_init('.scroller-con.auto-init-onload', {init_each: true});
 });

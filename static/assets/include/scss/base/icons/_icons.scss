@@ -14,17 +14,20 @@
   text-align: center;
   transition: all .2s ease-in-out;
 }
+
 .u-icon-v1:hover,
 .u-icon-v2:hover,
 .u-icon-v3:hover,
 .u-icon-v4:hover {
   text-decoration: none;
 }
+
 .u-icon-v1::before,
 .u-icon-v2::before,
 .u-icon-v3::before {
   display: block;
 }
+
 .u-icon-v1 > i,
 .u-icon-v2 > i,
 .u-icon-v3 > i,
@@ -42,8 +45,6 @@
   }
 }
 
-
-
 //
 // Rotattion Style
 //
@@ -58,8 +59,6 @@
     transform: rotate(-45deg) translate(25%, -30%);
   }
 }
-
-
 
 //
 // Imports

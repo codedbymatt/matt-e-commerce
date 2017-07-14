@@ -50,7 +50,8 @@
                     <div class="col-auto hidden-sm-down">
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item">
-                                <a href="https://www.facebook.com" class="g-color-white g-color-primary--hover g-pa-3"><i
+                                <a href="https://www.facebook.com"
+                                   class="g-color-white g-color-primary--hover g-pa-3"><i
                                         class="fa fa-facebook"></i></a>
                             </li>
                             <li class="list-inline-item">
@@ -84,44 +85,7 @@
 
                     <div class="col-auto g-pos-rel g-pb-10 g-pb-0--sm">
                         <ul class="list-inline g-overflow-hidden g-pt-1 g-mx-minus-4 mb-0">
-{#                            <li class="list-inline-item g-mx-4">#}
-{#                                <i class="icon-globe-alt g-font-size-18 g-valign-middle g-color-primary g-pos-rel g-top-minus-2 g-mr-10"></i>#}
-{#                                <a href="#" id="languages-dropdown-invoker-2"#}
-{#                                   class="g-color-white g-color-primary--hover g-text-underline--none--hover"#}
-{#                                   aria-controls="languages-dropdown-2"#}
-{#                                   aria-haspopup="true"#}
-{#                                   aria-expanded="false"#}
-{#                                   data-dropdown-event="click"#}
-{#                                   data-dropdown-target="#languages-dropdown-2"#}
-{#                                   data-dropdown-type="css-animation"#}
-{#                                   data-dropdown-duration="300"#}
-{#                                   data-dropdown-hide-on-scroll="false"#}
-{#                                   data-dropdown-animation-in="fadeIn"#}
-{#                                   data-dropdown-animation-out="fadeOut">#}
-{#                                    English#}
-{#                                </a>#}
-{#                                <ul id="languages-dropdown-2"#}
-{#                                    class="list-unstyled g-pos-abs g-left-0 g-bg-black g-width-160 g-pb-5 g-mt-10 g-z-index-2"#}
-{#                                    aria-labelledby="languages-dropdown-invoker-2">#}
-{#                                    <li>#}
-{#                                        <a class="d-block g-color-white g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20"#}
-{#                                           href="#">English</a></li>#}
-{#                                    <li>#}
-{#                                        <a class="d-block g-color-white g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20"#}
-{#                                           href="#">Spanish</a></li>#}
-{#                                    <li>#}
-{#                                        <a class="d-block g-color-white g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20"#}
-{#                                           href="#">Russian</a></li>#}
-{#                                    <li>#}
-{#                                        <a class="d-block g-color-white g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20"#}
-{#                                           href="#">German</a></li>#}
-{#                                </ul>#}
-{#                            </li>#}
-{#                            <li class="list-inline-item g-mx-4">|</li>#}
-{#                            <li class="list-inline-item g-mx-4">#}
-{#                                <a class="g-color-white g-color-primary--hover g-text-underline--none--hover" href="#">FAQ</a>#}
-{#                            </li>#}
-{#                            <li class="list-inline-item g-mx-4">|</li>#}
+
                             <li class="list-inline-item g-mx-4"><a
                                     class="g-color-white g-color-primary--hover g-text-underline--none--hover"
                                     href="{% url 'login' %}">Login</a>
@@ -257,7 +221,8 @@
 
                         <!-- Search -->
                         <div class="d-inline-block g-valign-middle g-pos-rel g-top-minus-1">
-                            <a href="{% url 'search' %}" class="g-font-size-18 g-color-white g-color-primary--hover"
+                            <a href="{% url 'categories-mens' %}"
+                               class="g-font-size-18 g-color-white g-color-primary--hover"
                                aria-haspopup="true"
                                aria-expanded="false"
                                aria-controls="searchform-1"
@@ -312,7 +277,7 @@
                     <!-- End Responsive Toggle Button -->
 
                     <!-- Logo -->
-                    <a href="index.html" class="navbar-brand">
+                    <a href="{% url 'index' %}" class="navbar-brand">
                         <img src="{% static 'assets/img/logo/logo-1.png' %}" alt="Image Description">
                     </a>
                     <!-- End Logo -->
@@ -324,254 +289,13 @@
                                 <a href="{% url 'index' %}" class="nav-link g-px-0">Home</a>
                             </li>
 
-                            <li class="nav-item hs-has-sub-menu g-mx-10--lg g-mx-15--xl">
-                                <a id="nav-link--pages" class="nav-link g-px-0" href="#"
-                                   aria-haspopup="true"
-                                   aria-expanded="false"
-                                   aria-controls="nav-submenu--pages"
-                                >Pages</a>
-
-                                <!-- Submenu -->
-                                <ul class="hs-sub-menu list-unstyled g-brd-top g-brd-primary g-brd-top-2 g-min-width-220 g-py-7 g-mt-22 g-mt-12--lg--scrolling"
-                                    id="nav-submenu--pages"
-                                    aria-labelledby="nav-link--pages">
-                                    <li class="dropdown-item"><a class="nav-link" href="page-grid-filter-1.html">Grid
-                                        Filter</a></li>
-                                    <li class="dropdown-item"><a class="nav-link" href="page-list-filter-1.html">List
-                                        Filter</a></li>
-                                    <li class="dropdown-item"><a class="nav-link" href="page-product-1.html">Product</a>
-                                    </li>
-                                    <li class="dropdown-item"><a class="nav-link"
-                                                                 href="page-checkout-1.html">Checkout</a></li>
-                                    <li class="dropdown-item"><a class="nav-link" href="page-login-1.html">Login</a>
-                                    </li>
-                                    <li class="dropdown-item"><a class="nav-link" href="page-signup-1.html">Signup</a>
-                                    </li>
-                                </ul>
-                                <!-- End Submenu -->
-                            </li>
-
-                            <!-- Mega Menu Item -->
-                            <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl"
-                                data-animation-in="fadeIn"
-                                data-animation-out="fadeOut"
-                                data-position="right">
-                                <a id="mega-menu-label-3" class="nav-link g-px-0" href="#" aria-haspopup="true"
-                                   aria-expanded="false">Clothes <i
-                                        class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-ml-7"></i></a>
-
-                                <!-- Mega Menu -->
-                                <div class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mt-17 g-mt-7--lg--scrolling"
-                                     aria-labelledby="mega-menu-label-3">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-lg-3 g-mb-30 g-mb-0--sm">
-                                            <figure class="g-px-10">
-                                                <div class="g-pos-rel g-mb-20">
-                                                    <a href="#"><img class="img-fluid"
-                                                                     src="{% static 'assets/img-temp/480x700/img1.jpg' %}"
-                                                                     alt="Image Description"></a>
-                                                    <!-- Ribbon -->
-                                                    <figcaption>
-                                                        <span class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-primary g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">New</span>
-                                                    </figcaption>
-                                                    <!-- End Ribbon -->
-                                                </div>
-
-                                                <div class="media">
-                                                    <!-- Product Info -->
-                                                    <div class="d-flex flex-column">
-                                                        <h4 class="h6 g-color-black mb-1">
-                                                            <a class="u-link-v5 g-color-black g-color-primary--hover"
-                                                               href="#" tabindex="0">
-                                                                Summer shorts
-                                                            </a>
-                                                        </h4>
-                                                        <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13"
-                                                           href="#" tabindex="0">Man</a>
-                                                        <span class="d-block g-color-black g-font-size-17">$52.00</span>
-                                                    </div>
-                                                    <!-- End Product Info -->
-
-                                                    <!-- Products Icons -->
-                                                    <ul class="list-inline media-body text-right">
-                                                        <li class="list-inline-item align-middle mx-0">
-                                                            <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                                               href="#" data-toggle="tooltip" data-placement="top"
-                                                               title="" data-original-title="Add to Cart" tabindex="0">
-                                                                <i class="icon-finance-100 u-line-icon-pro"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-inline-item align-middle mx-0">
-                                                            <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                                               href="#" data-toggle="tooltip" data-placement="top"
-                                                               title="" data-original-title="Add to Wishlist"
-                                                               tabindex="0">
-                                                                <i class="icon-medical-022 u-line-icon-pro"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- End Products Icons -->
-                                                </div>
-                                            </figure>
-                                        </div>
-
-                                        <div class="col-sm-6 col-lg-3 g-mb-30 g-mb-0--sm">
-                                            <figure class="g-px-10">
-                                                <div class="g-pos-rel g-mb-20">
-                                                    <a href="#"><img class="img-fluid"
-                                                                     src="{% static 'assets/img-temp/480x700/img2.jpg' %}"
-                                                                     alt="Image Description"></a>
-                                                </div>
-
-                                                <div class="media">
-                                                    <!-- Product Info -->
-                                                    <div class="d-flex flex-column">
-                                                        <h4 class="h6 g-color-black mb-1">
-                                                            <a class="u-link-v5 g-color-black g-color-primary--hover"
-                                                               href="#" tabindex="0">
-                                                                Stylish shirt
-                                                            </a>
-                                                        </h4>
-                                                        <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13"
-                                                           href="#" tabindex="0">Woman</a>
-                                                        <s class="d-block g-color-lightred g-font-weight-500 g-font-size-13">$101.00</s>
-                                                        <span class="d-block g-color-black g-font-size-17">$99.00</span>
-                                                    </div>
-                                                    <!-- End Product Info -->
-
-                                                    <!-- Products Icons -->
-                                                    <ul class="list-inline media-body text-right">
-                                                        <li class="list-inline-item align-middle mx-0">
-                                                            <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                                               href="#" data-toggle="tooltip" data-placement="top"
-                                                               title="" data-original-title="Add to Cart" tabindex="0">
-                                                                <i class="icon-finance-100 u-line-icon-pro"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-inline-item align-middle mx-0">
-                                                            <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                                               href="#" data-toggle="tooltip" data-placement="top"
-                                                               title="" data-original-title="Add to Wishlist"
-                                                               tabindex="0">
-                                                                <i class="icon-medical-022 u-line-icon-pro"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- End Products Icons -->
-                                                </div>
-                                            </figure>
-                                        </div>
-
-                                        <div class="col-sm-6 col-lg-3 g-mb-30 g-mb-0--sm">
-                                            <figure class="g-px-10">
-                                                <div class="g-pos-rel g-mb-20">
-                                                    <a href="#"><img class="img-fluid"
-                                                                     src="{% static 'assets/img-temp/480x700/img3.jpg' %}"
-                                                                     alt="Image Description"></a>
-
-                                                    <!-- Ribbon -->
-                                                    <figcaption>
-                                                        <span class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-lightred g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">Sold</span>
-                                                    </figcaption>
-                                                    <!-- End Ribbon -->
-                                                </div>
-
-                                                <div class="media">
-                                                    <!-- Product Info -->
-                                                    <div class="d-flex flex-column">
-                                                        <h4 class="h6 g-color-black mb-1">
-                                                            <a class="u-link-v5 g-color-black g-color-primary--hover"
-                                                               href="#" tabindex="0">
-                                                                Classic jacket
-                                                            </a>
-                                                        </h4>
-                                                        <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13"
-                                                           href="#" tabindex="0">Man</a>
-                                                        <span class="d-block g-color-black g-font-size-17">$49.99</span>
-                                                    </div>
-                                                    <!-- End Product Info -->
-
-                                                    <!-- Products Icons -->
-                                                    <ul class="list-inline media-body text-right">
-                                                        <li class="list-inline-item align-middle mx-0">
-                                                            <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                                               href="#" data-toggle="tooltip" data-placement="top"
-                                                               title="" data-original-title="Add to Cart" tabindex="0">
-                                                                <i class="icon-finance-100 u-line-icon-pro"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-inline-item align-middle mx-0">
-                                                            <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                                               href="#" data-toggle="tooltip" data-placement="top"
-                                                               title="" data-original-title="Add to Wishlist"
-                                                               tabindex="0">
-                                                                <i class="icon-medical-022 u-line-icon-pro"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- End Products Icons -->
-                                                </div>
-                                            </figure>
-                                        </div>
-
-                                        <div class="col-sm-6 col-lg-3 g-mb-30 g-mb-0--sm">
-                                            <figure class="g-px-10">
-                                                <div class="g-pos-rel g-mb-20">
-                                                    <a href="#"><img class="img-fluid"
-                                                                     src="{% static 'assets/img-temp/480x700/img4.jpg' %}"
-                                                                     alt="Image Description"></a>
-                                                </div>
-
-                                                <div class="media">
-                                                    <!-- Product Info -->
-                                                    <div class="d-flex flex-column">
-                                                        <h4 class="h6 g-color-black mb-1">
-                                                            <a class="u-link-v5 g-color-black g-color-primary--hover"
-                                                               href="#" tabindex="0">
-                                                                Wool lined parka
-                                                            </a>
-                                                        </h4>
-                                                        <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13"
-                                                           href="#" tabindex="0">Woman</a>
-                                                        <span class="d-block g-color-black g-font-size-17">$82.37</span>
-                                                    </div>
-                                                    <!-- End Product Info -->
-
-                                                    <!-- Products Icons -->
-                                                    <ul class="list-inline media-body text-right">
-                                                        <li class="list-inline-item align-middle mx-0">
-                                                            <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                                               href="#" data-toggle="tooltip" data-placement="top"
-                                                               title="" data-original-title="Add to Cart" tabindex="0">
-                                                                <i class="icon-finance-100 u-line-icon-pro"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-inline-item align-middle mx-0">
-                                                            <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                                               href="#" data-toggle="tooltip" data-placement="top"
-                                                               title="" data-original-title="Add to Wishlist"
-                                                               tabindex="0">
-                                                                <i class="icon-medical-022 u-line-icon-pro"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                    <!-- End Products Icons -->
-                                                </div>
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Mega Menu -->
-                            </li>
-                            <!-- End Mega Menu Item -->
-
                             <!-- Mega Menu Item -->
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl"
                                 data-animation-in="fadeIn"
                                 data-animation-out="fadeOut"
                                 data-position="right">
                                 <a id="mega-menu-label-2" class="nav-link g-px-0" href="#" aria-haspopup="true"
-                                   aria-expanded="false">Collections <i
+                                   aria-expanded="false">Collections<i
                                         class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-ml-7"></i></a>
 
                                 <!-- Mega Menu -->
@@ -613,7 +337,7 @@
                                                     <span class="d-block g-color-black">Collections</span>
                                                     <h2 class="h1 mb-0 g-color-black">Men</h2>
                                                 </div>
-                                                <a class="u-link-v2" href="#"></a>
+                                                <a class="u-link-v2" href="{% url 'categories-mens' %}"></a>
                                             </article>
                                         </div>
                                     </div>
@@ -655,7 +379,7 @@
                                                      src="{% static 'assets/img-temp/500x320/img4.png' %}"
                                                      alt="Image Description">
                                                 <h3 class="h5 u-link-v5 g-color-primary--hover g-font-weight-400 mb-3">
-                                                    Sneaker Shoes for Man</h3>
+                                                    Sneaker Shoes for Men</h3>
                                                 <span class="g-color-primary g-font-weight-700 g-font-size-20">$45.00</span>
                                             </div>
 
@@ -667,124 +391,6 @@
                             </li>
                             <!-- End Mega Menu Item -->
 
-                            <!-- Mega Menu Item -->
-                            <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl"
-                                data-animation-in="fadeIn"
-                                data-animation-out="fadeOut"
-                                data-position="right">
-                                <a id="mega-menu-label-3" class="nav-link g-px-0" href="#" aria-haspopup="true"
-                                   aria-expanded="false">Catalogue <i
-                                        class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-ml-7"></i></a>
-
-                                <!-- Mega Menu -->
-                                <div class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mt-17 g-mt-7--lg--scrolling"
-                                     aria-labelledby="mega-menu-label-3">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-3 g-mb-30 g-mb-0--sm">
-                                            <h4 class="h5 text-uppercase g-font-weight-600">Clothes</h4>
-                                            <ul class="list-unstyled g-mb-25">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">New in</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Coats &amp;
-                                                    Jackets</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Jeans</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Dresses</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Shorts</a> <span
-                                                        class="u-label g-bg-primary g-ml-10">New</span></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Skirts</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">T-Shirts</a></li>
-                                            </ul>
-
-                                            <h4 class="h5 text-uppercase g-font-weight-600">Shoes</h4>
-                                            <ul class="list-unstyled">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Boots</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">FLats</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Heels</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Sandals</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Sports</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-6 col-md-3 g-mb-30 g-mb-0--sm">
-                                            <h4 class="h5 text-uppercase g-font-weight-600">Accessories</h4>
-                                            <ul class="list-unstyled g-mb-25">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">All accessories</a>
-                                                </li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Bags &amp;
-                                                    Purses</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Scarvs &amp;
-                                                    Hats</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Jewellery</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Fragrance &amp;
-                                                    Beauty</a></li>
-                                            </ul>
-
-                                            <h4 class="h5 text-uppercase g-font-weight-600">Lingerie</h4>
-                                            <ul class="list-unstyled g-mb-25">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Linger</a> <span
-                                                        class="u-label g-bg-primary g-ml-10">New</span></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Slippers</a></li>
-                                            </ul>
-
-                                            <h4 class="h5 text-uppercase g-font-weight-600">Nightwear</h4>
-                                            <ul class="list-unstyled">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Nightwear</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Socks</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Tights</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-6 col-md-3 g-mb-30 g-mb-0--sm">
-                                            <h4 class="h5 text-uppercase g-font-weight-600">Mixed</h4>
-                                            <ul class="list-unstyled g-mb-25">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">New in</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Coats &amp;
-                                                    Jackets</a> <span class="u-label g-bg-primary g-ml-10">New</span>
-                                                </li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Jeans</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Dresses</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Shorts</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Skirts</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">T-shirts</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Boots</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Flats</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Heels</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Sandals</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Sports</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Socks</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Tights</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-6 col-md-3 g-mb-30 g-mb-0--sm">
-                                            <h4 class="h5 text-uppercase g-font-weight-600">Accessories</h4>
-                                            <ul class="list-unstyled g-mb-25">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">All accessories</a>
-                                                </li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Bags &amp;
-                                                    Purses</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Scarvs &amp;
-                                                    Hats</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Jewellery</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Fragrance &amp;
-                                                    Beauty</a></li>
-                                            </ul>
-
-                                            <h4 class="h5 text-uppercase g-font-weight-600">Lingerie</h4>
-                                            <ul class="list-unstyled g-mb-25">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Linger</a> <span
-                                                        class="u-label g-bg-primary g-ml-10">New</span></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Slippers</a></li>
-                                            </ul>
-
-                                            <h4 class="h5 text-uppercase g-font-weight-600">Nightwear</h4>
-                                            <ul class="list-unstyled">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Nightwear</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Socks</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">Tights</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Mega Menu -->
-                            </li>
-                            <!-- End Mega Menu Item -->
 
                             <!-- Mega Menu Item -->
                             <li class="hs-has-mega-menu nav-item g-ml-10--lg g-ml-15--xl"
@@ -1252,7 +858,7 @@
             <div class="container g-pt-100 g-pb-70">
                 <div class="row justify-content-start">
                     <div class="col-md-5">
-                        <h2 class="h4 mb-4">Products</h2>
+                        <h2 class="h4 mb-4">Categories</h2>
 
                         <div class="row">
                             <div class="col-4 g-mb-20">
@@ -1429,165 +1035,166 @@
 <script src="{% static 'assets/js/custom.js' %}"></script>
 
 <script>
-        (function ($) {
-            'use strict';
-            $(document).on('ready', function () {
-                // Header
-                $.HSCore.components.HSHeader.init($('#js-header'));
-                $.HSCore.helpers.HSHamburgers.init('.hamburger');
-
-                // Initialization of HSDropdown component
-                $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {
-                    afterOpen: function () {
-                        $(this).find('input[type="search"]').focus();
-                    }
-                });
-
-                // Initialization of HSScrollBar component
-                $.HSCore.components.HSScrollBar.init($('.js-scrollbar'));
-
-                // Initialization of HSMegaMenu plugin
-                $('.js-mega-menu').HSMegaMenu({
-                    event: 'hover',
-                    pageContainer: $('.container'),
-                    breakpoint: 991
-                });
-                $.HSCore.components.HSTabs.init('[data-tabs-mobile-type]');
-            });
-        })(jQuery);
-    </script>
-
-    <script>
+    (function ($) {
+        'use strict';
         $(document).on('ready', function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+            // Header
+            $.HSCore.components.HSHeader.init($('#js-header'));
+            $.HSCore.helpers.HSHamburgers.init('.hamburger');
 
-        ;(function ($) {
-            'use strict';
-            $(document).on('ready', function () {
-                // Carousel
-                $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
-
-                $('#js-carousel-1').slick('setOption', 'responsive', [{
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 3
-                    }
-                }, {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                }, {
-                    breakpoint: 554,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                }], true);
+            // Initialization of HSDropdown component
+            $.HSCore.components.HSDropdown.init($('[data-dropdown-target]'), {
+                afterOpen: function () {
+                    $(this).find('input[type="search"]').focus();
+                }
             });
 
-            // initialiation of countdowns
-            var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
-                yearsElSelector: '.js-cd-years',
-                monthElSelector: '.js-cd-month',
-                daysElSelector: '.js-cd-days',
-                hoursElSelector: '.js-cd-hours',
-                minutesElSelector: '.js-cd-minutes',
-                secondsElSelector: '.js-cd-seconds'
+            // Initialization of HSScrollBar component
+            $.HSCore.components.HSScrollBar.init($('.js-scrollbar'));
+
+            // Initialization of HSMegaMenu plugin
+            $('.js-mega-menu').HSMegaMenu({
+                event: 'hover',
+                pageContainer: $('.container'),
+                breakpoint: 991
             });
-        })(jQuery);
-    </script>
-
-    <!-- JS Plugins Init. -->
-    <script>
-        var tpj = jQuery;
-
-        var revapi1014;
-        tpj(document).ready(function () {
-            if (tpj("#rev_slider_1014_1").revolution === undefined) {
-                revapi1014("#rev_slider_1014_1");
-            } else {
-                revapi1014 = tpj("#rev_slider_1014_1").show().revolution({
-                    sliderType: "standard",
-                    jsFileLocation: "revolution/js/",
-                    sliderLayout: "fullscreen",
-                    dottedOverlay: "none",
-                    delay: 9000,
-                    navigation: {
-                        keyboardNavigation: "off",
-                        keyboard_direction: "horizontal",
-                        mouseScrollNavigation: "off",
-                        mouseScrollReverse: "default",
-                        onHoverStop: "off",
-                        touch: {
-                            touchenabled: "on",
-                            swipe_threshold: 75,
-                            swipe_min_touches: 1,
-                            swipe_direction: "horizontal",
-                            drag_block_vertical: false
-                        }
-                        ,
-                        arrows: {
-                            style: "uranus",
-                            enable: true,
-                            hide_onmobile: true,
-                            hide_under: 768,
-                            hide_onleave: false,
-                            tmp: '',
-                            left: {
-                                h_align: "left",
-                                v_align: "center",
-                                h_offset: 20,
-                                v_offset: 0
-                            },
-                            right: {
-                                h_align: "right",
-                                v_align: "center",
-                                h_offset: 20,
-                                v_offset: 0
-                            }
-                        }
-                    },
-                    parallax: {
-                        type: "mouse",
-                        origo: "slidercenter",
-                        speed: 2000,
-                        levels: [2, 3, 4, 5, 6, 7, 12, 16, 10, 50],
-                        disable_onmobile: "on"
-                    },
-                    responsiveLevels: [1240, 1024, 778, 480],
-                    visibilityLevels: [1240, 1024, 778, 480],
-                    gridwidth: [1240, 1024, 778, 480],
-                    gridheight: [868, 768, 960, 600],
-                    lazyType: "none",
-                    shadow: 0,
-                    spinner: "off",
-                    stopLoop: "on",
-                    stopAfterLoops: 0,
-                    stopAtSlide: 1,
-                    shuffle: "off",
-                    autoHeight: "off",
-                    fullScreenAutoWidth: "off",
-                    fullScreenAlignForce: "off",
-                    fullScreenOffsetContainer: "",
-                    fullScreenOffset: "60px",
-                    disableProgressBar: "on",
-                    hideThumbsOnMobile: "off",
-                    hideSliderAtLimit: 0,
-                    hideCaptionAtLimit: 0,
-                    hideAllCaptionAtLilmit: 0,
-                    debugMode: false,
-                    fallbacks: {
-                        simplifyAll: "off",
-                        nextSlideOnWindowFocus: "off",
-                        disableFocusListener: false,
-                    }
-                });
-            }
-
-            RsTypewriterAddOn(tpj, revapi1014);
+            $.HSCore.components.HSTabs.init('[data-tabs-mobile-type]');
         });
-    </script>
+    })(jQuery);
+</script>
+
+<script>
+    $(document).on('ready', function () {
+        //language=JQuery-CSS
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    (function ($) {
+        'use strict';
+        $(document).on('ready', function () {
+            // Carousel
+            $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+
+            $('#js-carousel-1').slick('setOption', 'responsive', [{
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3
+                }
+            }, {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2
+                }
+            }, {
+                breakpoint: 554,
+                settings: {
+                    slidesToShow: 2
+                }
+            }], true);
+        });
+
+        // initialiation of countdowns
+        var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+            yearsElSelector: '.js-cd-years',
+            monthElSelector: '.js-cd-month',
+            daysElSelector: '.js-cd-days',
+            hoursElSelector: '.js-cd-hours',
+            minutesElSelector: '.js-cd-minutes',
+            secondsElSelector: '.js-cd-seconds'
+        });
+    })(jQuery);
+</script>
+
+<!-- JS Plugins Init. -->
+<script>
+    var tpj = jQuery;
+
+    var revapi1014;
+    tpj(document).ready(function () {
+        if (tpj("#rev_slider_1014_1").revolution === undefined) {
+            revapi1014("#rev_slider_1014_1");
+        } else {
+            revapi1014 = tpj("#rev_slider_1014_1").show().revolution({
+                sliderType: "standard",
+                jsFileLocation: "revolution/js/",
+                sliderLayout: "fullscreen",
+                dottedOverlay: "none",
+                delay: 9000,
+                navigation: {
+                    keyboardNavigation: "off",
+                    keyboard_direction: "horizontal",
+                    mouseScrollNavigation: "off",
+                    mouseScrollReverse: "default",
+                    onHoverStop: "off",
+                    touch: {
+                        touchenabled: "on",
+                        swipe_threshold: 75,
+                        swipe_min_touches: 1,
+                        swipe_direction: "horizontal",
+                        drag_block_vertical: false
+                    }
+                    ,
+                    arrows: {
+                        style: "uranus",
+                        enable: true,
+                        hide_onmobile: true,
+                        hide_under: 768,
+                        hide_onleave: false,
+                        tmp: '',
+                        left: {
+                            h_align: "left",
+                            v_align: "center",
+                            h_offset: 20,
+                            v_offset: 0
+                        },
+                        right: {
+                            h_align: "right",
+                            v_align: "center",
+                            h_offset: 20,
+                            v_offset: 0
+                        }
+                    }
+                },
+                parallax: {
+                    type: "mouse",
+                    origo: "slidercenter",
+                    speed: 2000,
+                    levels: [2, 3, 4, 5, 6, 7, 12, 16, 10, 50],
+                    disable_onmobile: "on"
+                },
+                responsiveLevels: [1240, 1024, 778, 480],
+                visibilityLevels: [1240, 1024, 778, 480],
+                gridwidth: [1240, 1024, 778, 480],
+                gridheight: [868, 768, 960, 600],
+                lazyType: "none",
+                shadow: 0,
+                spinner: "off",
+                stopLoop: "on",
+                stopAfterLoops: 0,
+                stopAtSlide: 1,
+                shuffle: "off",
+                autoHeight: "off",
+                fullScreenAutoWidth: "off",
+                fullScreenAlignForce: "off",
+                fullScreenOffsetContainer: "",
+                fullScreenOffset: "60px",
+                disableProgressBar: "on",
+                hideThumbsOnMobile: "off",
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                debugMode: false,
+                fallbacks: {
+                    simplifyAll: "off",
+                    nextSlideOnWindowFocus: "off",
+                    disableFocusListener: false
+                }
+            });
+        }
+
+        RsTypewriterAddOn(tpj, revapi1014);
+    });
+</script>
 
 {% block footer_js %}
 

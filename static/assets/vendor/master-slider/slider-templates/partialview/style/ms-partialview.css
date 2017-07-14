@@ -1,37 +1,37 @@
 .ms-partialview-template .ms-slide-info {
-	text-align: center;
-	font-family: "Lato";
-	margin-top: 20px;
-	width: 100%;
+    text-align: center;
+    font-family: "Lato";
+    margin-top: 20px;
+    width: 100%;
 }
 
 .ms-partialview-template .ms-slide-info h3 {
-	margin: 5px;
-	font-weight: 300;
-	font-size: 23pt;
-	color: #222;
+    margin: 5px;
+    font-weight: 300;
+    font-size: 23pt;
+    color: #222;
 }
 
 .ms-partialview-template .ms-slide-info h4 {
-	margin: 5px;
-	font-weight: 300;
-	font-size: 14pt;
-	color: #7A7A7A;
+    margin: 5px;
+    font-weight: 300;
+    font-size: 14pt;
+    color: #7A7A7A;
 }
 
 .ms-partialview-template .ms-slide-info p {
-	font-size: 10pt;
-	margin: 6px;
-}	
+    font-size: 10pt;
+    margin: 6px;
+}
 
 /* Layers */
 .ms-layer.video-title {
-    font-family: "Lato",sans-serif;
+    font-family: "Lato", sans-serif;
     color: white;
     font-weight: 600;
     font-size: 42px;
-    margin:0px;
-    letter-spacing:0px;
+    margin: 0px;
+    letter-spacing: 0px;
 }
 
 .ms-layer.video-title.video-top-title {

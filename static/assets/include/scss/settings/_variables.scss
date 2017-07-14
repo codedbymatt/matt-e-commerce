@@ -18,8 +18,6 @@ $g-font-primary-size: 14px !default;
 // $g-font-bold: 600;
 // $g-font-bolder: bolder;
 
-
-
 //
 // Breakpoints
 //
@@ -31,8 +29,6 @@ $g-md: 768px !default; // Medium devices (tablets, >=768 & <=991)
 $g-lg: 992px !default; // Large devices (desktops, >=992 & <=1199)
 $g-xl: 1200px !default; // Extra large devices (large desktops, >=1200)
 // If you want to use "max-width" than var-1. For exmaple: @media (max-width: #{$g-lg}-1) {...}
-
-
 
 //
 // Colors
@@ -79,30 +75,28 @@ $g-color-gray-dark-v3: #555 !default; // $g-color-gray-dark-v1:
 $g-color-gray-dark-v4: #777 !default; // $g-color-gray:
 $g-color-gray-dark-v5: #999 !default; // $g-color-gray-light-v1:
 
-
 //
 // Status Colors
 
 // Color Green
-$g-color-success:             #5cb85c !default;
-$g-color-success-dark-v1:     darken($g-color-success, 2%) !default;
-$g-color-success-dark-v2:     darken($g-color-success, 5%) !default;
+$g-color-success: #5cb85c !default;
+$g-color-success-dark-v1: darken($g-color-success, 2%) !default;
+$g-color-success-dark-v2: darken($g-color-success, 5%) !default;
 
 // Color Green
-$g-color-info:                #5bc0de !default;
-$g-color-info-dark-v1:        darken($g-color-info, 2%) !default;
-$g-color-info-dark-v2:        darken($g-color-info, 5%) !default;
+$g-color-info: #5bc0de !default;
+$g-color-info-dark-v1: darken($g-color-info, 2%) !default;
+$g-color-info-dark-v2: darken($g-color-info, 5%) !default;
 
 // Color Green
-$g-color-warning:             #f0ad4e !default;
-$g-color-warning-dark-v1:     darken($g-color-warning, 2%) !default;
-$g-color-warning-dark-v2:     darken($g-color-warning, 5%) !default;
+$g-color-warning: #f0ad4e !default;
+$g-color-warning-dark-v1: darken($g-color-warning, 2%) !default;
+$g-color-warning-dark-v2: darken($g-color-warning, 5%) !default;
 
 // Color Green
-$g-color-danger:              #d9534f !default;
-$g-color-danger-dark-v1:      darken($g-color-danger, 2%) !default;
-$g-color-danger-dark-v2:      darken($g-color-danger, 5%) !default;
-
+$g-color-danger: #d9534f !default;
+$g-color-danger-dark-v1: darken($g-color-danger, 2%) !default;
+$g-color-danger-dark-v2: darken($g-color-danger, 5%) !default;
 
 //
 // Complementary Colors
@@ -171,7 +165,6 @@ $g-color-bluegray: #585f69 !default;
 
 // Color Beige
 $g-color-beige: #e5e1de !default;
-
 
 //
 // Social Colors

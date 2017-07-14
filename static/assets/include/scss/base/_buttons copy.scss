@@ -8,6 +8,7 @@
 %g-btn-color-white {
   color: $g-color-white;
 }
+
 %g-btn-color-dark {
   color: $g-color-gray-dark-v2;
 }
@@ -318,12 +319,14 @@
 .u-btn-inset {
   position: relative;
 }
+
 .u-btn-inset::after {
   @include absolute(top 2px right 2px bottom 2px left 2px);
   content: "";
   border: solid 1px #fff;
   border-radius: 1px;
 }
+
 .u-btn-inset--rounded::after {
   border-radius: 50px;
 }
@@ -331,10 +334,11 @@
 /* 3D Button Styles
 ------------------------------------*/
 .u-btn-3d {
-  border-bottom: solid 3px rgba(0,0,0,.2);
+  border-bottom: solid 3px rgba(0, 0, 0, .2);
 }
+
 .u-btn-3d:hover {
-  border-bottom: solid 3px rgba(0,0,0,.3);
+  border-bottom: solid 3px rgba(0, 0, 0, .3);
 }
 
 /* Skew Button Styles
@@ -342,6 +346,7 @@
 .u-btn-skew {
   transform: skewX(-20deg);
 }
+
 .u-btn-skew__inner {
   transform: skewX(20deg);
   display: block;
@@ -385,6 +390,7 @@
   height: 0;
   width: 100%;
 }
+
 .u-btn-hover-v1-1:hover::after {
   height: 100%;
 }
@@ -396,6 +402,7 @@
   width: 0;
   height: 100%;
 }
+
 .u-btn-hover-v1-2:hover::after {
   width: 100%;
 }
@@ -407,6 +414,7 @@
   height: 0;
   width: 100%;
 }
+
 .u-btn-hover-v1-3:hover::after {
   height: 100%;
 }
@@ -418,11 +426,10 @@
   width: 0;
   height: 100%;
 }
+
 .u-btn-hover-v1-4:hover::after {
   width: 100%;
 }
-
-
 
 //
 // Button Type v1 (Flat)
@@ -446,8 +453,6 @@
   @include u-button-flat-hover-v1 (4, $g-color-gray-dark-v2);
 }
 
-
-
 //
 // Button Type v2 (Outline)
 //
@@ -469,11 +474,6 @@
   @include u-button-outline-hover-v1 (3, $g-color-gray-dark-v2);
   @include u-button-outline-hover-v1 (4, $g-color-gray-dark-v2);
 }
-
-
-
-
-
 
 /* Buttons Only Icon
 ------------------------------------*/

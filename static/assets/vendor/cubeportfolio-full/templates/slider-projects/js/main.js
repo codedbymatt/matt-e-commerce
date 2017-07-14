@@ -1,4 +1,4 @@
-(function($, window, document, undefined) {
+(function ($, window, document, undefined) {
     'use strict';
 
     // init cubeportfolio
@@ -49,12 +49,12 @@
         singlePageStickyNavigation: true,
         singlePageCounter: '<div class="cbp-popup-singlePage-counter">{{current}} of {{total}}</div>',
         singlePageAnimation: 'fade',
-        singlePageCallback: function(url, element) {
+        singlePageCallback: function (url, element) {
             // to update singlePage content use the following method: this.updateSinglePage(yourContent)
             var indexElement = $(element).parents('.cbp-item').index(),
                 item = singlePage.eq(indexElement);
 
-            item.find('img').each(function(index, el) {
+            item.find('img').each(function (index, el) {
                 var attr = el.getAttribute('data-cbp-src');
 
                 if (attr) {

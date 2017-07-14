@@ -6,69 +6,69 @@
  *
  */
 ;(function ($) {
-  'use strict';
+    'use strict';
 
-  $.HSCore.components.HSMaskedInput = {
-    /**
-     *
-     *
-     * @var Object _baseConfig
-     */
-    _baseConfig: {},
+    $.HSCore.components.HSMaskedInput = {
+        /**
+         *
+         *
+         * @var Object _baseConfig
+         */
+        _baseConfig: {},
 
-    /**
-     *
-     *
-     * @var jQuery pageCollection
-     */
-    pageCollection: $(),
+        /**
+         *
+         *
+         * @var jQuery pageCollection
+         */
+        pageCollection: $(),
 
-    /**
-     * Initialization of Masked input wrapper.
-     *
-     * @param String selector (optional)
-     * @param Object config (optional)
-     *
-     * @return jQuery pageCollection - collection of initialized items.
-     */
+        /**
+         * Initialization of Masked input wrapper.
+         *
+         * @param String selector (optional)
+         * @param Object config (optional)
+         *
+         * @return jQuery pageCollection - collection of initialized items.
+         */
 
-    init: function (selector, config) {
+        init: function (selector, config) {
 
-      this.collection = selector && $(selector).length ? $(selector) : $();
-      if (!$(selector).length) return;
+            this.collection = selector && $(selector).length ? $(selector) : $();
+            if (!$(selector).length) return;
 
-      this.config = config && $.isPlainObject(config) ?
-          $.extend({}, this._baseConfig, config) : this._baseConfig;
+            this.config = config && $.isPlainObject(config) ?
+                $.extend({}, this._baseConfig, config) : this._baseConfig;
 
-      this.config.itemSelector = selector;
+            this.config.itemSelector = selector;
 
-      this.initMaskedInput();
+            this.initMaskedInput();
 
-      return this.pageCollection;
+            return this.pageCollection;
 
-    },
+        },
 
-    initMaskedInput: function () {
-      //Variables
-      var $self = this,
-          collection = $self.pageCollection;
+        initMaskedInput: function () {
+            //Variables
+            var $self = this,
+                collection = $self.pageCollection;
 
-      //Actions
-      this.collection.each(function (i, el) {
-        //Variables
-        var $this = $(el),
-            mask = $this.data('mask'),
-            placeholder = $this.attr('placeholder');
+            //Actions
+            this.collection.each(function (i, el) {
+                //Variables
+                var $this = $(el),
+                    mask = $this.data('mask'),
+                    placeholder = $this.attr('placeholder');
 
-        $this.mask(mask, {
-          placeholder: placeholder ? placeholder : false
-        });
+                $this.mask(mask, {
+                    placeholder: placeholder ? placeholder : false
+                });
 
-        //Actions
-        collection = collection.add($this);
-      });
-    }
+                //Actions
+                collection = collection.add($this);
+            });
+        }
 
-  };
+    };
 
 })(jQuery);

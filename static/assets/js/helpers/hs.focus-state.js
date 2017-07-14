@@ -6,32 +6,32 @@
  *
  */
 ;(function ($) {
-  'use strict';
+    'use strict';
 
-  $.HSCore.helpers.HSFocusState = {
-    /**
-     * Focus state.
-     *
-     * @return undefined
-     */
-    init: function () {
-      var collection = $('.input-group input:not([type="checkbox"], [type="radio"]), .input-group textarea, .input-group select');
+    $.HSCore.helpers.HSFocusState = {
+        /**
+         * Focus state.
+         *
+         * @return undefined
+         */
+        init: function () {
+            var collection = $('.input-group input:not([type="checkbox"], [type="radio"]), .input-group textarea, .input-group select');
 
-      if (!collection.length) return;
+            if (!collection.length) return;
 
-      collection.on('focusin', function () {
-        var $this = $(this),
-            $thisParent = $this.closest('.input-group');
+            collection.on('focusin', function () {
+                var $this = $(this),
+                    $thisParent = $this.closest('.input-group');
 
-        $thisParent.addClass('g-state-focus');
-      });
+                $thisParent.addClass('g-state-focus');
+            });
 
-      collection.on('focusout', function () {
-        var $this = $(this),
-            $thisParent = $this.closest('.input-group');
+            collection.on('focusout', function () {
+                var $this = $(this),
+                    $thisParent = $this.closest('.input-group');
 
-        $thisParent.removeClass('g-state-focus');
-      });
-    }
-  };
+                $thisParent.removeClass('g-state-focus');
+            });
+        }
+    };
 })(jQuery);

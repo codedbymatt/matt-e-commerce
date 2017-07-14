@@ -10,16 +10,15 @@
     background-color: #555;
 }
 
-
-.bold-text-white{
+.bold-text-white {
     color: #FFF;
     font-weight: 600;
     font-size: 45px;
-    text-shadow:-1px 1px black;
+    text-shadow: -1px 1px black;
     margin: 0;
     white-space: nowrap;
 }
 
-.bold-text-white.med-text{
+.bold-text-white.med-text {
     font-size: 30px;
 }

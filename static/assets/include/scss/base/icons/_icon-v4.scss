@@ -23,8 +23,6 @@
   transition: all .2s ease-in-out;
 }
 
-
-
 //
 // Sizes
 //
@@ -73,8 +71,6 @@
   }
 }
 
-
-
 //
 // Border-radiuses
 //
@@ -100,8 +96,6 @@
     border-radius: 50%;
   }
 }
-
-
 
 //
 // Colors
@@ -147,8 +141,6 @@
       background: $g-color-black;
     }
   }
-
-
 
   //
   // Hover Effects
@@ -204,6 +196,7 @@
     }
   }
 }
+
 @import "icon-v4-additional-colors";
 @import "icon-v4-social-colors";
 @import "icon-v4-gradients";

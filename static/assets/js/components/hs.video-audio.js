@@ -7,64 +7,64 @@
  *
  */
 ;(function ($) {
-  'use strict';
+    'use strict';
 
-  $.HSCore.components.HSVideoAudio = {
-    /**
-     *
-     *
-     * @var Object _baseConfig
-     */
-    _baseConfig: {},
+    $.HSCore.components.HSVideoAudio = {
+        /**
+         *
+         *
+         * @var Object _baseConfig
+         */
+        _baseConfig: {},
 
-    /**
-     *
-     *
-     * @var jQuery pageCollection
-     */
-    pageCollection: $(),
+        /**
+         *
+         *
+         * @var jQuery pageCollection
+         */
+        pageCollection: $(),
 
-    /**
-     * Initialization of Video and audio wrapper.
-     *
-     * @param String selector (optional)
-     * @param Object config (optional)
-     *
-     * @return jQuery pageCollection - collection of initialized items.
-     */
+        /**
+         * Initialization of Video and audio wrapper.
+         *
+         * @param String selector (optional)
+         * @param Object config (optional)
+         *
+         * @return jQuery pageCollection - collection of initialized items.
+         */
 
-    init: function (selector, config) {
+        init: function (selector, config) {
 
-      this.collection = selector && $(selector).length ? $(selector) : $();
-      if (!$(selector).length) return;
+            this.collection = selector && $(selector).length ? $(selector) : $();
+            if (!$(selector).length) return;
 
-      this.config = config && $.isPlainObject(config) ?
-          $.extend({}, this._baseConfig, config) : this._baseConfig;
+            this.config = config && $.isPlainObject(config) ?
+                $.extend({}, this._baseConfig, config) : this._baseConfig;
 
-      this.config.itemSelector = selector;
+            this.config.itemSelector = selector;
 
-      this.initVideoAudio();
+            this.initVideoAudio();
 
-      return this.pageCollection;
+            return this.pageCollection;
 
-    },
+        },
 
-    initVideoAudio: function () {
-      //Variables
-      var $self = this,
-          collection = $self.pageCollection;
+        initVideoAudio: function () {
+            //Variables
+            var $self = this,
+                collection = $self.pageCollection;
 
-      //Actions
-      this.collection.each(function (i, el) {
-        //Variables
-        var $videoAudio = el;
+            //Actions
+            this.collection.each(function (i, el) {
+                //Variables
+                var $videoAudio = el;
 
-        plyr.setup($videoAudio);
+                plyr.setup($videoAudio);
 
-        //Add object to collection
-        collection = collection.add($videoAudio);
-      });
+                //Add object to collection
+                collection = collection.add($videoAudio);
+            });
+        }
     }
-  }
 
 })(jQuery);

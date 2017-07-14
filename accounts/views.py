@@ -1,9 +1,10 @@
 from django.contrib import messages, auth
-from accounts.forms import UserRegistrationForm, UserLoginForm
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.template.context_processors import csrf
-from django.contrib.auth.decorators import login_required
+
+from accounts.forms import UserRegistrationForm, UserLoginForm
 
 
 @login_required(login_url='/accounts/login')
@@ -35,7 +36,6 @@ def login(request):
     args = {'form': form, 'next': request.GET['next'] if request.GET and 'next' in request.GET else ''}
     args.update(csrf(request))
     return render(request, 'login.html', args)
-
 
 
 def logout(request):

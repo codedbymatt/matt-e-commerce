@@ -5,217 +5,223 @@
  * @version 1.0
  */
 ;
-(function($) {
+(function ($) {
 
-  'use strict';
+    'use strict';
 
-  $.HSCore = {
-
-    /**
-     *
-     *
-     * @param
-     *
-     * @return
-     */
-    init: function() {
-
-      $(document).ready(function(e) {
-        // Botostrap Tootltips
-        $('[data-toggle="tooltip"]').tooltip();
-
-        // Set Background Image Dynamically
-        if( $('[data-bg-img-src]').length ) $.HSCore.helpers.bgImage( $('[data-bg-img-src]') );
-
-        // Extends jQuery
-        $.HSCore.helpers.extendjQuery();
-
-        // Bootstrap Navigation Options
-        $.HSCore.helpers.bootstrapNavOptions.init();
-
-      });
-
-      $(window).on('load', function(e) {
-
-      });
-
-    },
-
-    /**
-     *
-     *
-     * @var
-     */
-    components: {},
-
-    /**
-     *
-     *
-     * @var
-     */
-    helpers: {
-
-      Math: {
+    $.HSCore = {
 
         /**
-         * Returns random value from [startPoint, endPoint] interval.
          *
-         * @param Number startPoint
-         * @param Number endPoint
-         * @param Boolean fixed
          *
-         * @return Number
+         * @param
+         *
+         * @return
          */
-        getRandomValueFromRange(startPoint, endPoint, fixed) {
+        init: function () {
 
-          fixed = fixed ? fixed : false;
+            $(document).ready(function (e) {
+                // Botostrap Tootltips
+                $('[data-toggle="tooltip"]').tooltip();
 
-          Math.random();
+                // Set Background Image Dynamically
+                if ($('[data-bg-img-src]').length) $.HSCore.helpers.bgImage($('[data-bg-img-src]'));
 
-          return fixed ?
+                // Extends jQuery
+                $.HSCore.helpers.extendjQuery();
 
-              (Math.random() * (endPoint - startPoint) + startPoint) :
-              (Math.floor(Math.random() * (endPoint - startPoint + 1)) + startPoint);
+                // Bootstrap Navigation Options
+                $.HSCore.helpers.bootstrapNavOptions.init();
 
-        }
-
-      },
-
-      /**
-       * Sets background-image dynamically.
-       *
-       * @param jQuery collection
-       *
-       * @return jQuery|undefined
-       */
-      bgImage: function(collection) {
-
-        if( !collection || !collection.length ) return;
-
-        return collection.each(function(i, el){
-
-          var $el = $(el),
-              bgImageSrc = $el.data('bg-img-src');
-
-          if(bgImageSrc) $el.css('background-image', 'url('+bgImageSrc+')');
-
-        });
-
-      },
-
-      /**
-       * Extends basic jQuery functionality
-       *
-       * @return undefined
-       */
-      extendjQuery: function () {
-
-        $.fn.extend({
-
-          /**
-           * Runs specified function after loading of all images.
-           *
-           * @return Deferred
-           */
-          imagesLoaded : function () {
-
-            var $imgs = this.find('img[src!=""]');
-
-            if (!$imgs.length) {return $.Deferred().resolve().promise();}
-
-            var dfds = [];
-
-            $imgs.each(function(){
-                var dfd = $.Deferred();
-                dfds.push(dfd);
-                var img = new Image();
-                img.onload = function(){dfd.resolve();};
-                img.onerror = function(){dfd.resolve();};
-                img.src = this.src;
             });
 
-            return $.when.apply($,dfds);
+            $(window).on('load', function (e) {
 
-          }
+            });
 
-        });
-
-      },
-
-      /**
-       * Bootstrap navigation options
-       *
-       */
-      bootstrapNavOptions: {
-        init: function() {
-          this.mobileHideOnScroll();
         },
 
-        mobileHideOnScroll: function() {
-          var $collection = $('.navbar');
-          if( !$collection.length ) return;
+        /**
+         *
+         *
+         * @var
+         */
+        components: {},
 
-          var $w = $(window),
-          breakpointsMap = {
-            'sm': 576,
-            'md': 768,
-            'lg': 992,
-            'xl': 1200
-          };
+        /**
+         *
+         *
+         * @var
+         */
+        helpers: {
 
-          $('body').on('click.HSMobileHideOnScroll', '.navbar-toggler', function(e){
-            var $navbar = $(this).closest('.navbar');
+            Math: {
 
-            if( $navbar.length ) {
-              $navbar.data('mobile-menu-scroll-position', $w.scrollTop());
-            }
-            e.preventDefault();
-          });
+                /**
+                 * Returns random value from [startPoint, endPoint] interval.
+                 *
+                 * @param Number startPoint
+                 * @param Number endPoint
+                 * @param Boolean fixed
+                 *
+                 * @return Number
+                 */
+                getRandomValueFromRange(startPoint, endPoint, fixed) {
 
-          $w.on('scroll.HSMobileHideOnScroll', function(e){
-            $collection.each(function(i,el){
-              var $this = $(el), $toggler, $nav, offset, $hamburgers, breakpoint;
-              if( $this.hasClass('navbar-toggleable-xl') ) breakpoint = breakpointsMap['xl'];
-              else if( $this.hasClass('navbar-toggleable-lg') ) breakpoint = breakpointsMap['lg'];
-              else if( $this.hasClass('navbar-toggleable-md') ) breakpoint = breakpointsMap['md'];
-              else if( $this.hasClass('navbar-toggleable-xs') ) breakpoint = breakpointsMap['xs'];
+                    fixed = fixed ? fixed : false;
 
-              if( $w.width() > breakpoint ) return;
+                    Math.random();
 
-              $toggler = $this.find('.navbar-toggler');
-              $nav = $this.find('.navbar-collapse');
+                    return fixed ?
 
-              if(!$nav.data('mobile-scroll-hide')) return;
+                        (Math.random() * (endPoint - startPoint) + startPoint) :
+                        (Math.floor(Math.random() * (endPoint - startPoint + 1)) + startPoint);
 
-              if($nav.length) {
-                offset = $this.data('mobile-menu-scroll-position');
-
-                if( Math.abs( $w.scrollTop() - offset ) > 40 && $nav.hasClass('show') ) {
-                  $toggler.trigger('click');
-                  $hamburgers = $toggler.find('.is-active');
-                  if($hamburgers.length) {
-                    $hamburgers.removeClass('is-active');
-                  }
                 }
-              }
-            });
-          });
+
+            },
+
+            /**
+             * Sets background-image dynamically.
+             *
+             * @param jQuery collection
+             *
+             * @return jQuery|undefined
+             */
+            bgImage: function (collection) {
+
+                if (!collection || !collection.length) return;
+
+                return collection.each(function (i, el) {
+
+                    var $el = $(el),
+                        bgImageSrc = $el.data('bg-img-src');
+
+                    if (bgImageSrc) $el.css('background-image', 'url(' + bgImageSrc + ')');
+
+                });
+
+            },
+
+            /**
+             * Extends basic jQuery functionality
+             *
+             * @return undefined
+             */
+            extendjQuery: function () {
+
+                $.fn.extend({
+
+                    /**
+                     * Runs specified function after loading of all images.
+                     *
+                     * @return Deferred
+                     */
+                    imagesLoaded: function () {
+
+                        var $imgs = this.find('img[src!=""]');
+
+                        if (!$imgs.length) {
+                            return $.Deferred().resolve().promise();
+                        }
+
+                        var dfds = [];
+
+                        $imgs.each(function () {
+                            var dfd = $.Deferred();
+                            dfds.push(dfd);
+                            var img = new Image();
+                            img.onload = function () {
+                                dfd.resolve();
+                            };
+                            img.onerror = function () {
+                                dfd.resolve();
+                            };
+                            img.src = this.src;
+                        });
+
+                        return $.when.apply($, dfds);
+
+                    }
+
+                });
+
+            },
+
+            /**
+             * Bootstrap navigation options
+             *
+             */
+            bootstrapNavOptions: {
+                init: function () {
+                    this.mobileHideOnScroll();
+                },
+
+                mobileHideOnScroll: function () {
+                    var $collection = $('.navbar');
+                    if (!$collection.length) return;
+
+                    var $w = $(window),
+                        breakpointsMap = {
+                            'sm': 576,
+                            'md': 768,
+                            'lg': 992,
+                            'xl': 1200
+                        };
+
+                    $('body').on('click.HSMobileHideOnScroll', '.navbar-toggler', function (e) {
+                        var $navbar = $(this).closest('.navbar');
+
+                        if ($navbar.length) {
+                            $navbar.data('mobile-menu-scroll-position', $w.scrollTop());
+                        }
+                        e.preventDefault();
+                    });
+
+                    $w.on('scroll.HSMobileHideOnScroll', function (e) {
+                        $collection.each(function (i, el) {
+                            var $this = $(el), $toggler, $nav, offset, $hamburgers, breakpoint;
+                            if ($this.hasClass('navbar-toggleable-xl')) breakpoint = breakpointsMap['xl'];
+                            else if ($this.hasClass('navbar-toggleable-lg')) breakpoint = breakpointsMap['lg'];
+                            else if ($this.hasClass('navbar-toggleable-md')) breakpoint = breakpointsMap['md'];
+                            else if ($this.hasClass('navbar-toggleable-xs')) breakpoint = breakpointsMap['xs'];
+
+                            if ($w.width() > breakpoint) return;
+
+                            $toggler = $this.find('.navbar-toggler');
+                            $nav = $this.find('.navbar-collapse');
+
+                            if (!$nav.data('mobile-scroll-hide')) return;
+
+                            if ($nav.length) {
+                                offset = $this.data('mobile-menu-scroll-position');
+
+                                if (Math.abs($w.scrollTop() - offset) > 40 && $nav.hasClass('show')) {
+                                    $toggler.trigger('click');
+                                    $hamburgers = $toggler.find('.is-active');
+                                    if ($hamburgers.length) {
+                                        $hamburgers.removeClass('is-active');
+                                    }
+                                }
+                            }
+                        });
+                    });
+                }
+            }
+
+        },
+
+        /**
+         *
+         *
+         * @var
+         */
+        settings: {
+            rtl: false
         }
-      }
 
-    },
+    };
 
-    /**
-     *
-     *
-     * @var
-     */
-    settings: {
-      rtl: false
-    }
-
-  };
-
-  $.HSCore.init();
+    $.HSCore.init();
 
 })(jQuery);

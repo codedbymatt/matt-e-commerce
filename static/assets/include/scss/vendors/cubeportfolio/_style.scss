@@ -9,8 +9,6 @@
   }
 }
 
-
-
 /*------------------------------------
   Border Colors
 ------------------------------------*/
@@ -181,8 +179,6 @@
   }
 }
 
-
-
 /*------------------------------------
   Background Colors
 ------------------------------------*/
@@ -195,8 +191,6 @@
     }
   }
 }
-
-
 
 /*------------------------------------
   Colors
@@ -284,14 +278,12 @@
   }
 }
 
-
-
 //
 // Button Flat Type
 //
 
 // e.g. @include u-button-flat ($g-color-primary, $g-color-white, $g-color-black);
-@mixin u-button-flat ($color-bg-brd, $color-text, $color-text-hover) {
+@mixin u-button-flat($color-bg-brd, $color-text, $color-text-hover) {
   &.cbp-filter-item-active {
     border-color: lighten($color-bg-brd, 10%);
     background-color: lighten($color-bg-brd, 10%);
@@ -310,42 +302,36 @@
   }
 }
 
-
-
 //
 // Button Outline Type
 //
 
 // e.g. @include u-hover-btn-v1-1 ($g-color-primary, $g-color-white);
-@mixin u-button-outline ($color-bg-brd, $color-text, $color-text-hover) {
+@mixin u-button-outline($color-bg-brd, $color-text, $color-text-hover) {
   &.cbp-filter-item-active {
     color: $color-text-hover;
     background-color: $color-bg-brd;
   }
 }
 
-
-
 //
 // Button Gradient Type
 //
 
 // e.g. @include u-button-gradient ($g-color-primary, $g-color-red);
-@mixin u-button-gradient ($btn-left, $btn-right){
+@mixin u-button-gradient($btn-left, $btn-right) {
   &.cbp-filter-item-active {
     opacity: .9;
     color: $g-color-white;
   }
 }
 
-
-
 //
 // Button Gradient Outline Type
 //
 
 // e.g. @include u-button-outline-gradient ($g-color-primary, $g-color-red);
-@mixin u-button-outline-gradient ($btn-left, $btn-right){
+@mixin u-button-outline-gradient($btn-left, $btn-right) {
   &.cbp-filter-item-active {
     background: linear-gradient(to right, $btn-left 0%, $btn-right 100%);
     color: $g-color-white;
