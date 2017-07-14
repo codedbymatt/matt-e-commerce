@@ -215,7 +215,7 @@
                     <div class="text-center">
                         <h2 class="h4 g-font-weight-400 mb-4">Join more than <span class="g-color-primary">33,000</span>
                             members worldwide</h2>
-                        <img class="img-fluid g-opacity-0_6" src="{% static'assets/img/maps/map.png'%}" alt="Image Description">
+                        <img class="img-fluid g-opacity-0_6" src="{% static 'assets/img/maps/map.png'%}" alt="Image Description">
                     </div>
                 </div>
             </div>
@@ -246,7 +246,7 @@
     </section>
     <!-- End Call to Action -->
 
-{% endblock %}
+{% endblock content %}
 {% block footer_js %}
 
     <!-- JS Implementing Plugins -->
@@ -265,7 +265,7 @@
     <script src="{% static 'assets/js/components/hs.select.js' %}"></script>
     <script src="{% static 'assets/js/components/hs.counter.js' %}"></script>
     <script>
-        ;(function ($) {
+        (function ($) {
             'use strict';
             $(document).on('ready', function () {
                 // Header
