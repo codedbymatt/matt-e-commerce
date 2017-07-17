@@ -6,64 +6,64 @@
  * @requires hamburgers.min.css
  *
  */
-;(function ($) {
-    'use strict';
+;(function($){
+	'use strict';
 
-    $.HSCore.helpers.HSHamburgers = {
+	$.HSCore.helpers.HSHamburgers = {
 
-        /**
-         * Initialize 'hamburgers' plugin.
-         *
-         * @param String selector
-         *
-         * @return undefined;
-         */
-        init: function (selector) {
+		/**
+		 * Initialize 'hamburgers' plugin.
+		 * 
+		 * @param String selector
+		 *
+		 * @return undefined;
+		 */
+		init: function(selector) {
 
-            if (!selector || !$(selector).length) return;
+			if( !selector || !$(selector).length ) return;
 
-            var hamburgers = $(selector),
-                timeoutid;
+		  var hamburgers = $(selector),
+		  		timeoutid;
 
-            hamburgers.each(function (i, el) {
+		  hamburgers.each(function(i, el){
 
-                var $this = $(this);
+		  	var $this = $(this);
 
-                if ($this.closest('button').length) {
-                    $this.closest('button').get(0).addEventListener('click', function (e) {
+		  	if($this.closest('button').length) {
+		  		$this.closest('button').get(0).addEventListener('click', function(e){
 
-                        var $self = $(this),
-                            $hamburger = $self.find(selector);
+		  			var $self = $(this),
+		  					$hamburger = $self.find(selector);
 
-                        if (timeoutid) clearTimeout(timeoutid);
-                        timeoutid = setTimeout(function () {
+		  			if(timeoutid) clearTimeout(timeoutid);
+		  			timeoutid = setTimeout(function(){
 
-                            $hamburger.toggleClass('is-active');
+		  				$hamburger.toggleClass('is-active');
 
-                        }, 10);
-                        e.preventDefault();
-                    }, false);
-                }
-                else {
-                    $this.get(0).addEventListener('click', function (e) {
+		  			}, 10);
+		  			e.preventDefault();
+		  		}, false);
+		  	}
+		  	else {
+		  		$this.get(0).addEventListener('click', function(e){
 
-                        var $self = $(this);
+		  			var $self = $(this);
 
-                        if (timeoutid) clearTimeout(timeoutid);
-                        timeoutid = setTimeout(function () {
+		  			if(timeoutid) clearTimeout(timeoutid);
+		  			timeoutid = setTimeout(function(){
 
-                            $self.toggleClass('is-active');
+		  				$self.toggleClass('is-active');
 
-                        }, 10);
-                        e.preventDefault();
-                    }, false);
-                }
+		  			}, 10);
+		  			e.preventDefault();
+		  		}, false);
+		  	}
 
-            });
+		  });
 
-        }
+		}
+		
 
-
-    };
+	};
 
 })(jQuery);

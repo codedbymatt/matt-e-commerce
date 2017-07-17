@@ -3,7 +3,7 @@
 //
 
 // e.g. @include u-button-flat ($g-color-primary, $g-color-white, $g-color-black);
-@mixin u-button-flat($color-bg-brd, $color-text, $color-text-hover) {
+@mixin u-button-flat ($color-bg-brd, $color-text, $color-text-hover) {
   color: $color-text;
   background-color: $color-bg-brd;
 
@@ -29,12 +29,14 @@
   }
 }
 
+
+
 //
 // Button Outline Type
 //
 
 // e.g. @include u-hover-btn-v1-1 ($g-color-primary, $g-color-white);
-@mixin u-button-outline($color-bg-brd, $color-text, $color-text-hover) {
+@mixin u-button-outline ($color-bg-brd, $color-text, $color-text-hover) {
   color: $color-text;
   border-color: $color-bg-brd;
   background-color: transparent;
@@ -51,12 +53,14 @@
   }
 }
 
+
+
 //
 // Button Gradient Type
 //
 
 // e.g. @include u-button-gradient ($g-color-primary, $g-color-red);
-@mixin u-button-gradient($btn-left, $btn-right) {
+@mixin u-button-gradient ($btn-left, $btn-right){
   color: $g-color-white;
   background: linear-gradient(to right, $btn-left 0%, $btn-right 100%) !important;
   border-image: linear-gradient(to right, $btn-left 0%, $btn-right 100%);
@@ -70,12 +74,14 @@
   }
 }
 
+
+
 //
 // Button Gradient Outline Type
 //
 
 // e.g. @include u-button-outline-gradient ($g-color-primary, $g-color-red);
-@mixin u-button-outline-gradient($btn-left, $btn-right) {
+@mixin u-button-outline-gradient ($btn-left, $btn-right){
   color: $g-color-gray-dark-v3;
   background: transparent;
   border-image: linear-gradient(to right, $btn-left 0%, $btn-right 100%);

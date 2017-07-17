@@ -3,7 +3,7 @@
 //
 
 // e.g. @include u-hover-btn-v1 (1, 1, $g-color-primary);
-@mixin u-button-flat-hover($version, $type, $background) {
+@mixin u-button-flat-hover ($version, $type, $background) {
   &.u-btn-hover-v#{$version}-#{$type} {
     overflow: hidden;
 
@@ -20,7 +20,7 @@
 }
 
 // e.g. @include u-hover-btn-v1 (1, 1, $g-color-primary);
-@mixin u-button-outline-hover($version, $type, $background) {
+@mixin u-button-outline-hover ($version, $type, $background) {
   &.u-btn-hover-v#{$version}-#{$type} {
     overflow: hidden;
 

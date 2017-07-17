@@ -18,7 +18,8 @@
   @each $value in $values {
     @if index((0, 0px), $value) or $value == auto {
       $rem: append($rem, $value);
-    } @else {
+    }
+    @else {
       $rem: append($rem, parseInt($value));
     }
   }

@@ -18,170 +18,170 @@
  * @package   websemantics/image-select
  */
 
-(function ($) {
+(function($) {
 
 // Image template, this can be overridden from the constructor (options.template),
 // must contains {src} placeholder. Ther eare two class names
 // 'chose-image' or 'chose-image-small', modifiy in CSS
-    var fn_template = '<img class="{class_name}" src="{url}" />'
+var fn_template = '<img class="{class_name}" src="{url}" />'
 
-    function prependTemplate(element, option, template, rtl, multiple, cls) {
-        // summery:
-        // This will fill-in the provided template with image source and css class
-        // then add it to the element.
-        //
-        // element: Dom
-        //          This is the span node
-        // object: Object,
-        //          The select option to get image url
-        // template: String
-        //          Html content
-        // rtl: Boolean,
-        //          Right to Left
-        // multiple: Boolean
-        //          Used to select the approperiate css class, default to 'true'
-        // cls*: String (optional)
-        //          Css styles class
+function prependTemplate(element, option, template, rtl, multiple, cls){
+    // summery:
+    // This will fill-in the provided template with image source and css class
+    // then add it to the element.
+    //
+    // element: Dom
+    //          This is the span node
+    // object: Object,
+    //          The select option to get image url
+    // template: String
+    //          Html content
+    // rtl: Boolean,
+    //          Right to Left
+    // multiple: Boolean
+    //          Used to select the approperiate css class, default to 'true'
+    // cls*: String (optional)
+    //          Css styles class
 
-        var src = $(option).data('img-src')
+    var src = $(option).data('img-src')
 
-        if (src != undefined && src > '') {
+    if(src != undefined && src > ''){
 
-            element = $(element)
+        element = $(element)
 
-            text = $(option).text()
-            multiple = (multiple != undefined) ? multiple : true
-            cls = cls || (multiple ? 'chose-image' : 'chose-image-small')
-            cls = rtl ? cls + ' rtl' : cls
-            template = template.replace('{url}', src)
-                .replace('{class_name}', cls)
-                .replace('{text}', text)
+        text     = $(option).text()
+        multiple = (multiple != undefined) ? multiple : true
+        cls      = cls || (multiple ? 'chose-image' : 'chose-image-small')
+        cls      = rtl ? cls + ' rtl' : cls
+        template = template.replace('{url}',src)
+                           .replace('{class_name}',cls)
+                           .replace('{text}',text)
 
-            // Empty the element
-            element.empty()
+        // Empty the element
+        element.empty()
 
-            // Insert after if ltr or multiple select, otherwise, insert before
-            if (rtl && multiple) {
-                element.append(template)
-            }
-            else {
-                element.prepend(template)
-            }
+        // Insert after if ltr or multiple select, otherwise, insert before
+        if(rtl && multiple){
+            element.append(template)
+        }
+        else {
+            element.prepend(template)
         }
     }
+}
 
-    function getSelectedOptions(chosen) {
-        // summery:
-        //      Return a list of selected items/options with the selected 'option' elements
-        //      and chosen 'span' elements.
-        //
-        // chosen: Chosen
-        //          The Chosen object
+function getSelectedOptions(chosen){
+    // summery:
+    //      Return a list of selected items/options with the selected 'option' elements
+    //      and chosen 'span' elements.
+    //
+    // chosen: Chosen
+    //          The Chosen object
 
-        var items = []
-        var options = $(chosen.form_field).find('option:selected') || []
-        var spans = (chosen.is_multiple) ? $(chosen.container).find('.chosen-choices span') :
-            $(chosen.container).find('.chosen-single span')
+    var items    = []
+    var options  = $(chosen.form_field).find('option:selected') || []
+    var spans    = (chosen.is_multiple) ? $(chosen.container).find('.chosen-choices span'):
+                                          $(chosen.container).find('.chosen-single span')
 
-        for (var i = 0; i < options.length; i++)
-            for (var j = 0; j < spans.length; j++)
-                if ($(spans[j]).text() == $(options[i]).text())
-                    items.push({span: spans[j], option: options[i]})
+    for(var i = 0; i < options.length; i++)
+        for(var j = 0; j < spans.length; j++)
+            if($(spans[j]).text() == $(options[i]).text())
+                items.push({span:spans[j],option:options[i]})
 
-        return items
-    }
+    return items
+}
 
 // Store the original 'chosen' method
-    var fn_chosen = $.fn.chosen
+var fn_chosen = $.fn.chosen
 
-    $.fn.extend({
-        // summery:
-        //  Extend the original 'chosen' method to support images
-        chosen: function (params) {
+$.fn.extend({
+ // summery:
+ //  Extend the original 'chosen' method to support images
+ chosen: function(params) {
 
-            params = params || {}
+    params = params || {}
 
-            // Original behavior - use function.apply to preserve context
-            var ret = fn_chosen.apply(this, arguments)
+    // Original behavior - use function.apply to preserve context
+    var ret = fn_chosen.apply(this, arguments)
 
-            // Process all select elements to attach event handlers
-            // (change, hiding_dropdown and showing_dropdown)
+    // Process all select elements to attach event handlers
+    // (change, hiding_dropdown and showing_dropdown)
 
-            this.each(function () {
+    this.each(function() {
 
-                var $this = $(this), chosen = $this.data('chosen')
+        var $this = $(this), chosen = $this.data('chosen')
 
-                $this.on("chosen:hiding_dropdown", function (e, chosen) {
-                    // summery
-                    //  Triggers when hidding dropdown, explain why:TODO.
-                    //
-                    // evt: Event
-                    //      The event object
-                    // _chosen: Object {chosen:Chosen}
-                    //      Contains the current instance of Chosen class
+        $this.on("chosen:hiding_dropdown", function(e, chosen){
+            // summery
+            //  Triggers when hidding dropdown, explain why:TODO.
+            //
+            // evt: Event
+            //      The event object
+            // _chosen: Object {chosen:Chosen}
+            //      Contains the current instance of Chosen class
 
-                    var options = getSelectedOptions(chosen.chosen)
-                    var rtl = chosen.chosen.is_rtl
-                    var multiple = chosen.chosen.is_multiple
-                    var html_template = params.html_template ||
-                        (rtl && multiple ? '{text}' + fn_template : fn_template + '{text}')
+            var options       = getSelectedOptions(chosen.chosen)
+            var rtl           = chosen.chosen.is_rtl
+            var multiple      = chosen.chosen.is_multiple
+            var html_template = params.html_template ||
+                                (rtl && multiple ? '{text}' + fn_template : fn_template + '{text}')
 
-                    for (var i = 0; i < options.length; i++) {
-                        prependTemplate(options[i].span, options[i].option, html_template, rtl, multiple)
-                    }
-                })
+            for(var i = 0; i < options.length; i++){
+                prependTemplate(options[i].span, options[i].option, html_template, rtl, multiple)
+            }
+        })
 
-                $this.on("chosen:showing_dropdown", function showing_dropdown(evt, chosen) {
-                    // summery
-                    //    This function is triggered when the chosen instance dropdown list
-                    //    becomes visible. http://forwebonly.com/jquery-chosen-custom-events-and-how-to-use-them/
-                    //
-                    // evt: Event
-                    //      The event object
-                    // chosen: Object {chosen:Chosen}
-                    //      Contains the current instance of Chosen class
+        $this.on("chosen:showing_dropdown", function showing_dropdown(evt, chosen){
+            // summery
+            //    This function is triggered when the chosen instance dropdown list
+            //    becomes visible. http://forwebonly.com/jquery-chosen-custom-events-and-how-to-use-them/
+            //
+            // evt: Event
+            //      The event object
+            // chosen: Object {chosen:Chosen}
+            //      Contains the current instance of Chosen class
 
-                    var chosen = chosen.chosen
-                    var options = chosen.form_field.options || []
-                    var rtl = chosen.is_rtl
-                    var html_template = params.html_template ||
-                    rtl ? '{text}' + fn_template : fn_template + '{text}'
+            var chosen        = chosen.chosen
+            var options       = chosen.form_field.options || []
+            var rtl           = chosen.is_rtl
+            var html_template = params.html_template ||
+                                rtl ? '{text}'+fn_template : fn_template+'{text}'
 
-                    var lis = $(chosen.container).find('.chosen-drop ul li:not(:has(img))')
+            var lis = $(chosen.container).find('.chosen-drop ul li:not(:has(img))')
 
-                    for (var i = 0; i < lis.length; i++) {
-                        var li = lis[i]
-                        var option = $(options[i])
-                        var idx = $(li).attr('data-option-array-index')
+            for(var i = 0; i < lis.length; i++){
+                var li      = lis[i]
+                var option  = $(options[i])
+                var idx     = $(li).attr('data-option-array-index')
 
-                        /* correct option index */
+                /* correct option index */
 
-                        if (idx) {
-                            option = options[chosen.results_data[idx].options_index]
-                            prependTemplate(li, option, html_template, rtl, true, 'chose-image-list')
-                        }
+                if (idx){
+                  option = options[chosen.results_data[idx].options_index]
+                  prependTemplate(li, option, html_template, rtl, true, 'chose-image-list')
+                }
 
-                    }
-                })
+            }
+        })
 
-                $this.on("chosen:ready", function change(e, chosen) {
-                    // summery:
-                    //  Trigger hide dropdown when ready.
-                    //  This never triggers. TODO: remove.
-                    $this.trigger('chosen:hiding_dropdown', chosen)
-                })
+        $this.on("chosen:ready", function change(e, chosen){
+            // summery:
+            //  Trigger hide dropdown when ready.
+            //  This never triggers. TODO: remove.
+            $this.trigger('chosen:hiding_dropdown',chosen)
+        })
 
-                $this.on('chosen:filter', function (evt, chosen) {
-                    // summery
-                    //  Support search, pending: https://github.com/harvesthq/chosen/pull/2373
-                    $this.trigger('chosen:showing_dropdown', {chosen: chosen.chosen})
-                })
+        $this.on('chosen:filter', function(evt, chosen){
+            // summery
+            //  Support search, pending: https://github.com/harvesthq/chosen/pull/2373
+          $this.trigger('chosen:showing_dropdown',{chosen:chosen.chosen})
+        })
 
-                // Finally, trigger hiding_dropdown on all select elements
-                $this.trigger('chosen:hiding_dropdown', {chosen: chosen})
-            })
-        }
+        // Finally, trigger hiding_dropdown on all select elements
+        $this.trigger('chosen:hiding_dropdown',{chosen:chosen})
     })
+ }
+})
 
 
 })(jQuery)

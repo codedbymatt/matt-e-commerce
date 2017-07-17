@@ -14,6 +14,8 @@
   background-repeat: repeat-x;
 }
 
+
+
 //
 // Gradients Y
 //
@@ -30,6 +32,8 @@
   background-repeat: repeat-x;
 }
 
+
+
 //
 // Gradients directional
 //
@@ -38,6 +42,8 @@
   background-repeat: repeat-x;
   background-image: linear-gradient($deg, $start-color, $end-color);
 }
+
+
 
 //
 // Gradients X three colors
@@ -48,6 +54,8 @@
   background-repeat: no-repeat;
 }
 
+
+
 //
 // Gradients Y three colors
 //
@@ -57,6 +65,8 @@
   background-repeat: no-repeat;
 }
 
+
+
 //
 // Gradients Striped
 //
@@ -64,6 +74,8 @@
 @mixin gradient-striped($color: rgba(255,255,255,.15), $angle: 45deg) {
   background-image: linear-gradient($angle, $color 25%, transparent 25%, transparent 50%, $color 50%, $color 75%, transparent 75%, transparent);
 }
+
+
 
 //
 // Gradients Circle
@@ -74,6 +86,8 @@
   background-repeat: no-repeat;
 }
 
+
+
 //
 // Gradients Ellipse
 //
@@ -82,6 +96,8 @@
   background-image: radial-gradient(ellipse $gradient-size at $pos-x $pos-y, $inner-color, $outer-color);
   background-repeat: no-repeat;
 }
+
+
 
 //
 // Gradients Text
@@ -93,6 +109,8 @@
   text-fill-color: transparent;
   -webkit-text-fill-color: transparent;
 }
+
+
 
 //
 // Border Gradients

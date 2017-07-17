@@ -6,11 +6,9 @@
  * @requires chart.js (v1.0.3)
  *
  */
-;(function ($) {
-    'use strict';
+;(function($){
+	'use strict';
 
-    $(document).on('click', '.js-selecter', function () {
-        this.select();
-    });
+	$(document).on('click','.js-selecter',function(){ this.select(); });
 
 })(jQuery);

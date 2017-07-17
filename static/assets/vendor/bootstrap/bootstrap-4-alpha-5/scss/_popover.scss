@@ -18,6 +18,7 @@
   @include border-radius($border-radius-lg);
   @include box-shadow($popover-box-shadow);
 
+
   // Popover directions
 
   &.popover-top,
@@ -125,6 +126,7 @@
   }
 }
 
+
 // Offset the popover to account for the popover arrow
 .popover-title {
   padding: $popover-title-padding-y $popover-title-padding-x;
@@ -144,6 +146,7 @@
   padding: $popover-content-padding-y $popover-content-padding-x;
 }
 
+
 // Arrows
 //
 // .popover-arrow is outer, .popover-arrow::after is inner
@@ -162,7 +165,6 @@
   content: "";
   border-width: $popover-arrow-outer-width;
 }
-
 .popover::after {
   content: "";
   border-width: $popover-arrow-width;

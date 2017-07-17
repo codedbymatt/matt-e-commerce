@@ -6,14 +6,14 @@
 /* Gray Light v1 */
 .g-bg-gray-light-gradient-v1 {
   &--after::after {
-    background: linear-gradient(to bottom, rgba($g-color-gray-light-v5, .5), rgba($g-color-gray-light-v5, 1));
+    background: linear-gradient(to bottom, rgba($g-color-gray-light-v5,.5), rgba($g-color-gray-light-v5,1));
   }
 }
 
 /* White v1 */
 .g-bg-white-gradient-v1 {
   &--after::after {
-    background: linear-gradient(to bottom, rgba($g-color-white, .5), rgba($g-color-white, 9));
+    background: linear-gradient(to bottom, rgba($g-color-white,.5), rgba($g-color-white,9));
   }
 }
 
@@ -33,19 +33,15 @@
 .g-bg-blue-lineargradient {
   @include gradient-directional($start-color: #73bec7, $end-color: #4e66b0, $deg: 0deg);
 }
-
 .g-bg-blue-lineargradient-v2 {
   @include gradient-directional($start-color: #429edc, $end-color: #00629e, $deg: 225deg);
 }
-
 .g-bg-blue-lineargradient-v3 {
   @include gradient-directional($start-color: #3266a2, $end-color: #98cfbf, $deg: 225deg);
 }
-
 .g-bg-blue-lineargradient-v4 {
   @include gradient-directional($start-color: #5b85df, $end-color: #3ec2e3, $deg: 225deg);
 }
-
 .g-bg-blue-lineargradient-v5 {
   @include gradient-directional($start-color: #0050c2, $end-color: #5180fa, $deg: 225deg);
 }
@@ -54,7 +50,6 @@
 .g-bg-orange-lineargradient {
   @include gradient-directional($start-color: #be1715, $end-color: #ed6d0f, $deg: 225deg);
 }
-
 .g-bg-orange-lineargradient-v2 {
   @include gradient-directional($start-color: #f5cd21, $end-color: #c22821, $deg: 225deg);
 }
@@ -206,6 +201,7 @@
 .g-bg-darkgray-radialgradient-circle {
   @include gradient-radial-circle($inner-color: #596070, $outer-color: #31353e, $pos-x: 110%, $pos-y: 0, $gradient-size: farthest-side);
 }
+
 
 //
 // Complementary Gradients

@@ -17,7 +17,7 @@
   } @else if $media-type == lg {
     $media-value: $g-lg;
     $media-type: --lg;
-  } @else {
+  }  @else {
     $media-value: $g-xl;
     $media-type: --xl;
   }

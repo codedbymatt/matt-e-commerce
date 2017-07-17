@@ -7,275 +7,275 @@
  *
  */
 ;(function ($) {
-    'use strict';
+  'use strict';
 
-    $.HSCore.components.HSCarousel = {
-        /**
-         *
-         *
-         * @var Object _baseConfig
-         */
-        _baseConfig: {
-            autoplay: false,
-            infinite: true
-        },
+  $.HSCore.components.HSCarousel = {
+    /**
+     *
+     *
+     * @var Object _baseConfig
+     */
+    _baseConfig: {
+      autoplay: false,
+      infinite: true
+    },
 
-        /**
-         *
-         *
-         * @var jQuery pageCollection
-         */
-        pageCollection: $(),
+    /**
+     *
+     *
+     * @var jQuery pageCollection
+     */
+    pageCollection: $(),
 
-        /**
-         * Initialization of Carousel wrapper.
-         *
-         * @param String selector (optional)
-         * @param Object config (optional)
-         *
-         * @return jQuery pageCollection - collection of initialized items.
-         */
+    /**
+     * Initialization of Carousel wrapper.
+     *
+     * @param String selector (optional)
+     * @param Object config (optional)
+     *
+     * @return jQuery pageCollection - collection of initialized items.
+     */
 
-        init: function (selector, config) {
+    init: function (selector, config) {
 
-            this.collection = selector && $(selector).length ? $(selector) : $();
-            if (!$(selector).length) return;
+      this.collection = selector && $(selector).length ? $(selector) : $();
+      if (!$(selector).length) return;
 
-            this.config = config && $.isPlainObject(config) ?
-                $.extend({}, this._baseConfig, config) : this._baseConfig;
+      this.config = config && $.isPlainObject(config) ?
+        $.extend({}, this._baseConfig, config) : this._baseConfig;
 
-            this.config.itemSelector = selector;
+      this.config.itemSelector = selector;
 
-            this.initCarousel();
+      this.initCarousel();
 
-            return this.pageCollection;
+      return this.pageCollection;
 
-        },
+    },
 
-        initCarousel: function () {
+    initCarousel: function () {
+      //Variables
+      var $self = this,
+        config = $self.config,
+        collection = $self.pageCollection;
+
+      //Actions
+      this.collection.each(function (i, el) {
+        //Variables
+        var $this = $(el),
+          id = $this.attr('id'),
+
+          //Markup elements
+          target = $this.data('nav-for'),
+          isThumb = $this.data('is-thumbs'),
+          arrowsClasses = $this.data('arrows-classes'),
+          arrowLeftClasses = $this.data('arrow-left-classes'),
+          arrowRightClasses = $this.data('arrow-right-classes'),
+          pagiClasses = $this.data('pagi-classes'),
+          pagiHelper = $this.data('pagi-helper'),
+          $pagiIcons = $this.data('pagi-icons'),
+          $prevMarkup = '<div class="js-prev ' + arrowsClasses + ' ' + arrowLeftClasses + '"></div>',
+          $nextMarkup = '<div class="js-next ' + arrowsClasses + ' ' + arrowRightClasses + '"></div>',
+
+          //Setters
+          setSlidesToShow = $this.data('slides-show'),
+          setSlidesToScroll = $this.data('slides-scroll'),
+          setAutoplay = $this.data('autoplay'),
+          setAnimation = $this.data('animation'),
+          setEasing = $this.data('easing'),
+          setFade = $this.data('fade'),
+          setSpeed = $this.data('speed'),
+          setSlidesRows = $this.data('rows'),
+          setCenterMode = $this.data('center-mode'),
+          setCenterPadding = $this.data('center-padding'),
+          setPauseOnHover = $this.data('pause-hover'),
+          setVariableWidth = $this.data('variable-width'),
+          setInitialSlide = $this.data('initial-slide'),
+          setVertical = $this.data('vertical'),
+          setRtl = $this.data('rtl'),
+          setInEffect = $this.data('in-effect'),
+          setOutEffect = $this.data('out-effect'),
+          setInfinite = $this.data('infinite'),
+          setDataTitlePosition = $this.data('title-pos-inside'),
+          setFocusOnSelect = $this.data('focus-on-select');
+
+        $this.on('init', function (event, slick) {
+          $(slick.$slides).css('height', 'auto');
+        });
+
+        if (setInEffect && setOutEffect) {
+          $this.on('init', function (event, slick) {
+            $(slick.$slides).addClass('single-slide');
+          });
+        }
+
+        if (pagiHelper) {
+          $this.on('init', function (event, slick) {
+            var $pagination = $this.find('.js-pagination');
+
+            if (!$pagination.length) return;
+
+            $pagination.append('<span class="u-dots-helper"></span>');
+          });
+        }
+
+        if (isThumb) {
+          $('#' + id).on('click', '.js-slide', function (e) {
+            e.stopPropagation();
             //Variables
-            var $self = this,
-                config = $self.config,
-                collection = $self.pageCollection;
+            var i;
 
-            //Actions
-            this.collection.each(function (i, el) {
-                //Variables
-                var $this = $(el),
-                    id = $this.attr('id'),
+            //Variables values
+            i = $(this).data('slick-index');
 
-                    //Markup elements
-                    target = $this.data('nav-for'),
-                    isThumb = $this.data('is-thumbs'),
-                    arrowsClasses = $this.data('arrows-classes'),
-                    arrowLeftClasses = $this.data('arrow-left-classes'),
-                    arrowRightClasses = $this.data('arrow-right-classes'),
-                    pagiClasses = $this.data('pagi-classes'),
-                    pagiHelper = $this.data('pagi-helper'),
-                    $pagiIcons = $this.data('pagi-icons'),
-                    $prevMarkup = '<div class="js-prev ' + arrowsClasses + ' ' + arrowLeftClasses + '"></div>',
-                    $nextMarkup = '<div class="js-next ' + arrowsClasses + ' ' + arrowRightClasses + '"></div>',
+            if ($('#' + id).slick('slickCurrentSlide') !== i) {
+              $('#' + id).slick('slickGoTo', i);
+            }
+          });
+        }
 
-                    //Setters
-                    setSlidesToShow = $this.data('slides-show'),
-                    setSlidesToScroll = $this.data('slides-scroll'),
-                    setAutoplay = $this.data('autoplay'),
-                    setAnimation = $this.data('animation'),
-                    setEasing = $this.data('easing'),
-                    setFade = $this.data('fade'),
-                    setSpeed = $this.data('speed'),
-                    setSlidesRows = $this.data('rows'),
-                    setCenterMode = $this.data('center-mode'),
-                    setCenterPadding = $this.data('center-padding'),
-                    setPauseOnHover = $this.data('pause-hover'),
-                    setVariableWidth = $this.data('variable-width'),
-                    setInitialSlide = $this.data('initial-slide'),
-                    setVertical = $this.data('vertical'),
-                    setRtl = $this.data('rtl'),
-                    setInEffect = $this.data('in-effect'),
-                    setOutEffect = $this.data('out-effect'),
-                    setInfinite = $this.data('infinite'),
-                    setDataTitlePosition = $this.data('title-pos-inside'),
-                    setFocusOnSelect = $this.data('focus-on-select');
+        $this.on('init', function (event, slider) {
+          var $pagination = $this.find('.js-pagination');
 
-                $this.on('init', function (event, slick) {
-                    $(slick.$slides).css('height', 'auto');
-                });
+          if (!$pagination.length) return;
 
-                if (setInEffect && setOutEffect) {
-                    $this.on('init', function (event, slick) {
-                        $(slick.$slides).addClass('single-slide');
-                    });
-                }
+          $($pagination[0].children[0]).addClass('slick-current');
+        });
 
-                if (pagiHelper) {
-                    $this.on('init', function (event, slick) {
-                        var $pagination = $this.find('.js-pagination');
+        $this.slick({
+          autoplay: setAutoplay ? true : false,
+          autoplaySpeed: setSpeed ? setSpeed : 3000,
 
-                        if (!$pagination.length) return;
+          cssEase: setAnimation ? setAnimation : 'ease',
+          easing: setEasing ? setEasing : 'linear',
+          fade: setFade ? true : false,
 
-                        $pagination.append('<span class="u-dots-helper"></span>');
-                    });
-                }
+          infinite: setInfinite ? true : false,
+          initialSlide: setInitialSlide ? setInitialSlide - 1 : 0,
+          slidesToShow: setSlidesToShow ? setSlidesToShow : 1,
+          slidesToScroll: setSlidesToScroll ? setSlidesToScroll : 1,
+          centerMode: setCenterMode ? true : false,
+          variableWidth: setVariableWidth ? true : false,
+          pauseOnHover: setPauseOnHover ? true : false,
+          rows: setSlidesRows ? setSlidesRows : 1,
+          vertical: setVertical ? true : false,
+          verticalSwiping: setVertical ? true : false,
+          rtl: setRtl ? true : false,
+          centerPadding: setCenterPadding ? setCenterPadding : 0,
+          focusOnSelect: setFocusOnSelect ? true : false,
 
-                if (isThumb) {
-                    $('#' + id).on('click', '.js-slide', function (e) {
-                        e.stopPropagation();
-                        //Variables
-                        var i;
+          asNavFor: target ? target : false,
+          prevArrow: arrowsClasses ? $prevMarkup : false,
+          nextArrow: arrowsClasses ? $nextMarkup : false,
+          dots: pagiClasses ? true : false,
+          dotsClass: 'js-pagination ' + pagiClasses,
+          customPaging: function (slider, i) {
+            var title = $(slider.$slides[i]).data('title');
 
-                        //Variables values
-                        i = $(this).data('slick-index');
+            if (title && $pagiIcons) {
+              return '<span>' + title + '</span>' + $pagiIcons;
+            } else if ($pagiIcons) {
+              return '<span></span>' + $pagiIcons;
+            } else if (title && setDataTitlePosition) {
+              return '<span>' + title + '</span>';
+            } else if (title && !setDataTitlePosition) {
+              return '<span></span>' + '<strong class="u-dot-title">' + title + '</strong>';
+            } else {
+              return '<span></span>';
+            }
+          }
+        });
 
-                        if ($('#' + id).slick('slickCurrentSlide') !== i) {
-                            $('#' + id).slick('slickGoTo', i);
-                        }
-                    });
-                }
+        $this.on('beforeChange', function (event, slider, currentSlide, nextSlide) {
+          var $pagination = $this.find('.js-pagination');
 
-                $this.on('init', function (event, slider) {
-                    var $pagination = $this.find('.js-pagination');
+          if (!$pagination.length) return;
 
-                    if (!$pagination.length) return;
+          if (currentSlide > nextSlide) {
+            $($pagination[0].children).removeClass('slick-active-right');
+            $($pagination[0].children[nextSlide]).addClass('slick-active-right');
+          } else {
+            $($pagination[0].children).removeClass('slick-active-right');
+          }
 
-                    $($pagination[0].children[0]).addClass('slick-current');
-                });
+          $($pagination[0].children).removeClass('slick-current');
+          setTimeout(function () {
+            $($pagination[0].children[nextSlide]).addClass('slick-current');
+          }, .25);
+        });
 
-                $this.slick({
-                    autoplay: setAutoplay ? true : false,
-                    autoplaySpeed: setSpeed ? setSpeed : 3000,
+        if (setInEffect && setOutEffect) {
+          $this.on('afterChange', function (event, slick, currentSlide, nextSlide) {
+            $(slick.$slides).removeClass('animated set-position ' + setInEffect + ' ' + setOutEffect);
+          });
 
-                    cssEase: setAnimation ? setAnimation : 'ease',
-                    easing: setEasing ? setEasing : 'linear',
-                    fade: setFade ? true : false,
+          $this.on('beforeChange', function (event, slick, currentSlide) {
+            $(slick.$slides[currentSlide]).addClass('animated ' + setOutEffect);
+          });
 
-                    infinite: setInfinite ? true : false,
-                    initialSlide: setInitialSlide ? setInitialSlide - 1 : 0,
-                    slidesToShow: setSlidesToShow ? setSlidesToShow : 1,
-                    slidesToScroll: setSlidesToScroll ? setSlidesToScroll : 1,
-                    centerMode: setCenterMode ? true : false,
-                    variableWidth: setVariableWidth ? true : false,
-                    pauseOnHover: setPauseOnHover ? true : false,
-                    rows: setSlidesRows ? setSlidesRows : 1,
-                    vertical: setVertical ? true : false,
-                    verticalSwiping: setVertical ? true : false,
-                    rtl: setRtl ? true : false,
-                    centerPadding: setCenterPadding ? setCenterPadding : 0,
-                    focusOnSelect: setFocusOnSelect ? true : false,
+          $this.on('setPosition', function (event, slick) {
+            $(slick.$slides[slick.currentSlide]).addClass('animated set-position ' + setInEffect);
+          });
+        }
 
-                    asNavFor: target ? target : false,
-                    prevArrow: arrowsClasses ? $prevMarkup : false,
-                    nextArrow: arrowsClasses ? $nextMarkup : false,
-                    dots: pagiClasses ? true : false,
-                    dotsClass: 'js-pagination ' + pagiClasses,
-                    customPaging: function (slider, i) {
-                        var title = $(slider.$slides[i]).data('title');
+        //Actions
+        collection = collection.add($this);
+      });
+    },
 
-                        if (title && $pagiIcons) {
-                            return '<span>' + title + '</span>' + $pagiIcons;
-                        } else if ($pagiIcons) {
-                            return '<span></span>' + $pagiIcons;
-                        } else if (title && setDataTitlePosition) {
-                            return '<span>' + title + '</span>';
-                        } else if (title && !setDataTitlePosition) {
-                            return '<span></span>' + '<strong class="u-dot-title">' + title + '</strong>';
-                        } else {
-                            return '<span></span>';
-                        }
-                    }
-                });
+    /**
+     * Implementation of text animation.
+     *
+     * @param jQuery carousel
+     * @param String textAnimationSelector
+     *
+     * @requires charming.js, anime.js, textfx.js
+     *
+     * @return undefined
+     */
+    initTextAnimation(carousel, textAnimationSelector) {
 
-                $this.on('beforeChange', function (event, slider, currentSlide, nextSlide) {
-                    var $pagination = $this.find('.js-pagination');
+      if (!window.TextFx || !window.anime || !carousel.length) return;
 
-                    if (!$pagination.length) return;
+      var $text = carousel.find(textAnimationSelector);
 
-                    if (currentSlide > nextSlide) {
-                        $($pagination[0].children).removeClass('slick-active-right');
-                        $($pagination[0].children[nextSlide]).addClass('slick-active-right');
-                    } else {
-                        $($pagination[0].children).removeClass('slick-active-right');
-                    }
+      if (!$text.length) return;
 
-                    $($pagination[0].children).removeClass('slick-current');
-                    setTimeout(function () {
-                        $($pagination[0].children[nextSlide]).addClass('slick-current');
-                    }, .25);
-                });
+      $text.each(function (i, el) {
 
-                if (setInEffect && setOutEffect) {
-                    $this.on('afterChange', function (event, slick, currentSlide, nextSlide) {
-                        $(slick.$slides).removeClass('animated set-position ' + setInEffect + ' ' + setOutEffect);
-                    });
+        var $this = $(el);
 
-                    $this.on('beforeChange', function (event, slick, currentSlide) {
-                        $(slick.$slides[currentSlide]).addClass('animated ' + setOutEffect);
-                    });
+        if (!$this.data('TextFx')) {
 
-                    $this.on('setPosition', function (event, slick) {
-                        $(slick.$slides[slick.currentSlide]).addClass('animated set-position ' + setInEffect);
-                    });
-                }
-
-                //Actions
-                collection = collection.add($this);
-            });
-        },
-
-        /**
-         * Implementation of text animation.
-         *
-         * @param jQuery carousel
-         * @param String textAnimationSelector
-         *
-         * @requires charming.js, anime.js, textfx.js
-         *
-         * @return undefined
-         */
-        initTextAnimation(carousel, textAnimationSelector) {
-
-            if (!window.TextFx || !window.anime || !carousel.length) return;
-
-            var $text = carousel.find(textAnimationSelector);
-
-            if (!$text.length) return;
-
-            $text.each(function (i, el) {
-
-                var $this = $(el);
-
-                if (!$this.data('TextFx')) {
-
-                    $this.data('TextFx', new TextFx($this.get(0)));
-
-                }
-
-            });
-
-
-            carousel.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
-
-                var targets = slick.$slider
-                    .find('.slick-track')
-                    .children();
-
-                var currentTarget = targets.eq(currentSlide),
-                    nextTarget = targets.eq(nextSlide);
-
-                currentTarget = currentTarget.find(textAnimationSelector);
-                nextTarget = nextTarget.find(textAnimationSelector);
-
-                if (currentTarget.length) {
-                    currentTarget.data('TextFx').hide(currentTarget.data('effect') ? currentTarget.data('effect') : 'fx1');
-                }
-
-                if (nextTarget.length) {
-                    nextTarget.data('TextFx').show(nextTarget.data('effect') ? nextTarget.data('effect') : 'fx1');
-                }
-
-            });
+          $this.data('TextFx', new TextFx($this.get(0)));
 
         }
+
+      });
+
+
+      carousel.on('beforeChange', function (event, slick, currentSlide, nextSlide) {
+
+        var targets = slick.$slider
+          .find('.slick-track')
+          .children();
+
+        var currentTarget = targets.eq(currentSlide),
+          nextTarget = targets.eq(nextSlide);
+
+        currentTarget = currentTarget.find(textAnimationSelector);
+        nextTarget = nextTarget.find(textAnimationSelector);
+
+        if (currentTarget.length) {
+          currentTarget.data('TextFx').hide(currentTarget.data('effect') ? currentTarget.data('effect') : 'fx1');
+        }
+
+        if (nextTarget.length) {
+          nextTarget.data('TextFx').show(nextTarget.data('effect') ? nextTarget.data('effect') : 'fx1');
+        }
+
+      });
+
     }
+  }
 
 })(jQuery);

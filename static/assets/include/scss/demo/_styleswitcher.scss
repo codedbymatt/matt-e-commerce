@@ -3,43 +3,43 @@
 ------------------------------------*/
 
 .u-styleswitcher {
-  position: fixed;
-  right: 0;
-  z-index: 30;
-  @include px-to-rem(top, 50px);
+	position: fixed;
+	right: 0;
+	z-index: 30;
+	@include px-to-rem(top, 50px);
 
-  @include px-to-rem(width, 235px);
+	@include px-to-rem(width, 235px);
+	
+	color: $g-color-white;
+		
+	/* Style Switcher Header */
+	&__header {
+		@include px-to-rem(font-size, 16px);
+		text-transform: uppercase;
 
-  color: $g-color-white;
+		@include px-to-rem(padding, 9px 15px 6px);
 
-  /* Style Switcher Header */
-  &__header {
-    @include px-to-rem(font-size, 16px);
-    text-transform: uppercase;
+		color: $g-color-white;
+		background-color: $g-color-gray-dark-v1;
+		border-radius: 3px 0 0 0;
+	}
 
-    @include px-to-rem(padding, 9px 15px 6px);
+	/* Style Switcher Body */
+	&__body {
+		background-color: $g-color-gray-dark-v2;
+		@include px-to-rem(padding,15px);
+	}
 
-    color: $g-color-white;
-    background-color: $g-color-gray-dark-v1;
-    border-radius: 3px 0 0 0;
-  }
+	/* Style Switcher Toggler */
+	&__toggler {
+		position: absolute;
+		right: 100%;
+		top: 3px;
+	}
 
-  /* Style Switcher Body */
-  &__body {
-    background-color: $g-color-gray-dark-v2;
-    @include px-to-rem(padding, 15px);
-  }
-
-  /* Style Switcher Toggler */
-  &__toggler {
-    position: absolute;
-    right: 100%;
-    top: 3px;
-  }
-
-  // TEMP
-  [class*="u-select-v"] {
-    color: $g-color-gray-light-v1;
-    background-color: $g-color-white;
-  }
+	// TEMP
+	[class*="u-select-v"] {
+		color: $g-color-gray-light-v1;
+		background-color: $g-color-white;
+	}
 }

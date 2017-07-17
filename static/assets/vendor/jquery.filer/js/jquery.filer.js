@@ -5,10 +5,10 @@
  * Version: 1.3 (14-Sep-2016)
  * Requires: jQuery v1.7.1 or later
  */
-(function ($) {
+(function($) {
     "use strict";
-    $.fn.filer = function (q) {
-        return this.each(function (t, r) {
+    $.fn.filer = function(q) {
+        return this.each(function(t, r) {
             var s = $(r),
                 b = '.jFiler',
                 p = $(),
@@ -18,27 +18,27 @@
                 n_f = $.isFunction(q) ? q(s, $.fn.filer.defaults) : q,
                 n = n_f && $.isPlainObject(n_f) ? $.extend(true, {}, $.fn.filer.defaults, n_f) : $.fn.filer.defaults,
                 f = {
-                    init: function () {
+                    init: function() {
                         s.wrap('<div class="jFiler"></div>');
                         f._set('props');
                         s.prop("jFiler").boxEl = p = s.closest(b);
                         f._changeInput();
                     },
-                    _bindInput: function () {
+                    _bindInput: function() {
                         if (n.changeInput && o.length > 0) {
                             o.on("click", f._clickHandler);
                         }
                         s.on({
-                            "focus": function () {
+                            "focus": function() {
                                 o.addClass('focused');
                             },
-                            "blur": function () {
+                            "blur": function() {
                                 o.removeClass('focused');
                             },
                             "change": f._onChange
                         });
                         if (n.dragDrop) {
-                            n.dragDrop.dragContainer.on("drag dragstart dragend dragover dragenter dragleave drop", function (e) {
+                            n.dragDrop.dragContainer.on("drag dragstart dragend dragover dragenter dragleave drop", function(e) {
                                 e.preventDefault();
                                 e.stopPropagation();
                             });
@@ -51,7 +51,7 @@
                                 .on("paste", f._clipboardPaste);
                         }
                     },
-                    _unbindInput: function (all) {
+                    _unbindInput: function(all) {
                         if (n.changeInput && o.length > 0) {
                             o.off("click", f._clickHandler);
                         }
@@ -69,12 +69,12 @@
                             }
                         }
                     },
-                    _clickHandler: function () {
+                    _clickHandler: function() {
                         if (!n.uploadFile && n.addMore && s.val().length != 0) {
                             f._unbindInput(true);
                             var elem = $('<input type="file" />');
                             var attributes = s.prop("attributes");
-                            $.each(attributes, function () {
+                            $.each(attributes, function() {
                                 if (this.name == "required") return;
                                 elem.attr(this.name, this.value);
                             });
@@ -86,7 +86,7 @@
                         }
                         s.click()
                     },
-                    _applyAttrSettings: function () {
+                    _applyAttrSettings: function() {
                         var d = ["name", "limit", "maxSize", "fileMaxSize", "extensions", "changeInput", "showThumbs", "appendTo", "theme", "addMore", "excludeName", "files", "uploadUrl", "uploadData", "options"];
                         for (var k in d) {
                             var j = "data-jfiler-" + d[k];
@@ -119,15 +119,15 @@
                             }
                         }
                     },
-                    _changeInput: function () {
+                    _changeInput: function() {
                         f._applyAttrSettings();
                         n.beforeRender != null && typeof n.beforeRender == "function" ? n.beforeRender(p, s) : null;
                         if (n.theme) {
                             p.addClass('jFiler-theme-' + n.theme);
                         }
                         if (s.get(0)
-                                .tagName.toLowerCase() != "input" && s.get(0)
-                                .type != "file") {
+                            .tagName.toLowerCase() != "input" && s.get(0)
+                            .type != "file") {
                             o = s;
                             s = $("<input type=\"file\" name=\"" + n.name + "\" />");
                             s.css({
@@ -186,7 +186,7 @@
                         }
                         n.afterRender != null && typeof n.afterRender == "function" ? n.afterRender(l, p, o, s) : null;
                     },
-                    _clear: function () {
+                    _clear: function() {
                         f.files = null;
                         s.prop("jFiler")
                             .files = null;
@@ -196,7 +196,7 @@
                         f._set('feedback', (f._itFl && f._itFl.length > 0 ? f._itFl.length + ' ' + n.captions.feedback2 : n.captions.feedback));
                         n.onEmpty != null && typeof n.onEmpty == "function" ? n.onEmpty(p, o, s) : null
                     },
-                    _reset: function (a) {
+                    _reset: function(a) {
                         if (!a) {
                             if (!n.uploadFile && n.addMore) {
                                 for (var i = 0; i < sl.length; i++) {
@@ -224,13 +224,13 @@
                         f._itFr = [];
                         p.find("input[name^='jfiler-items-exclude-']:hidden")
                             .remove();
-                        l.fadeOut("fast", function () {
+                        l.fadeOut("fast", function() {
                             $(this)
                                 .remove();
                         });
                         s.prop("jFiler").listEl = l = $();
                     },
-                    _set: function (element, value) {
+                    _set: function(element, value) {
                         switch (element) {
                             case 'input':
                                 s.val(value);
@@ -252,12 +252,12 @@
                                         files: f.files,
                                         files_list: f._itFl,
                                         current_file: f._itFc,
-                                        append: function (data) {
+                                        append: function(data) {
                                             return f._append(false, {
                                                 files: [data]
                                             });
                                         },
-                                        enable: function () {
+                                        enable: function() {
                                             if (!n.disabled)
                                                 return;
                                             n.disabled = false;
@@ -265,14 +265,14 @@
                                             p.removeClass("jFiler-disabled");
                                             f._bindInput();
                                         },
-                                        disable: function () {
+                                        disable: function() {
                                             if (n.disabled)
                                                 return;
                                             n.disabled = true;
                                             p.addClass("jFiler-disabled");
                                             f._unbindInput(true);
                                         },
-                                        remove: function (id) {
+                                        remove: function(id) {
                                             f._remove(null, {
                                                 binded: true,
                                                 data: {
@@ -281,19 +281,19 @@
                                             });
                                             return true;
                                         },
-                                        reset: function () {
+                                        reset: function() {
                                             f._reset();
                                             f._clear();
                                             return true;
                                         },
-                                        retry: function (data) {
+                                        retry: function(data) {
                                             return f._retryUpload(data);
                                         }
                                     })
                                 }
                         }
                     },
-                    _filesCheck: function () {
+                    _filesCheck: function() {
                         var s = 0;
                         if (n.limit && f.files.length + f._itFl.length > n.limit) {
                             n.dialogs.alert(f._assets.textParse(n.captions.errors.filesLimit));
@@ -302,8 +302,8 @@
                         for (var t = 0; t < f.files.length; t++) {
                             var file = f.files[t],
                                 x = file.name.split(".")
-                                    .pop()
-                                    .toLowerCase(),
+                                .pop()
+                                .toLowerCase(),
                                 m = {
                                     name: file.name,
                                     size: file.size,
@@ -328,7 +328,7 @@
                             }
 
                             if ((n.uploadFile || n.addMore) && !n.allowDuplicates) {
-                                var m = f._itFl.filter(function (a, b) {
+                                var m = f._itFl.filter(function(a, b) {
                                     if (a.file.name == file.name && a.file.size == file.size && a.file.type == file.type && (file.lastModified ? a.file.lastModified == file.lastModified : true)) {
                                         return true;
                                     }
@@ -351,18 +351,18 @@
                         return true;
                     },
                     _thumbCreator: {
-                        create: function (i) {
+                        create: function(i) {
                             var file = f.files[i],
                                 id = (f._itFc ? f._itFc.id : i),
                                 name = file.name,
                                 size = file.size,
                                 url = file.file,
                                 type = file.type ? file.type.split("/", 1) : ""
-                                    .toString()
-                                    .toLowerCase(),
+                                .toString()
+                                .toLowerCase(),
                                 ext = name.indexOf(".") != -1 ? name.split(".")
-                                    .pop()
-                                    .toLowerCase() : "",
+                                .pop()
+                                .toLowerCase() : "",
                                 progressBar = n.uploadFile ? '<div class="jFiler-jProgressBar">' + n.templates.progressBar + '</div>' : '',
                                 opts = {
                                     id: id,
@@ -400,25 +400,25 @@
                                 f._onSelect(i);
                             }
                         },
-                        renderContent: function (opts) {
+                        renderContent: function(opts) {
                             return f._assets.textParse((opts._appended ? n.templates.itemAppend : n.templates.item), opts);
                         },
-                        renderFile: function (file, html, opts) {
+                        renderFile: function(file, html, opts) {
                             if (html.find('.jFiler-item-thumb-image')
-                                    .length == 0) {
+                                .length == 0) {
                                 return false;
                             }
                             if (file.file && opts.type == "image") {
                                 var g = '<img src="' + file.file + '" draggable="false" />',
                                     m = html.find('.jFiler-item-thumb-image.fi-loading');
                                 $(g)
-                                    .error(function () {
+                                    .error(function() {
                                         g = f._thumbCreator.generateIcon(opts);
                                         html.addClass('jFiler-no-thumbnail');
                                         m.removeClass('fi-loading')
                                             .html(g);
                                     })
-                                    .load(function () {
+                                    .load(function() {
                                         m.removeClass('fi-loading')
                                             .html(g);
                                     });
@@ -426,14 +426,14 @@
                             }
                             if (window.File && window.FileList && window.FileReader && opts.type == "image" && opts.size < 1e+7) {
                                 var y = new FileReader;
-                                y.onload = function (e) {
+                                y.onload = function(e) {
                                     var m = html.find('.jFiler-item-thumb-image.fi-loading');
                                     if (n.templates.canvasImage) {
                                         var canvas = document.createElement('canvas'),
                                             context = canvas.getContext('2d'),
                                             img = new Image();
 
-                                        img.onload = function () {
+                                        img.onload = function() {
                                             var height = m.height(),
                                                 width = m.width(),
                                                 heightRatio = img.height / height,
@@ -464,7 +464,7 @@
                                             }
                                             m.removeClass('fi-loading').html('<img src="' + canvas.toDataURL("image/png") + '" draggable="false" />');
                                         }
-                                        img.onerror = function () {
+                                        img.onerror = function() {
                                             html.addClass('jFiler-no-thumbnail');
                                             m.removeClass('fi-loading')
                                                 .html(f._thumbCreator.generateIcon(opts));
@@ -483,7 +483,7 @@
                                     .html(g);
                             }
                         },
-                        generateIcon: function (obj) {
+                        generateIcon: function(obj) {
                             var m = new Array(3);
                             if (obj && obj.type && obj.type[0] && obj.extension) {
                                 switch (obj.type[0]) {
@@ -523,7 +523,7 @@
                             }
                             return el;
                         },
-                        _box: function (params) {
+                        _box: function(params) {
                             if (n.beforeShow != null && typeof n.beforeShow == "function" ? !n.beforeShow(f.files, l, p, o, s) : false) {
                                 return false
                             }
@@ -539,10 +539,10 @@
                                 s.prop("jFiler").listEl = l;
                                 l.append(f._assets.textParse(n.templates.box))
                                     .appendTo(appendTo);
-                                l.on('click', n.templates._selectors.remove, function (e) {
+                                l.on('click', n.templates._selectors.remove, function(e) {
                                     e.preventDefault();
                                     var m = [params ? params.remove.event : e, params ? params.remove.el : $(this).closest(n.templates._selectors.item)],
-                                        c = function (a) {
+                                        c = function(a) {
                                             f._remove(m[0], m[1]);
                                         };
                                     if (n.templates.removeConfirmation) {
@@ -559,7 +559,7 @@
                             }
                         }
                     },
-                    _upload: function (i) {
+                    _upload: function(i) {
                         var c = f._itFl[i],
                             el = c.html,
                             formData = new FormData();
@@ -573,22 +573,22 @@
                         f._ajax.send(el, formData, c);
                     },
                     _ajax: {
-                        send: function (el, formData, c) {
+                        send: function(el, formData, c) {
                             c.ajax = $.ajax({
                                 url: n.uploadFile.url,
                                 data: formData,
                                 type: n.uploadFile.type,
                                 enctype: n.uploadFile.enctype,
-                                xhr: function () {
+                                xhr: function() {
                                     var myXhr = $.ajaxSettings.xhr();
                                     if (myXhr.upload) {
-                                        myXhr.upload.addEventListener("progress", function (e) {
+                                        myXhr.upload.addEventListener("progress", function(e) {
                                             f._ajax.progressHandling(e, el)
                                         }, false)
                                     }
                                     return myXhr
                                 },
-                                complete: function (jqXHR, textStatus) {
+                                complete: function(jqXHR, textStatus) {
                                     c.ajax = false;
                                     f._ajFc++;
 
@@ -602,14 +602,14 @@
                                         n.uploadFile.onComplete != null && typeof n.uploadFile.onComplete == "function" ? n.uploadFile.onComplete(l, p, o, s, jqXHR, textStatus) : null;
                                     }
                                 },
-                                beforeSend: function (jqXHR, settings) {
+                                beforeSend: function(jqXHR, settings) {
                                     return n.uploadFile.beforeSend != null && typeof n.uploadFile.beforeSend == "function" ? n.uploadFile.beforeSend(el, l, p, o, s, c.id, jqXHR, settings) : true;
                                 },
-                                success: function (data, textStatus, jqXHR) {
+                                success: function(data, textStatus, jqXHR) {
                                     c.uploaded = true;
                                     n.uploadFile.success != null && typeof n.uploadFile.success == "function" ? n.uploadFile.success(data, el, l, p, o, s, c.id, textStatus, jqXHR) : null
                                 },
-                                error: function (jqXHR, textStatus, errorThrown) {
+                                error: function(jqXHR, textStatus, errorThrown) {
                                     c.uploaded = false;
                                     n.uploadFile.error != null && typeof n.uploadFile.error == "function" ? n.uploadFile.error(el, l, p, o, s, c.id, jqXHR, textStatus, errorThrown) : null
                                 },
@@ -620,7 +620,7 @@
                             });
                             return c.ajax;
                         },
-                        progressHandling: function (e, el) {
+                        progressHandling: function(e, el) {
                             if (e.lengthComputable) {
                                 var t = Math.round(e.loaded * 100 / e.total)
                                     .toString();
@@ -632,15 +632,15 @@
                         }
                     },
                     _dragDrop: {
-                        dragEnter: function (e) {
+                        dragEnter: function(e) {
                             clearTimeout(f._dragDrop._drt);
                             n.dragDrop.dragContainer.addClass('dragged');
                             f._set('feedback', n.captions.drop);
                             n.dragDrop.dragEnter != null && typeof n.dragDrop.dragEnter == "function" ? n.dragDrop.dragEnter(e, o, s, p) : null;
                         },
-                        dragLeave: function (e) {
+                        dragLeave: function(e) {
                             clearTimeout(f._dragDrop._drt);
-                            f._dragDrop._drt = setTimeout(function (e) {
+                            f._dragDrop._drt = setTimeout(function(e) {
                                 if (!f._dragDrop._dragLeaveCheck(e)) {
                                     f._dragDrop.dragLeave(e);
                                     return false;
@@ -650,7 +650,7 @@
                                 n.dragDrop.dragLeave != null && typeof n.dragDrop.dragLeave == "function" ? n.dragDrop.dragLeave(e, o, s, p) : null;
                             }, 100, e);
                         },
-                        drop: function (e) {
+                        drop: function(e) {
                             clearTimeout(f._dragDrop._drt);
                             n.dragDrop.dragContainer.removeClass('dragged');
                             f._set('feedback', n.captions.feedback);
@@ -659,7 +659,7 @@
                             }
                             n.dragDrop.drop != null && typeof n.dragDrop.drop == "function" ? n.dragDrop.drop(e.originalEvent.dataTransfer.files, e, o, s, p) : null;
                         },
-                        _dragLeaveCheck: function (e) {
+                        _dragLeaveCheck: function(e) {
                             var related = $(e.currentTarget),
                                 insideEls = 0;
                             if (!related.is(o)) {
@@ -673,7 +673,7 @@
                             return true;
                         }
                     },
-                    _clipboardPaste: function (e, fromDrop) {
+                    _clipboardPaste: function(e, fromDrop) {
                         if (!fromDrop && (!e.originalEvent.clipboardData && !e.originalEvent.clipboardData.items)) {
                             return
                         }
@@ -684,7 +684,7 @@
                             return
                         }
                         var items = (fromDrop ? e.originalEvent.dataTransfer.items : e.originalEvent.clipboardData.items),
-                            b64toBlob = function (b64Data, contentType, sliceSize) {
+                            b64toBlob = function(b64Data, contentType, sliceSize) {
                                 contentType = contentType || '';
                                 sliceSize = sliceSize || 512;
                                 var byteCharacters = atob(b64Data);
@@ -722,18 +722,18 @@
                                         .toString(36)
                                         .substring(5);
                                     blob.name += blob.type.indexOf("/") != -1 ? "." + blob.type.split("/")[1].toString()
-                                            .toLowerCase() : ".png";
+                                        .toLowerCase() : ".png";
                                     f._onChange(e, [blob]);
-                                    f._clPsePre = setTimeout(function () {
+                                    f._clPsePre = setTimeout(function() {
                                         delete f._clPsePre
                                     }, 1000);
                                 }
                             }
                         }
                     },
-                    _onSelect: function (i) {
+                    _onSelect: function(i) {
                         if (n.uploadFile && !$.isEmptyObject(n.uploadFile)) {
-                            if (!n.uploadFile.synchron || (n.uploadFile.synchron && $.grep(f._itFl, function (a) {
+                            if (!n.uploadFile.synchron || (n.uploadFile.synchron && $.grep(f._itFl, function(a) {
                                     return a.ajax
                                 }).length == 0)) {
                                 f._upload(f._itFc.id)
@@ -753,12 +753,12 @@
                             n.afterShow != null && typeof n.afterShow == "function" ? n.afterShow(l, p, o, s) : null
                         }
                     },
-                    _onChange: function (e, d) {
+                    _onChange: function(e, d) {
                         if (!d) {
                             if (!s.get(0)
-                                    .files || typeof s.get(0)
-                                    .files == "undefined" || s.get(0)
-                                    .files.length == 0) {
+                                .files || typeof s.get(0)
+                                .files == "undefined" || s.get(0)
+                                .files.length == 0) {
                                 if (!n.uploadFile && !n.addMore) {
                                     f._set('input', '');
                                     f._clear();
@@ -803,7 +803,7 @@
                             }
                         }
                     },
-                    _append: function (e, data) {
+                    _append: function(e, data) {
                         var files = (!data ? false : data.files);
                         if (!files || files.length <= 0) {
                             return;
@@ -818,7 +818,7 @@
                             f._thumbCreator._box();
                         }
                     },
-                    _getList: function (e, data) {
+                    _getList: function(e, data) {
                         var files = (!data ? false : data.files);
                         if (!files || files.length <= 0) {
                             return;
@@ -837,9 +837,9 @@
                             }
                         }
                     },
-                    _retryUpload: function (e, data) {
+                    _retryUpload: function(e, data) {
                         var id = parseInt(typeof data == "object" ? data.attr("data-jfiler-index") : data),
-                            obj = f._itFl.filter(function (value, key) {
+                            obj = f._itFl.filter(function(value, key) {
                                 return value.id == id;
                             });
                         if (obj.length > 0) {
@@ -854,7 +854,7 @@
                             return false;
                         }
                     },
-                    _remove: function (e, el) {
+                    _remove: function(e, el) {
                         if (el.binded) {
                             if (typeof(el.data.id) != "undefined") {
                                 el = l.find(n.templates._selectors.item + "[data-jfiler-index='" + el.data.id + "']");
@@ -866,15 +866,15 @@
                                 el = el.data.el;
                             }
                         }
-                        var excl_input = function (val) {
+                        var excl_input = function(val) {
                                 var input = p.find("input[name^='jfiler-items-exclude-']:hidden")
                                     .first();
 
                                 if (input.length == 0) {
                                     input = $('<input type="hidden" name="jfiler-items-exclude-' + (n.excludeName ? n.excludeName : (s.attr("name")
-                                                .slice(-2) != "[]" ? s.attr("name") : s.attr("name")
-                                                .substring(0, s.attr("name")
-                                                        .length - 2)) + "-" + t) + '">');
+                                        .slice(-2) != "[]" ? s.attr("name") : s.attr("name")
+                                        .substring(0, s.attr("name")
+                                            .length - 2)) + "-" + t) + '">');
                                     input.appendTo(p);
                                 }
 
@@ -883,14 +883,14 @@
                                     input.val(val);
                                 }
                             },
-                            callback = function (el, id) {
+                            callback = function(el, id) {
                                 var item = f._itFl[id],
                                     val = [];
 
                                 if (item.file._choosed || item.file._appended || item.uploaded) {
                                     f._itFr.push(item);
 
-                                    var m = f._itFl.filter(function (a) {
+                                    var m = f._itFl.filter(function(a) {
                                         return a.file.name == item.file.name;
                                     });
 
@@ -909,14 +909,14 @@
                                 } else {
                                     f._set('feedback', f._itFl.length + ' ' + n.captions.feedback2);
                                 }
-                                el.fadeOut("fast", function () {
+                                el.fadeOut("fast", function() {
                                     $(this)
                                         .remove();
                                 });
                             };
 
                         var attrId = el.get(0)
-                                    .jfiler_id || el.attr('data-jfiler-index'),
+                            .jfiler_id || el.attr('data-jfiler-index'),
                             id = null;
 
                         for (var key in f._itFl) {
@@ -937,7 +937,7 @@
                             callback(el, id);
                         }
                     },
-                    _addToMemory: function (i) {
+                    _addToMemory: function(i) {
                         f._itFl.push({
                             id: f._itFl.length,
                             file: f.files[i],
@@ -953,15 +953,15 @@
                             .current_file = f._itFc;
                     },
                     _assets: {
-                        bytesToSize: function (bytes) {
+                        bytesToSize: function(bytes) {
                             if (bytes == 0) return '0 Byte';
                             var k = 1000;
                             var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
                             var i = Math.floor(Math.log(bytes) / Math.log(k));
                             return (bytes / Math.pow(k, i))
-                                    .toPrecision(3) + ' ' + sizes[i];
+                                .toPrecision(3) + ' ' + sizes[i];
                         },
-                        hasAttr: function (attr, el) {
+                        hasAttr: function(attr, el) {
                             var el = (!el ? s : el),
                                 a = el.attr(attr);
                             if (!a || typeof a == "undefined") {
@@ -970,14 +970,14 @@
                                 return true;
                             }
                         },
-                        getIcon: function (ext, type) {
+                        getIcon: function(ext, type) {
                             var types = ["audio", "image", "text", "video"];
                             if ($.inArray(type, types) > -1) {
                                 return '<i class="icon-jfi-file-' + type + ' jfi-file-ext-' + ext + '"></i>';
                             }
                             return '<i class="icon-jfi-file-o jfi-file-type-' + type + ' jfi-file-ext-' + ext + '"></i>';
                         },
-                        textParse: function (text, opts) {
+                        textParse: function(text, opts) {
                             opts = $.extend({}, {
                                 limit: n.limit,
                                 maxSize: n.maxSize,
@@ -986,10 +986,10 @@
                             }, (opts && $.isPlainObject(opts) ? opts : {}), n.options);
                             switch (typeof(text)) {
                                 case "string":
-                                    return text.replace(/\{\{fi-(.*?)\}\}/g, function (match, a) {
+                                    return text.replace(/\{\{fi-(.*?)\}\}/g, function(match, a) {
                                         a = a.replace(/ /g, '');
                                         if (a.match(/(.*?)\|limitTo\:(\d+)/)) {
-                                            return a.replace(/(.*?)\|limitTo\:(\d+)/, function (match, a, b) {
+                                            return a.replace(/(.*?)\|limitTo\:(\d+)/, function(match, a, b) {
                                                 var a = (opts[a] ? opts[a] : ""),
                                                     str = a.substring(0, b);
                                                 str = (a.length > str.length ? str.substring(0, str.length - 3) + "..." : str);
@@ -1007,13 +1007,13 @@
                                     return text;
                             }
                         },
-                        text2Color: function (str) {
+                        text2Color: function(str) {
                             if (!str || str.length == 0) {
                                 return false
                             }
                             for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
                             for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 2) & 0xFF)
-                                .toString(16))
+                                    .toString(16))
                                 .slice(-2));
                             return colour;
                         }
@@ -1026,18 +1026,18 @@
                     _ajFc: 0
                 }
 
-            s.on("filer.append", function (e, data) {
+            s.on("filer.append", function(e, data) {
                 f._append(e, data)
-            }).on("filer.remove", function (e, data) {
+            }).on("filer.remove", function(e, data) {
                 data.binded = true;
                 f._remove(e, data);
-            }).on("filer.reset", function (e) {
+            }).on("filer.reset", function(e) {
                 f._reset();
                 f._clear();
                 return true;
-            }).on("filer.generateList", function (e, data) {
+            }).on("filer.generateList", function(e, data) {
                 return f._getList(e, data)
-            }).on("filer.retry", function (e, data) {
+            }).on("filer.retry", function(e, data) {
                 return f._retryUpload(e, data)
             });
 
@@ -1088,10 +1088,10 @@
         onEmpty: null,
         options: null,
         dialogs: {
-            alert: function (text) {
+            alert: function(text) {
                 return alert(text);
             },
-            confirm: function (text, callback) {
+            confirm: function(text, callback) {
                 confirm(text) ? callback() : null;
             }
         },

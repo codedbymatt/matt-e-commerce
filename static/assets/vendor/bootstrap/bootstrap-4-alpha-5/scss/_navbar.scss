@@ -13,6 +13,7 @@
   }
 }
 
+
 // Navbar alignment options
 //
 // Display the navbar across the entirety of the page or fixed it to the top or
@@ -61,6 +62,7 @@
   }
 }
 
+
 //
 // Brand/project name
 //
@@ -78,13 +80,14 @@
   }
 }
 
+
 .navbar-divider {
   float: left;
   width: $border-width;
   padding-top: $navbar-divider-padding-y;
   padding-bottom: $navbar-divider-padding-y;
   margin-right: $navbar-padding-x;
-  margin-left: $navbar-padding-x;
+  margin-left:  $navbar-padding-x;
   overflow: hidden;
 
   &::before {
@@ -92,15 +95,17 @@
   }
 }
 
+
 // Navbar text
 //
 //
 
 .navbar-text {
   display: inline-block;
-  padding-top: .425rem;
+  padding-top:    .425rem;
   padding-bottom: .425rem;
 }
+
 
 // Navbar toggle
 //
@@ -156,8 +161,8 @@
     }
   }
 }
-
 // scss-lint:enable ImportantRule
+
 
 // Navigation
 //
@@ -170,7 +175,7 @@
 
   .nav-link {
     display: block;
-    padding-top: .425rem;
+    padding-top:    .425rem;
     padding-bottom: .425rem;
 
     + .nav-link {
@@ -219,7 +224,7 @@
   }
 
   .navbar-divider {
-    background-color: rgba(0, 0, 0, .075);
+    background-color: rgba(0,0,0,.075);
   }
 }
 
@@ -259,9 +264,10 @@
   }
 
   .navbar-divider {
-    background-color: rgba(255, 255, 255, .075);
+    background-color: rgba(255,255,255,.075);
   }
 }
+
 
 // Navbar toggleable
 //

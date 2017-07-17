@@ -16,26 +16,17 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views import static
-from rest_framework import routers
 
 from accounts import reset_urls as reset_urls
 from accounts import urls as accounts_urls
 from cart import urls as cart_urls
-from cart import views as cart_views
 from categories import urls as categories_urls
 from home.views import get_index
 from payments import urls as payments_urls
 from products import urls as products_urls
-from products import views as product_views
 from .settings import MEDIA_ROOT
 
-router = routers.DefaultRouter()
-router.register(r'products', product_views.ProductViewSet)
-router.register(r'users', cart_views.UserViewSet)
-router.register(r'cart', cart_views.CartItemViewSet)
-
 urlpatterns = [
-    url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
     url(r'^products/', include(products_urls)),
@@ -46,6 +37,5 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)$', static.serve, {'document_root': MEDIA_ROOT}),
     url(r'accounts/', include(accounts_urls)),
     url(r'user/', include(reset_urls)),
-    url(r'^dashboard/', include(router.urls)),
 
 ]

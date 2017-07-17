@@ -1,4 +1,4 @@
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     function CubePortfolio(obj, options, callback) {
@@ -67,7 +67,7 @@
 
         // register and initialize plugins
         t.plugins = {};
-        $.each(CubePortfolio.plugins, function (key, value) {
+        $.each(CubePortfolio.plugins, function(key, value) {
             var fn = value(t);
 
             if (fn) {
@@ -84,12 +84,12 @@
 
 
     $.extend(CubePortfolio.prototype, {
-        storeData: function (blocks, indexStart) {
+        storeData: function(blocks, indexStart) {
             var t = this;
 
             indexStart = indexStart || 0; // used by loadMore
 
-            blocks.each(function (index, el) {
+            blocks.each(function(index, el) {
                 var item = $(el),
                     width = item.width(),
                     height = item.height();
@@ -119,7 +119,7 @@
 
 
         // http://bit.ly/pure-js-wrap
-        wrapInner: function (items, classAttr) {
+        wrapInner: function(items, classAttr) {
             var t = this,
                 item, i, div;
 
@@ -146,7 +146,7 @@
             }
         },
 
-        removeAttrImage: function (img) {
+        removeAttrImage: function(img) {
             img.removeAttribute('width');
             img.removeAttribute('height');
             img.removeAttribute('style');
@@ -156,12 +156,12 @@
         /**
          * Wait to load all images
          */
-        loadImages: function (elems, callback) {
+        loadImages: function(elems, callback) {
             var t = this;
 
             // wait a frame (Safari bug)
-            requestAnimationFrame(function () {
-                var imgs = elems.find('img').map(function (index, el) {
+            requestAnimationFrame(function() {
+                var imgs = elems.find('img').map(function(index, el) {
                     // don't wait for images that have a width & height defined
                     if (el.hasAttribute('width') && el.hasAttribute('height')) {
                         el.style.width = el.getAttribute('width') + 'px';
@@ -176,7 +176,7 @@
                         } else {
                             var img = $('<img>');
 
-                            img.on('load.cbp error.cbp', function () {
+                            img.on('load.cbp error.cbp', function() {
                                 $(this).off('load.cbp error.cbp');
                                 t.removeAttrImage(el);
                             });
@@ -202,10 +202,10 @@
                     return;
                 }
 
-                $.each(imgs, function (i, el) {
+                $.each(imgs, function(i, el) {
                     var img = $('<img>');
 
-                    img.on('load.cbp error.cbp', function () {
+                    img.on('load.cbp error.cbp', function() {
                         $(this).off('load.cbp error.cbp');
 
                         imgsLength--;
@@ -227,7 +227,7 @@
         },
 
 
-        checkSrc: function (el) {
+        checkSrc: function(el) {
             var srcset = el.srcset;
             var src = el.src;
 
@@ -257,7 +257,7 @@
         /**
          * Show the plugin
          */
-        display: function () {
+        display: function() {
             var t = this;
 
             // store to data values of t.blocks
@@ -279,10 +279,10 @@
         },
 
 
-        delayFrame: function () {
+        delayFrame: function() {
             var t = this;
 
-            requestAnimationFrame(function () {
+            requestAnimationFrame(function() {
                 t.resizeEvent();
 
                 t.triggerEvent('initFinish');
@@ -299,12 +299,12 @@
         /**
          * Add resize event when browser width changes
          */
-        resizeEvent: function () {
+        resizeEvent: function() {
             var t = this;
 
             CubePortfolio.private.resize.initEvent({
                 instance: t,
-                fn: function () {
+                fn: function() {
                     // used by wp fullWidth force option
                     t.triggerEvent('beforeResizeGrid');
 
@@ -326,7 +326,7 @@
         },
 
 
-        gridAdjust: function () {
+        gridAdjust: function() {
             var t = this;
 
             // update the current grid width
@@ -342,7 +342,7 @@
                 // Note: reset height if it was set for addHeightToBlocks
                 t.blocks.removeAttr('style');
 
-                t.blocks.each(function (index, el) {
+                t.blocks.each(function(index, el) {
                     var data = $(el).data('cbp'),
                         bound = el.getBoundingClientRect(),
                         width = t.columnWidthTruncate(bound.right - bound.left),
@@ -363,7 +363,7 @@
         },
 
 
-        layoutAndAdjustment: function () {
+        layoutAndAdjustment: function() {
             var t = this;
 
             t.gridAdjust();
@@ -375,7 +375,7 @@
         /**
          * Build the layout
          */
-        layout: function () {
+        layout: function() {
             var t = this;
 
             t.computeBlocks(t.filterConcat(t.defaultFilter));
@@ -396,7 +396,7 @@
         },
 
 
-        computeFilter: function (expression) {
+        computeFilter: function(expression) {
             var t = this;
 
             t.computeBlocks(expression);
@@ -412,13 +412,13 @@
         /**
          *  Default filter layout if nothing overrides
          */
-        filterLayout: function () {
+        filterLayout: function() {
             var t = this;
 
             t.blocksOff.addClass('cbp-item-off');
 
             t.blocksOn.removeClass('cbp-item-off')
-                .each(function (index, el) {
+                .each(function(index, el) {
                     var data = $(el).data('cbp');
 
                     data.left = data.leftNew;
@@ -438,7 +438,7 @@
         /**
          *  Trigger when a filter is finished
          */
-        filterFinish: function () {
+        filterFinish: function() {
             var t = this;
 
             // if blocks are sorted (the index ascending is broken) revert
@@ -454,7 +454,7 @@
         },
 
 
-        computeBlocks: function (expression) {
+        computeBlocks: function(expression) {
             var t = this;
 
             // blocks that are visible before applying the filter
@@ -473,7 +473,7 @@
         /**
          * Make this plugin responsive
          */
-        responsiveLayout: function () {
+        responsiveLayout: function() {
             var t = this;
 
             // calculate numbers of cols
@@ -487,7 +487,7 @@
                 t.getMosaicWidthReference();
             }
 
-            t.blocks.each(function (index, el) {
+            t.blocks.each(function(index, el) {
                 var data = $(el).data('cbp'),
                     cols = 1, // grid & slider layoutMode must be 1
                     width;
@@ -508,8 +508,8 @@
 
             var imgs = [];
 
-            t.blocks.each(function (index, el) {
-                $.each($(el).find('img').filter('[width][height]'), function (index, el) {
+            t.blocks.each(function(index, el) {
+                $.each($(el).find('img').filter('[width][height]'), function(index, el) {
                     var width = $(el).parent().width();
                     var imgWidth = parseInt(el.getAttribute('width'), 10);
                     var imgHeight = parseInt(el.getAttribute('height'), 10);
@@ -523,14 +523,14 @@
                 });
             });
 
-            $.each(imgs, function (index, item) {
+            $.each(imgs, function(index, item) {
                 item.el.width = item.width;
                 item.el.height = item.height;
                 item.el.style.width = item.width + 'px';
                 item.el.style.height = item.height + 'px';
             });
 
-            t.blocks.each(function (index, el) {
+            t.blocks.each(function(index, el) {
                 var data = $(el).data('cbp'),
                     bound = el.getBoundingClientRect(),
                     height = Math.round(bound.bottom - bound.top);
@@ -541,16 +541,16 @@
         },
 
 
-        getMosaicWidthReference: function () {
+        getMosaicWidthReference: function() {
             var t = this,
                 arrWidth = [];
 
-            t.blocks.each(function (index, el) {
+            t.blocks.each(function(index, el) {
                 var data = $(el).data('cbp');
                 arrWidth.push(data.widthInitial);
             });
 
-            arrWidth.sort(function (a, b) {
+            arrWidth.sort(function(a, b) {
                 return a - b;
             });
 
@@ -562,7 +562,7 @@
         },
 
 
-        getColsMosaic: function (widthInitial) {
+        getColsMosaic: function(widthInitial) {
             var t = this;
 
             if (widthInitial === t.width) {
@@ -584,7 +584,7 @@
         /**
          * Get numbers of columns when t.options.mediaQueries is not an array
          */
-        getColumnsAuto: function () {
+        getColumnsAuto: function() {
             var t = this;
 
             if (t.blocks.length === 0) {
@@ -600,12 +600,12 @@
         /**
          * Get numbers of columns if t.options.mediaQueries is an array
          */
-        getColumnsBreakpoints: function () {
+        getColumnsBreakpoints: function() {
             var t = this,
                 gridWidth = t.width,
                 mediaQuery;
 
-            $.each(t.options.mediaQueries, function (index, obj) {
+            $.each(t.options.mediaQueries, function(index, obj) {
                 if (gridWidth >= obj.width) {
                     mediaQuery = obj;
                     return false;
@@ -639,17 +639,17 @@
          *  The initial behaviour was return Math.floor
          *
          */
-        columnWidthTruncate: function (value) {
+        columnWidthTruncate: function(value) {
             return Math.floor(value);
         },
 
 
-        positionateItems: function () {
+        positionateItems: function() {
             var t = this,
                 data;
 
             t.blocksOn.removeClass('cbp-item-off')
-                .each(function (index, el) {
+                .each(function(index, el) {
                     data = $(el).data('cbp');
 
                     data.left = data.leftNew;
@@ -672,7 +672,7 @@
         /**
          * Resize main container vertically
          */
-        resizeMainContainer: function () {
+        resizeMainContainer: function() {
             var t = this,
                 height = Math.max(t.freeSpaces.slice(-1)[0].topStart - t.options.gapHorizontal, 0),
                 maxWidth;
@@ -681,7 +681,7 @@
             if (t.options.gridAdjustment === 'alignCenter') {
                 maxWidth = 0;
 
-                t.blocksOn.each(function (index, el) {
+                t.blocksOn.each(function(index, el) {
                     var data = $(el).data('cbp'),
                         rightEdge = data.left + data.width;
 
@@ -704,7 +704,7 @@
             // if resizeMainContainer is called for the first time skip this event trigger
             if (t.height !== undefined) {
                 if (CubePortfolio.private.modernBrowser) {
-                    t.$obj.one(CubePortfolio.private.transitionend, function () {
+                    t.$obj.one(CubePortfolio.private.transitionend, function() {
                         t.$obj.trigger('pluginResize.cbp');
                     });
                 } else {
@@ -718,12 +718,12 @@
         },
 
 
-        filterConcat: function (filter) {
+        filterConcat: function(filter) {
             return filter.replace(/\|/gi, '');
         },
 
 
-        pushQueue: function (name, deferred) {
+        pushQueue: function(name, deferred) {
             var t = this;
 
             t.queue[name] = t.queue[name] || [];
@@ -731,7 +731,7 @@
         },
 
 
-        runQueue: function (name, fn) {
+        runQueue: function(name, fn) {
             var t = this,
                 queue = t.queue[name] || [];
 
@@ -739,7 +739,7 @@
         },
 
 
-        clearQueue: function (name) {
+        clearQueue: function(name) {
             var t = this;
 
             t.queue[name] = [];
@@ -749,7 +749,7 @@
         /**
          *  Register event
          */
-        registerEvent: function (name, callbackFunction, oneTime) {
+        registerEvent: function(name, callbackFunction, oneTime) {
             var t = this;
 
             if (!t.registeredEvents[name]) {
@@ -766,7 +766,7 @@
         /**
          *  Trigger event
          */
-        triggerEvent: function (name, param) {
+        triggerEvent: function(name, param) {
             var t = this,
                 i, len;
 
@@ -787,7 +787,7 @@
         },
 
 
-        addItems: function (items, callback, position) {
+        addItems: function(items, callback, position) {
             var t = this;
 
             // wrap .cbp-item-wrap div inside .cbp-item
@@ -799,14 +799,14 @@
             }));
 
             if (CubePortfolio.private.modernBrowser) {
-                items.last().one(CubePortfolio.private.animationend, function () {
+                items.last().one(CubePortfolio.private.animationend, function() {
                     t.addItemsFinish(items, callback);
                 });
             } else {
                 t.addItemsFinish(items, callback); // @todo - on ie8 & ie9 callback triggers to early
             }
 
-            t.loadImages(items, function () {
+            t.loadImages(items, function() {
                 t.$obj.addClass('cbp-updateItems');
 
                 if (position === 'append') {
@@ -818,7 +818,7 @@
                     t.storeData(items);
 
                     var itemsLen = items.length;
-                    t.blocks.each(function (index, el) {
+                    t.blocks.each(function(index, el) {
                         $(el).data('cbp').index = itemsLen + index;
                     });
 
@@ -838,7 +838,7 @@
         },
 
 
-        addItemsFinish: function (items, callback) {
+        addItemsFinish: function(items, callback) {
             var t = this;
 
             t.isAnimating = false;
@@ -854,21 +854,21 @@
             t.$obj.trigger('onAfterLoadMore.cbp', [items]);
         },
 
-        removeItems: function (items, callback) {
+        removeItems: function(items, callback) {
             var t = this;
 
             t.$obj.addClass('cbp-updateItems');
 
             if (CubePortfolio.private.modernBrowser) {
-                items.last().one(CubePortfolio.private.animationend, function () {
+                items.last().one(CubePortfolio.private.animationend, function() {
                     t.removeItemsFinish(items, callback);
                 });
             } else {
                 t.removeItemsFinish(items, callback); // @todo - on ie8 & ie9 callback triggers to early
             }
 
-            items.each(function (index, el) {
-                t.blocks.each(function (index2, el2) {
+            items.each(function(index, el) {
+                t.blocks.each(function(index2, el2) {
                     if (el === el2) {
                         var removeEl = $(el2);
 
@@ -876,7 +876,7 @@
                         t.blocks.splice(index2, 1);
 
                         if (CubePortfolio.private.modernBrowser) {
-                            removeEl.one(CubePortfolio.private.animationend, function () {
+                            removeEl.one(CubePortfolio.private.animationend, function() {
                                 removeEl.remove();
                             });
                             removeEl.addClass('cbp-removeItem');
@@ -887,7 +887,7 @@
                 });
             });
 
-            t.blocks.each(function (index, el) {
+            t.blocks.each(function(index, el) {
                 $(el).data('cbp').index = index;
             });
 
@@ -900,7 +900,7 @@
         },
 
 
-        removeItemsFinish: function (items, callback) {
+        removeItemsFinish: function(items, callback) {
             var t = this;
 
             t.isAnimating = false;
@@ -917,8 +917,8 @@
     /**
      * jQuery plugin initializer
      */
-    $.fn.cubeportfolio = function (method, options, callback) {
-        return this.each(function () {
+    $.fn.cubeportfolio = function(method, options, callback) {
+        return this.each(function() {
             if (typeof method === 'object' || !method) {
                 return CubePortfolio.public.init.call(this, method, options);
             } else if (CubePortfolio.public[method]) {
@@ -932,13 +932,13 @@
     CubePortfolio.plugins = {};
     $.fn.cubeportfolio.constructor = CubePortfolio;
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
 
     $.extend(CubePortfolio.prototype, {
-        mosaicLayoutReset: function () {
+        mosaicLayoutReset: function() {
             var t = this;
 
             // flag to be set after the blocks sorting is done
@@ -946,7 +946,7 @@
 
             // when I start the layout again all blocks must not be positionated
             // reset height if it was set for addHeightToBlocks
-            t.blocksOn.each(function (index, el) {
+            t.blocksOn.each(function(index, el) {
                 $(el).data('cbp').pack = false;
 
                 if (t.options.sortToPreventGaps) {
@@ -964,7 +964,7 @@
         },
 
 
-        mosaicLayout: function () {
+        mosaicLayout: function() {
             var t = this;
 
             for (var i = 0, blocksLen = t.blocksOn.length; i < blocksLen; i++) {
@@ -1006,15 +1006,15 @@
          * is set to true then sort the blocks and start the layout once again
          * Decide the free rectangle Fi from F to pack the rectangle R into.
          */
-        getSpaceIndexAndBlock: function () {
+        getSpaceIndexAndBlock: function() {
             var t = this,
                 spaceIndexAndBlock = null;
 
-            $.each(t.freeSpaces, function (index1, space) {
+            $.each(t.freeSpaces, function(index1, space) {
                 var widthSpace = space.leftEnd - space.leftStart,
                     heightSpace = space.topEnd - space.topStart;
 
-                t.blocksOn.each(function (index2, block) {
+                t.blocksOn.each(function(index2, block) {
                     var data = $(block).data('cbp');
 
                     if (data.pack === true) {
@@ -1060,7 +1060,7 @@
          * then remove that space from spaces
          * Insert F1 & F2 in F in place of Fi
          */
-        generateF1F2: function (spaceIndex, block) {
+        generateF1F2: function(spaceIndex, block) {
             var t = this,
                 space = t.freeSpaces[spaceIndex];
 
@@ -1095,12 +1095,12 @@
         /**
          * Generate G1, G2, G3, G4 from intersaction of t.freeSpaces with block
          */
-        generateG1G2G3G4: function (block) {
+        generateG1G2G3G4: function(block) {
             var t = this;
 
             var spaces = [];
 
-            $.each(t.freeSpaces, function (index, space) {
+            $.each(t.freeSpaces, function(index, space) {
                 var intersectSpace = t.intersectSpaces(space, block);
 
                 // if block & space are the same push space in spaces and return
@@ -1123,7 +1123,7 @@
          * Return the intersected rectagle of Fi and block
          * If the two spaces don't intersect or are the same return null
          */
-        intersectSpaces: function (space1, block) {
+        intersectSpaces: function(space1, block) {
             var t = this,
                 space2 = {
                     leftStart: block.leftNew,
@@ -1160,7 +1160,7 @@
         /**
          * The top subdivide space
          */
-        generateG1: function (space, intersectSpace, spaces) {
+        generateG1: function(space, intersectSpace, spaces) {
             if (space.topStart === intersectSpace.topStart) {
                 return;
             }
@@ -1177,7 +1177,7 @@
         /**
          * The right subdivide space
          */
-        generateG2: function (space, intersectSpace, spaces) {
+        generateG2: function(space, intersectSpace, spaces) {
             if (space.leftEnd === intersectSpace.leftEnd) {
                 return;
             }
@@ -1194,7 +1194,7 @@
         /**
          * The bottom subdivide space
          */
-        generateG3: function (space, intersectSpace, spaces) {
+        generateG3: function(space, intersectSpace, spaces) {
             if (space.topEnd === intersectSpace.topEnd) {
                 return;
             }
@@ -1211,7 +1211,7 @@
         /**
          * The left subdivide space
          */
-        generateG4: function (space, intersectSpace, spaces) {
+        generateG4: function(space, intersectSpace, spaces) {
             if (space.leftStart === intersectSpace.leftStart) {
                 return;
             }
@@ -1229,11 +1229,11 @@
          * For every Fi check if is another Fj so Fj contains Fi
          * @todo - refactor
          */
-        cleanFreeSpaces: function () {
+        cleanFreeSpaces: function() {
             var t = this;
 
             // sort space from top to bottom and left to right
-            t.freeSpaces.sort(function (space1, space2) {
+            t.freeSpaces.sort(function(space1, space2) {
                 if (space1.topStart > space2.topStart) {
                     return 1;
                 } else if (space1.topStart < space2.topStart) {
@@ -1258,7 +1258,7 @@
         /**
          * If topStart values for spaces are <= 1px then align those spaces
          */
-        correctSubPixelValues: function () {
+        correctSubPixelValues: function() {
             var t = this,
                 i, len, diff, space1, space2;
 
@@ -1277,13 +1277,13 @@
          * Remove spaces that are not maximal
          * If Fi contains Fj then remove Fj from F
          */
-        removeNonMaximalFreeSpaces: function () {
+        removeNonMaximalFreeSpaces: function() {
             var t = this;
 
             t.uniqueFreeSpaces();
 
-            t.freeSpaces = $.map(t.freeSpaces, function (space1, index1) {
-                $.each(t.freeSpaces, function (index2, space2) {
+            t.freeSpaces = $.map(t.freeSpaces, function(space1, index1) {
+                $.each(t.freeSpaces, function(index2, space2) {
                     // don't compare the same free spaces
                     if (index1 === index2) {
                         return;
@@ -1307,12 +1307,12 @@
         /**
          * Remove duplicates spaces from freeSpaces
          */
-        uniqueFreeSpaces: function () {
+        uniqueFreeSpaces: function() {
             var t = this,
                 result = [];
 
-            $.each(t.freeSpaces, function (index1, space1) {
-                $.each(result, function (index2, space2) {
+            $.each(t.freeSpaces, function(index1, space1) {
+                $.each(result, function(index2, space2) {
                     if (space2.leftStart === space1.leftStart &&
                         space2.leftEnd === space1.leftEnd &&
                         space2.topStart === space1.topStart &&
@@ -1336,11 +1336,11 @@
          * If freeSpaces arrray has only one space and that space overlap the
          * height of the bottom blocks with 1px cut those blocks
          */
-        addHeightToBlocks: function () {
+        addHeightToBlocks: function() {
             var t = this;
 
-            $.each(t.freeSpaces, function (indexSpace, space) {
-                t.blocksOn.each(function (indexBlock, block) {
+            $.each(t.freeSpaces, function(indexSpace, space) {
+                t.blocksOn.each(function(indexBlock, block) {
                     var data = $(block).data('cbp');
 
                     if (data.pack !== true) {
@@ -1364,12 +1364,12 @@
         /**
          * Sort by the longer width first, followed by a comparison of the shorter height
          */
-        sortBlocksToPreventGaps: function () {
+        sortBlocksToPreventGaps: function() {
             var t = this;
 
             t.blocksAreSorted = true;
 
-            t.blocksOn.sort(function (block1, block2) {
+            t.blocksOn.sort(function(block1, block2) {
                 var data1 = $(block1).data('cbp'),
                     data2 = $(block2).data('cbp');
 
@@ -1400,10 +1400,10 @@
         /**
          * Generic sort block function from lower to highest values
          */
-        sortBlocks: function (blocks, compare) {
+        sortBlocks: function(blocks, compare) {
             var t = this;
 
-            blocks.sort(function (block1, block2) {
+            blocks.sort(function(block1, block2) {
                 var data1 = $(block1).data('cbp'),
                     data2 = $(block2).data('cbp');
 
@@ -1731,20 +1731,20 @@ jQuery.fn.cubeportfolio.options = {
      */
     plugins: {},
 };
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
     var $window = $(window);
 
     CubePortfolio.private = {
-        publicEvents: function (eventName, time, beforeEventCallback) {
+        publicEvents: function(eventName, time, beforeEventCallback) {
             var t = this;
 
             // array of objects: {instance: instance, fn: fn}
             t.events = [];
 
-            t.initEvent = function (obj) {
+            t.initEvent = function(obj) {
                 if (t.events.length === 0) {
                     t.scrollEvent();
                 }
@@ -1752,8 +1752,8 @@ jQuery.fn.cubeportfolio.options = {
                 t.events.push(obj);
             };
 
-            t.destroyEvent = function (instance) {
-                t.events = $.map(t.events, function (val, index) {
+            t.destroyEvent = function(instance) {
+                t.events = $.map(t.events, function(val, index) {
                     if (val.instance !== instance) {
                         return val;
                     }
@@ -1765,19 +1765,19 @@ jQuery.fn.cubeportfolio.options = {
                 }
             };
 
-            t.scrollEvent = function () {
+            t.scrollEvent = function() {
                 var timeout;
 
                 // resize
-                $window.on(eventName, function () {
+                $window.on(eventName, function() {
                     clearTimeout(timeout);
 
-                    timeout = setTimeout(function () {
+                    timeout = setTimeout(function() {
                         if ($.isFunction(beforeEventCallback) && beforeEventCallback.call(t)) {
                             return;
                         }
 
-                        $.each(t.events, function (index, val) {
+                        $.each(t.events, function(index, val) {
                             val.fn.call(val.instance);
                         });
                     }, time);
@@ -1788,7 +1788,7 @@ jQuery.fn.cubeportfolio.options = {
         /**
          * Check if cubeportfolio instance exists on current element
          */
-        checkInstance: function (method) {
+        checkInstance: function(method) {
             var t = $.data(this, 'cubeportfolio');
 
             if (!t) {
@@ -1803,7 +1803,7 @@ jQuery.fn.cubeportfolio.options = {
         /**
          * Get info about client browser
          */
-        browserInfo: function () {
+        browserInfo: function() {
             var t = CubePortfolio.private,
                 appVersion = navigator.appVersion,
                 transition, animation, perspective;
@@ -1869,7 +1869,7 @@ jQuery.fn.cubeportfolio.options = {
         /**
          * Feature testing for css3
          */
-        styleSupport: function (prop) {
+        styleSupport: function(prop) {
             var supportedProp,
                 // capitalize first character of the prop to test vendor prefix
                 webkitProp = 'Webkit' + prop.charAt(0).toUpperCase() + prop.slice(1),
@@ -1892,14 +1892,14 @@ jQuery.fn.cubeportfolio.options = {
 
     CubePortfolio.private.browserInfo();
 
-    CubePortfolio.private.resize = new CubePortfolio.private.publicEvents('resize.cbp', 50, function () {
+    CubePortfolio.private.resize = new CubePortfolio.private.publicEvents('resize.cbp', 50, function() {
         if (window.innerHeight == screen.height) {
             // this is fulll screen mode. don't need to trigger a resize
             return true;
         }
     });
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -1909,14 +1909,14 @@ jQuery.fn.cubeportfolio.options = {
         /*
          * Init the plugin
          */
-        init: function (options, callback) {
+        init: function(options, callback) {
             new CubePortfolio(this, options, callback);
         },
 
         /*
          * Destroy the plugin
          */
-        destroy: function (callback) {
+        destroy: function(callback) {
             var t = CubePortfolio.private.checkInstance.call(this, 'destroy');
 
             t.triggerEvent('beforeDestroy');
@@ -1941,7 +1941,7 @@ jQuery.fn.cubeportfolio.options = {
             // reset blocks
             t.blocks.removeClass('cbp-item-off').removeAttr('style');
 
-            t.blocks.find('.cbp-item-wrapper').each(function (index, el) {
+            t.blocks.find('.cbp-item-wrapper').each(function(index, el) {
                 var elem = $(el),
                     children = elem.children();
 
@@ -1968,7 +1968,7 @@ jQuery.fn.cubeportfolio.options = {
                 t.$ul.remove();
             }
 
-            $.each(t.plugins, function (key, value) {
+            $.each(t.plugins, function(key, value) {
                 if (typeof value.destroy === 'function') {
                     value.destroy();
                 }
@@ -1984,7 +1984,7 @@ jQuery.fn.cubeportfolio.options = {
         /*
          * Filter the plugin by filterName
          */
-        filter: function (param, callback) {
+        filter: function(param, callback) {
             var t = CubePortfolio.private.checkInstance.call(this, 'filter'),
                 expression;
 
@@ -2002,7 +2002,7 @@ jQuery.fn.cubeportfolio.options = {
             if ($.isFunction(param)) {
                 expression = param.call(t, t.blocks);
 
-                if (expression === undefined) {
+                if(expression === undefined) {
                     throw new Error('When you call cubeportfolio API `filter` method with a param of type function you must return the blocks that will be visible.');
                 }
             } else {
@@ -2023,7 +2023,7 @@ jQuery.fn.cubeportfolio.options = {
 
             if (t.singlePageInline && t.singlePageInline.isOpen) {
                 t.singlePageInline.close('promise', {
-                    callback: function () {
+                    callback: function() {
                         t.computeFilter(expression);
                     }
                 });
@@ -2035,7 +2035,7 @@ jQuery.fn.cubeportfolio.options = {
         /*
          * Show counter for filters
          */
-        showCounter: function (elems, callback) {
+        showCounter: function(elems, callback) {
             var t = CubePortfolio.private.checkInstance.call(this, 'showCounter');
 
             // register callback function
@@ -2045,7 +2045,7 @@ jQuery.fn.cubeportfolio.options = {
 
             t.elems = elems;
 
-            elems.each(function () {
+            elems.each(function() {
                 var el = $(this);
 
                 var count = t.blocks.filter(el.data('filter')).length;
@@ -2056,14 +2056,14 @@ jQuery.fn.cubeportfolio.options = {
         },
 
         // alias for append public method
-        appendItems: function (els, callback) {
+        appendItems: function(els, callback) {
             CubePortfolio.public.append.call(this, els, callback);
         },
 
         /*
          * Append elements
          */
-        append: function (els, callback) {
+        append: function(els, callback) {
             var t = CubePortfolio.private.checkInstance.call(this, 'append'),
                 items = $(els).filter('.cbp-item');
 
@@ -2079,7 +2079,7 @@ jQuery.fn.cubeportfolio.options = {
 
             if (t.singlePageInline && t.singlePageInline.isOpen) {
                 t.singlePageInline.close('promise', {
-                    callback: function () {
+                    callback: function() {
                         t.addItems(items, callback, 'append');
                     }
                 });
@@ -2091,7 +2091,7 @@ jQuery.fn.cubeportfolio.options = {
         /*
          * Prepend elements
          */
-        prepend: function (els, callback) {
+        prepend: function(els, callback) {
             var t = CubePortfolio.private.checkInstance.call(this, 'prepend'),
                 items = $(els).filter('.cbp-item');
 
@@ -2107,7 +2107,7 @@ jQuery.fn.cubeportfolio.options = {
 
             if (t.singlePageInline && t.singlePageInline.isOpen) {
                 t.singlePageInline.close('promise', {
-                    callback: function () {
+                    callback: function() {
                         t.addItems(items, callback, 'prepend');
                     }
                 });
@@ -2120,7 +2120,7 @@ jQuery.fn.cubeportfolio.options = {
          * Remove elements from the instance and DOM.
          * els - jQuery DOM Object
          */
-        remove: function (els, callback) {
+        remove: function(els, callback) {
             var t = CubePortfolio.private.checkInstance.call(this, 'remove'),
                 items = $(els).filter('.cbp-item');
 
@@ -2136,7 +2136,7 @@ jQuery.fn.cubeportfolio.options = {
 
             if (t.singlePageInline && t.singlePageInline.isOpen) {
                 t.singlePageInline.close('promise', {
-                    callback: function () {
+                    callback: function() {
                         t.removeItems(items, callback);
                     }
                 });
@@ -2146,7 +2146,7 @@ jQuery.fn.cubeportfolio.options = {
         },
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -2154,7 +2154,7 @@ jQuery.fn.cubeportfolio.options = {
     // @todo - gandit cum ar trebui sa fac aici ca nu prea ar merge un plugin
     // pt slider ca as extinde pe CubePortfolio.prototype la fiecare initializare
     $.extend(CubePortfolio.prototype, {
-        updateSliderPagination: function () {
+        updateSliderPagination: function() {
             var t = this,
                 pages,
                 i;
@@ -2178,7 +2178,7 @@ jQuery.fn.cubeportfolio.options = {
             t.enableDisableNavSlider();
         },
 
-        destroySlider: function () {
+        destroySlider: function() {
             var t = this;
 
             if (t.options.layoutMode !== 'slider') {
@@ -2198,7 +2198,7 @@ jQuery.fn.cubeportfolio.options = {
             }
         },
 
-        nextSlider: function (el) {
+        nextSlider: function(el) {
             var t = this;
 
             if (t.isEndSlider()) {
@@ -2218,7 +2218,7 @@ jQuery.fn.cubeportfolio.options = {
             t.goToSlider();
         },
 
-        prevSlider: function (el) {
+        prevSlider: function(el) {
             var t = this;
 
             if (t.isStartSlider()) {
@@ -2238,7 +2238,7 @@ jQuery.fn.cubeportfolio.options = {
             t.goToSlider();
         },
 
-        jumpToSlider: function (el) {
+        jumpToSlider: function(el) {
             var t = this,
                 index = Math.min(el.index() * t.cols, t.blocksOn.length - t.cols);
 
@@ -2251,7 +2251,7 @@ jQuery.fn.cubeportfolio.options = {
             t.goToSlider();
         },
 
-        jumpDragToSlider: function (pos) {
+        jumpDragToSlider: function(pos) {
             var t = this,
                 jumpWidth,
                 offset,
@@ -2283,16 +2283,16 @@ jQuery.fn.cubeportfolio.options = {
             t.goToSlider();
         },
 
-        isStartSlider: function () {
+        isStartSlider: function() {
             return this.sliderActive === 0;
         },
 
-        isEndSlider: function () {
+        isEndSlider: function() {
             var t = this;
             return (t.sliderActive + t.cols) > t.blocksOn.length - 1;
         },
 
-        goToSlider: function () {
+        goToSlider: function() {
             var t = this;
 
             // enable disable the nav
@@ -2301,7 +2301,7 @@ jQuery.fn.cubeportfolio.options = {
             t.updateSliderPosition();
         },
 
-        startSliderAuto: function () {
+        startSliderAuto: function() {
             var t = this;
 
             if (t.isDrag) {
@@ -2309,7 +2309,7 @@ jQuery.fn.cubeportfolio.options = {
                 return;
             }
 
-            t.timeout = setTimeout(function () {
+            t.timeout = setTimeout(function() {
                 // go to next slide
                 t.nextSlider();
 
@@ -2319,11 +2319,11 @@ jQuery.fn.cubeportfolio.options = {
             }, t.options.autoTimeout);
         },
 
-        stopSliderAuto: function () {
+        stopSliderAuto: function() {
             clearTimeout(this.timeout);
         },
 
-        enableDisableNavSlider: function () {
+        enableDisableNavSlider: function() {
             var t = this,
                 page,
                 method;
@@ -2374,7 +2374,7 @@ jQuery.fn.cubeportfolio.options = {
         /**
          * If slider loop is enabled don't add classes to `next` and `prev` buttons
          */
-        isRewindNav: function () {
+        isRewindNav: function() {
             var t = this;
 
             if (!t.options.showNavigation) {
@@ -2392,17 +2392,17 @@ jQuery.fn.cubeportfolio.options = {
             return false;
         },
 
-        sliderItemsLength: function () {
+        sliderItemsLength: function() {
             return this.blocksOn.length <= this.cols;
         },
 
         /**
          * Arrange the items in a slider layout
          */
-        sliderLayout: function () {
+        sliderLayout: function() {
             var t = this;
 
-            t.blocksOn.each(function (index, el) {
+            t.blocksOn.each(function(index, el) {
                 var data = $(el).data('cbp');
 
                 // update the values with the new ones
@@ -2419,12 +2419,12 @@ jQuery.fn.cubeportfolio.options = {
             t.$ul.width(t.columnWidth * t.blocksOn.length - t.options.gapVertical);
         },
 
-        getFreeSpacesForSlider: function () {
+        getFreeSpacesForSlider: function() {
             var t = this;
 
             t.freeSpaces = t.sliderFreeSpaces.slice(t.sliderActive, t.sliderActive + t.cols);
 
-            t.freeSpaces.sort(function (space1, space2) {
+            t.freeSpaces.sort(function(space1, space2) {
                 if (space1.topStart > space2.topStart) {
                     return 1;
                 } else if (space1.topStart < space2.topStart) {
@@ -2433,7 +2433,7 @@ jQuery.fn.cubeportfolio.options = {
             });
         },
 
-        updateSliderPosition: function () {
+        updateSliderPosition: function() {
             var t = this,
                 value = -t.sliderActive * t.columnWidth;
 
@@ -2448,7 +2448,7 @@ jQuery.fn.cubeportfolio.options = {
             t.resizeMainContainer();
         },
 
-        dragSlider: function () {
+        dragSlider: function() {
             var t = this,
                 $document = $(document),
                 posInitial,
@@ -2499,7 +2499,7 @@ jQuery.fn.cubeportfolio.options = {
                 }
 
                 if (isAnimating) {
-                    $(target).one('click.cbp', function () {
+                    $(target).one('click.cbp', function() {
                         return false;
                     });
                     return;
@@ -2524,12 +2524,12 @@ jQuery.fn.cubeportfolio.options = {
                 isAnimating = true;
 
                 if (pos !== 0) {
-                    target.one('click.cbp', function (e) {
+                    target.one('click.cbp', function(e) {
                         return false;
                     });
 
                     // wait a frame to be sure the .cbp-mode-slider-dragStart is removed from the dom
-                    requestAnimationFrame(function () {
+                    requestAnimationFrame(function() {
                         t.jumpDragToSlider(pos);
                         t.$ul.one(CubePortfolio.private.transitionend, afterDragEnd);
                     });
@@ -2595,7 +2595,7 @@ jQuery.fn.cubeportfolio.options = {
         /**
          * Reset the slider layout
          */
-        sliderLayoutReset: function () {
+        sliderLayoutReset: function() {
             var t = this;
 
             t.freeSpaces = [];
@@ -2605,10 +2605,8 @@ jQuery.fn.cubeportfolio.options = {
     });
 })(jQuery, window, document);
 if (typeof Object.create !== 'function') {
-    Object.create = function (obj) {
-        function F() {
-        }
-
+    Object.create = function(obj) {
+        function F() {}
         F.prototype = obj;
         return new F();
     };
@@ -2618,7 +2616,7 @@ if (typeof Object.create !== 'function') {
 // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
 // requestAnimationFrame polyfill by Erik M�ller. fixes from Paul Irish and Tino Zijdel
 // MIT license
-(function () {
+(function() {
     var lastTime = 0;
     var vendors = ['moz', 'webkit'];
 
@@ -2628,10 +2626,10 @@ if (typeof Object.create !== 'function') {
     }
 
     if (!window.requestAnimationFrame) {
-        window.requestAnimationFrame = function (callback, element) {
+        window.requestAnimationFrame = function(callback, element) {
             var currTime = new Date().getTime();
             var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function () {
+            var id = window.setTimeout(function() {
                     callback(currTime + timeToCall);
                 },
                 timeToCall);
@@ -2641,12 +2639,12 @@ if (typeof Object.create !== 'function') {
     }
 
     if (!window.cancelAnimationFrame) {
-        window.cancelAnimationFrame = function (id) {
+        window.cancelAnimationFrame = function(id) {
             clearTimeout(id);
         };
     }
 }());
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -2658,21 +2656,21 @@ if (typeof Object.create !== 'function') {
 
         parent.filterLayout = t.filterLayout;
 
-        parent.registerEvent('computeBlocksFinish', function (expression) {
+        parent.registerEvent('computeBlocksFinish', function(expression) {
             parent.blocksOn2On = parent.blocksOnInitial.filter(expression);
             parent.blocksOn2Off = parent.blocksOnInitial.not(expression);
         });
     }
 
     // here this value point to parent grid
-    Plugin.prototype.filterLayout = function () {
+    Plugin.prototype.filterLayout = function() {
         var t = this;
 
         t.$obj.addClass('cbp-animation-' + t.options.animationType);
 
         // [1] - blocks that are only moving with translate
         t.blocksOn2On.addClass('cbp-item-on2on')
-            .each(function (index, el) {
+            .each(function(index, el) {
                 var data = $(el).data('cbp');
                 el.style[CubePortfolio.private.transform] = 'translate3d(' + (data.leftNew - data.left) + 'px, ' + (data.topNew - data.top) + 'px, 0)';
             });
@@ -2685,7 +2683,7 @@ if (typeof Object.create !== 'function') {
             .filter('.cbp-item-off')
             .removeClass('cbp-item-off')
             .addClass('cbp-item-off2on')
-            .each(function (index, el) {
+            .each(function(index, el) {
                 var data = $(el).data('cbp');
 
                 el.style.left = data.leftNew + 'px';
@@ -2705,7 +2703,7 @@ if (typeof Object.create !== 'function') {
 
         function animationend() {
             t.blocks.removeClass('cbp-item-on2off cbp-item-off2on cbp-item-on2on')
-                .each(function (index, el) {
+                .each(function(index, el) {
                     var data = $(el).data('cbp');
 
                     data.left = data.leftNew;
@@ -2725,12 +2723,12 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         var parent = this.parent;
         parent.$obj.removeClass('cbp-animation-' + parent.options.animationType);
     };
 
-    CubePortfolio.plugins.animationClassic = function (parent) {
+    CubePortfolio.plugins.animationClassic = function(parent) {
         if (!CubePortfolio.private.modernBrowser || $.inArray(parent.options.animationType, ['boxShadow', 'fadeOut', 'flipBottom', 'flipOut', 'quicksand', 'scaleSides', 'skew']) < 0) {
             return null;
         }
@@ -2738,7 +2736,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -2752,20 +2750,20 @@ if (typeof Object.create !== 'function') {
     }
 
     // here this value point to parent grid
-    Plugin.prototype.filterLayout = function () {
+    Plugin.prototype.filterLayout = function() {
         var t = this,
             ulClone = t.$ul[0].cloneNode(true);
 
         ulClone.setAttribute('class', 'cbp-wrapper-helper');
         t.wrapper[0].insertBefore(ulClone, t.$ul[0]);
 
-        requestAnimationFrame(function () {
+        requestAnimationFrame(function() {
             t.$obj.addClass('cbp-animation-' + t.options.animationType);
 
             t.blocksOff.addClass('cbp-item-off');
 
             t.blocksOn.removeClass('cbp-item-off')
-                .each(function (index, el) {
+                .each(function(index, el) {
                     var data = $(el).data('cbp');
 
                     data.left = data.leftNew;
@@ -2795,7 +2793,7 @@ if (typeof Object.create !== 'function') {
             t.wrapper[0].removeChild(ulClone);
 
             if (t.options.animationType === 'sequentially') {
-                t.blocksOn.each(function (index, el) {
+                t.blocksOn.each(function(index, el) {
                     $(el).data('cbp').wrapper[0].style[CubePortfolio.private.animationDelay] = '';
                 });
             }
@@ -2806,12 +2804,12 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         var parent = this.parent;
         parent.$obj.removeClass('cbp-animation-' + parent.options.animationType);
     };
 
-    CubePortfolio.plugins.animationClone = function (parent) {
+    CubePortfolio.plugins.animationClone = function(parent) {
         if (!CubePortfolio.private.modernBrowser || $.inArray(parent.options.animationType, ['fadeOutTop', 'slideLeft', 'sequentially']) < 0) {
             return null;
         }
@@ -2819,7 +2817,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -2833,7 +2831,7 @@ if (typeof Object.create !== 'function') {
     }
 
     // here this value point to parent grid
-    Plugin.prototype.filterLayout = function () {
+    Plugin.prototype.filterLayout = function() {
         var t = this,
             ulClone = t.$ul.clone(true, true);
 
@@ -2844,17 +2842,17 @@ if (typeof Object.create !== 'function') {
         // on cbp-item-wrapper before I clone the t.$ul
         var items = ulClone.find('.cbp-item').not('.cbp-item-off');
         t.sortBlocks(items, 'top');
-        items.children('.cbp-item-wrapper').each(function (index, el) {
+        items.children('.cbp-item-wrapper').each(function(index, el) {
             el.style[CubePortfolio.private.animationDelay] = (index * 50) + 'ms';
         });
 
-        requestAnimationFrame(function () {
+        requestAnimationFrame(function() {
             t.$obj.addClass('cbp-animation-' + t.options.animationType);
 
             t.blocksOff.addClass('cbp-item-off');
 
             t.blocksOn.removeClass('cbp-item-off')
-                .each(function (index, el) {
+                .each(function(index, el) {
                     var data = $(el).data('cbp');
 
                     data.left = data.leftNew;
@@ -2886,7 +2884,7 @@ if (typeof Object.create !== 'function') {
 
             t.$obj.removeClass('cbp-animation-' + t.options.animationType);
 
-            t.blocks.each(function (index, el) {
+            t.blocks.each(function(index, el) {
                 $(el).data('cbp').wrapper[0].style[CubePortfolio.private.animationDelay] = '';
             });
 
@@ -2894,12 +2892,12 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         var parent = this.parent;
         parent.$obj.removeClass('cbp-animation-' + parent.options.animationType);
     };
 
-    CubePortfolio.plugins.animationCloneDelay = function (parent) {
+    CubePortfolio.plugins.animationCloneDelay = function(parent) {
         if (!CubePortfolio.private.modernBrowser || $.inArray(parent.options.animationType, ['3dflip', 'flipOutDelay', 'foldLeft', 'frontRow', 'rotateRoom', 'rotateSides', 'scaleDown', 'slideDelay', 'unfold']) < 0) {
             return null;
         }
@@ -2907,7 +2905,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -2921,20 +2919,20 @@ if (typeof Object.create !== 'function') {
     }
 
     // here this value point to parent grid
-    Plugin.prototype.filterLayout = function () {
+    Plugin.prototype.filterLayout = function() {
         var t = this,
             ulClone = t.$ul[0].cloneNode(true);
 
         ulClone.setAttribute('class', 'cbp-wrapper-helper');
         t.wrapper[0].insertBefore(ulClone, t.$ul[0]);
 
-        requestAnimationFrame(function () {
+        requestAnimationFrame(function() {
             t.$obj.addClass('cbp-animation-' + t.options.animationType);
 
             t.blocksOff.addClass('cbp-item-off');
 
             t.blocksOn.removeClass('cbp-item-off')
-                .each(function (index, el) {
+                .each(function(index, el) {
                     var data = $(el).data('cbp');
 
                     data.left = data.leftNew;
@@ -2965,12 +2963,12 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         var parent = this.parent;
         parent.$obj.removeClass('cbp-animation-' + parent.options.animationType);
     };
 
-    CubePortfolio.plugins.animationWrapper = function (parent) {
+    CubePortfolio.plugins.animationWrapper = function(parent) {
         if (!CubePortfolio.private.modernBrowser || $.inArray(parent.options.animationType, ['bounceBottom', 'bounceLeft', 'bounceTop', 'moveLeft']) < 0) {
             return null;
         }
@@ -2978,7 +2976,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -2991,7 +2989,7 @@ if (typeof Object.create !== 'function') {
 
         t.captionOn = options.caption;
 
-        parent.registerEvent('onMediaQueries', function (opt) {
+        parent.registerEvent('onMediaQueries', function(opt) {
             if (opt && opt.hasOwnProperty('caption')) {
                 if (t.captionOn !== opt.caption) {
                     t.destroy();
@@ -3008,7 +3006,7 @@ if (typeof Object.create !== 'function') {
         t.init();
     }
 
-    Plugin.prototype.init = function () {
+    Plugin.prototype.init = function() {
         var t = this;
 
         // if caption is active
@@ -3025,15 +3023,15 @@ if (typeof Object.create !== 'function') {
         t.parent.$obj.addClass('cbp-caption-active cbp-caption-' + t.captionOn);
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         this.parent.$obj.removeClass('cbp-caption-active cbp-caption-' + this.captionOn);
     };
 
-    CubePortfolio.plugins.caption = function (parent) {
+    CubePortfolio.plugins.caption = function(parent) {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -3043,8 +3041,8 @@ if (typeof Object.create !== 'function') {
 
         t.parent = parent;
 
-        parent.registerEvent('initFinish', function () {
-            parent.$obj.on('click.cbp', '.cbp-caption-defaultWrap', function (e) {
+        parent.registerEvent('initFinish', function() {
+            parent.$obj.on('click.cbp', '.cbp-caption-defaultWrap', function(e) {
                 e.preventDefault();
 
                 if (parent.isAnimating) {
@@ -3077,7 +3075,7 @@ if (typeof Object.create !== 'function') {
 
                 activeWrap.css(endStyle);
 
-                parent.$obj.one('pluginResize.cbp', function () {
+                parent.$obj.one('pluginResize.cbp', function() {
                     parent.isAnimating = false;
                     parent.$obj.removeClass('cbp-caption-expand-active');
 
@@ -3094,7 +3092,7 @@ if (typeof Object.create !== 'function') {
                 activeWrap.css(startStyle);
 
                 // delay animation
-                requestAnimationFrame(function () {
+                requestAnimationFrame(function() {
                     caption.addClass('cbp-caption-expand-open');
 
                     activeWrap.css(endStyle);
@@ -3108,11 +3106,11 @@ if (typeof Object.create !== 'function') {
         }, true);
     }
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         this.parent.$obj.find('.cbp-caption-defaultWrap').off('click.cbp').parent().removeClass('cbp-caption-expand-active');
     };
 
-    CubePortfolio.plugins.captionExpand = function (parent) {
+    CubePortfolio.plugins.captionExpand = function(parent) {
         if (parent.options.caption !== 'expand') {
             return null;
         }
@@ -3120,7 +3118,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -3130,18 +3128,18 @@ if (typeof Object.create !== 'function') {
 
         parent.pushQueue('delayFrame', deferred);
 
-        parent.registerEvent('initEndWrite', function () {
-            parent.blocksOn.each(function (index, el) {
+        parent.registerEvent('initEndWrite', function() {
+            parent.blocksOn.each(function(index, el) {
                 el.style[CubePortfolio.private.animationDelay] = (index * parent.options.displayTypeSpeed) + 'ms';
             });
 
             parent.$obj.addClass('cbp-displayType-bottomToTop');
 
             // get last element
-            parent.blocksOn.last().one(CubePortfolio.private.animationend, function () {
+            parent.blocksOn.last().one(CubePortfolio.private.animationend, function() {
                 parent.$obj.removeClass('cbp-displayType-bottomToTop');
 
-                parent.blocksOn.each(function (index, el) {
+                parent.blocksOn.each(function(index, el) {
                     el.style[CubePortfolio.private.animationDelay] = '';
                 });
 
@@ -3151,7 +3149,7 @@ if (typeof Object.create !== 'function') {
         }, true);
     }
 
-    CubePortfolio.plugins.displayBottomToTop = function (parent) {
+    CubePortfolio.plugins.displayBottomToTop = function(parent) {
         if (!CubePortfolio.private.modernBrowser || parent.options.displayType !== 'bottomToTop' || parent.blocksOn.length === 0) {
             return null;
         }
@@ -3159,7 +3157,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -3169,12 +3167,12 @@ if (typeof Object.create !== 'function') {
 
         parent.pushQueue('delayFrame', deferred);
 
-        parent.registerEvent('initEndWrite', function () {
+        parent.registerEvent('initEndWrite', function() {
             parent.obj.style[CubePortfolio.private.animationDuration] = parent.options.displayTypeSpeed + 'ms';
 
             parent.$obj.addClass('cbp-displayType-fadeIn');
 
-            parent.$obj.one(CubePortfolio.private.animationend, function () {
+            parent.$obj.one(CubePortfolio.private.animationend, function() {
                 parent.$obj.removeClass('cbp-displayType-fadeIn');
 
                 parent.obj.style[CubePortfolio.private.animationDuration] = '';
@@ -3185,7 +3183,7 @@ if (typeof Object.create !== 'function') {
         }, true);
     }
 
-    CubePortfolio.plugins.displayFadeIn = function (parent) {
+    CubePortfolio.plugins.displayFadeIn = function(parent) {
         if (!CubePortfolio.private.modernBrowser || (parent.options.displayType !== 'lazyLoading' && parent.options.displayType !== 'fadeIn') || parent.blocksOn.length === 0) {
             return null;
         }
@@ -3193,7 +3191,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -3203,12 +3201,12 @@ if (typeof Object.create !== 'function') {
 
         parent.pushQueue('delayFrame', deferred);
 
-        parent.registerEvent('initEndWrite', function () {
+        parent.registerEvent('initEndWrite', function() {
             parent.obj.style[CubePortfolio.private.animationDuration] = parent.options.displayTypeSpeed + 'ms';
 
             parent.$obj.addClass('cbp-displayType-fadeInToTop');
 
-            parent.$obj.one(CubePortfolio.private.animationend, function () {
+            parent.$obj.one(CubePortfolio.private.animationend, function() {
                 parent.$obj.removeClass('cbp-displayType-fadeInToTop');
 
                 parent.obj.style[CubePortfolio.private.animationDuration] = '';
@@ -3219,7 +3217,7 @@ if (typeof Object.create !== 'function') {
         }, true);
     }
 
-    CubePortfolio.plugins.displayFadeInToTop = function (parent) {
+    CubePortfolio.plugins.displayFadeInToTop = function(parent) {
         if (!CubePortfolio.private.modernBrowser || parent.options.displayType !== 'fadeInToTop' || parent.blocksOn.length === 0) {
             return null;
         }
@@ -3227,7 +3225,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -3237,18 +3235,18 @@ if (typeof Object.create !== 'function') {
 
         parent.pushQueue('delayFrame', deferred);
 
-        parent.registerEvent('initEndWrite', function () {
-            parent.blocksOn.each(function (index, el) {
+        parent.registerEvent('initEndWrite', function() {
+            parent.blocksOn.each(function(index, el) {
                 el.style[CubePortfolio.private.animationDelay] = (index * parent.options.displayTypeSpeed) + 'ms';
             });
 
             parent.$obj.addClass('cbp-displayType-sequentially');
 
             // get last element
-            parent.blocksOn.last().one(CubePortfolio.private.animationend, function () {
+            parent.blocksOn.last().one(CubePortfolio.private.animationend, function() {
                 parent.$obj.removeClass('cbp-displayType-sequentially');
 
-                parent.blocksOn.each(function (index, el) {
+                parent.blocksOn.each(function(index, el) {
                     el.style[CubePortfolio.private.animationDelay] = '';
                 });
 
@@ -3258,7 +3256,7 @@ if (typeof Object.create !== 'function') {
         }, true);
     }
 
-    CubePortfolio.plugins.displaySequentially = function (parent) {
+    CubePortfolio.plugins.displaySequentially = function(parent) {
         if (!CubePortfolio.private.modernBrowser || parent.options.displayType !== 'sequentially' || parent.blocksOn.length === 0) {
             return null;
         }
@@ -3266,7 +3264,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -3279,20 +3277,20 @@ if (typeof Object.create !== 'function') {
         t.filters = $(parent.options.filters);
         t.filterData = [];
 
-        parent.registerEvent('afterPlugins', function (elems) {
+        parent.registerEvent('afterPlugins', function(elems) {
             // set default filter if it's present in url
             t.filterFromUrl();
             t.registerFilter();
         });
 
         // reset filters active class after the search is used
-        parent.registerEvent('resetFiltersVisual', function () {
+        parent.registerEvent('resetFiltersVisual', function() {
             var arr = parent.options.defaultFilter.split('|');
 
-            t.filters.each(function (index, el) {
+            t.filters.each(function(index, el) {
                 var items = $(el).find('.cbp-filter-item');
 
-                $.each(arr, function (index, val) {
+                $.each(arr, function(index, val) {
                     var item = items.filter('[data-filter="' + val + '"]');
                     if (item.length) {
                         item.addClass('cbp-filter-item-active').siblings().removeClass('cbp-filter-item-active');
@@ -3306,7 +3304,7 @@ if (typeof Object.create !== 'function') {
         });
     }
 
-    Plugin.prototype.registerFilter = function () {
+    Plugin.prototype.registerFilter = function() {
         var t = this,
             parent = t.parent,
             filtersCallback,
@@ -3314,15 +3312,15 @@ if (typeof Object.create !== 'function') {
 
         t.wrap = t.filters.find('.cbp-l-filters-dropdownWrap')
             .on({
-                'mouseover.cbp': function () {
+                'mouseover.cbp': function() {
                     $(this).addClass('cbp-l-filters-dropdownWrap-open');
                 },
-                'mouseleave.cbp': function () {
+                'mouseleave.cbp': function() {
                     $(this).removeClass('cbp-l-filters-dropdownWrap-open');
                 }
             });
 
-        t.filters.each(function (index, el) {
+        t.filters.each(function(index, el) {
             var filter = $(el),
                 filterName = '*',
                 items = filter.find('.cbp-filter-item'),
@@ -3337,7 +3335,7 @@ if (typeof Object.create !== 'function') {
             // activate counter for filters
             parent.$obj.cubeportfolio('showCounter', items);
 
-            $.each(arr, function (index, val) {
+            $.each(arr, function(index, val) {
                 if (items.filter('[data-filter="' + val + '"]').length) {
                     filterName = val;
                     arr.splice(index, 1);
@@ -3350,7 +3348,7 @@ if (typeof Object.create !== 'function') {
 
             t.filtersCallback(dropdown, items.filter('[data-filter="' + filterName + '"]'));
 
-            items.on('click.cbp', function () {
+            items.on('click.cbp', function() {
                 var item = $(this);
 
                 if (item.hasClass('cbp-filter-item-active') || parent.isAnimating) {
@@ -3361,7 +3359,7 @@ if (typeof Object.create !== 'function') {
 
                 $.data(el, 'filterName', item.data('filter'));
 
-                var name = $.map(t.filterData, function (el, index) {
+                var name = $.map(t.filterData, function(el, index) {
                     var f = $.data(el, 'filterName');
                     return (f !== "" && f !== '*') ? f : null;
                 });
@@ -3380,7 +3378,7 @@ if (typeof Object.create !== 'function') {
         });
     };
 
-    Plugin.prototype.filtersCallback = function (dropdown, item) {
+    Plugin.prototype.filtersCallback = function(dropdown, item) {
         if (!$.isEmptyObject(dropdown)) {
             dropdown.wrap.trigger('mouseleave.cbp');
 
@@ -3397,7 +3395,7 @@ if (typeof Object.create !== 'function') {
     /**
      * Check if filters are present in url
      */
-    Plugin.prototype.filterFromUrl = function () {
+    Plugin.prototype.filterFromUrl = function() {
         var match = /#cbpf=(.*?)([#\?&]|$)/gi.exec(location.href);
 
         if (match !== null) {
@@ -3405,14 +3403,14 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         var t = this;
 
         t.filters.find('.cbp-filter-item').off('.cbp');
         t.wrap.off('.cbp');
     };
 
-    CubePortfolio.plugins.filters = function (parent) {
+    CubePortfolio.plugins.filters = function(parent) {
         if (parent.options.filters === '') {
             return null;
         }
@@ -3420,7 +3418,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -3429,11 +3427,11 @@ if (typeof Object.create !== 'function') {
         var gapVerticalInitial = parent.options.gapVertical;
         var gapHorizontalInitial = parent.options.gapHorizontal;
 
-        parent.registerEvent('onMediaQueries', function (opt) {
-            parent.options.gapVertical = (opt && opt.hasOwnProperty('gapVertical')) ? opt.gapVertical : gapVerticalInitial;
-            parent.options.gapHorizontal = (opt && opt.hasOwnProperty('gapHorizontal')) ? opt.gapHorizontal : gapHorizontalInitial;
+        parent.registerEvent('onMediaQueries', function(opt) {
+            parent.options.gapVertical = (opt && opt.hasOwnProperty('gapVertical'))? opt.gapVertical : gapVerticalInitial;
+            parent.options.gapHorizontal = (opt && opt.hasOwnProperty('gapHorizontal'))? opt.gapHorizontal : gapHorizontalInitial;
 
-            parent.blocks.each(function (index, el) {
+            parent.blocks.each(function(index, el) {
                 var data = $(el).data('cbp');
 
                 data.widthAndGap = data.width + parent.options.gapVertical;
@@ -3442,11 +3440,11 @@ if (typeof Object.create !== 'function') {
         });
     }
 
-    CubePortfolio.plugins.changeGapOnMediaQueries = function (parent) {
+    CubePortfolio.plugins.changeGapOnMediaQueries = function(parent) {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var options = {};
@@ -3462,7 +3460,7 @@ if (typeof Object.create !== 'function') {
 
         t.runInit();
 
-        parent.registerEvent('addItemsToDOM', function () {
+        parent.registerEvent('addItemsToDOM', function() {
             t.runInit();
         });
 
@@ -3484,7 +3482,7 @@ if (typeof Object.create !== 'function') {
 
         t.updateLeft();
 
-        slider.find('.cbp-slider-next').on('click.cbp', function (e) {
+        slider.find('.cbp-slider-next').on('click.cbp', function(e) {
             e.preventDefault();
 
             if (t.active < t.total) {
@@ -3496,7 +3494,7 @@ if (typeof Object.create !== 'function') {
             }
         });
 
-        slider.find('.cbp-slider-prev').on('click.cbp', function (e) {
+        slider.find('.cbp-slider-prev').on('click.cbp', function(e) {
             e.preventDefault();
 
             if (t.active > 0) {
@@ -3509,26 +3507,26 @@ if (typeof Object.create !== 'function') {
         });
     };
 
-    InitSlider.prototype.updateLeft = function () {
+    InitSlider.prototype.updateLeft = function() {
         var t = this;
 
         t.items.removeClass('cbp-slider-item--active');
         t.items.eq(t.active).addClass('cbp-slider-item--active');
 
-        t.items.each(function (index, el) {
+        t.items.each(function(index, el) {
             el.style.left = (index - t.active) + '00%';
         });
     };
 
-    Plugin.prototype.runInit = function () {
+    Plugin.prototype.runInit = function() {
         var t = this;
 
-        t.parent.$obj.find('.cbp-slider-inline').not('.cbp-slider-inline-ready').each(function (index, el) {
+        t.parent.$obj.find('.cbp-slider-inline').not('.cbp-slider-inline-ready').each(function(index, el) {
             var slider = $(el);
             var activeImage = slider.find('.cbp-slider-item--active').find('img')[0];
 
             if (activeImage.hasAttribute('data-cbp-src')) {
-                t.parent.$obj.on('lazyLoad.cbp', function (e, image) {
+                t.parent.$obj.on('lazyLoad.cbp', function(e, image) {
                     if (image.src === activeImage.src) {
                         new InitSlider(slider);
                     }
@@ -3539,7 +3537,7 @@ if (typeof Object.create !== 'function') {
         });
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         var t = this;
 
         t.parent.$obj.find('.cbp-slider-next').off('click.cbp');
@@ -3547,7 +3545,7 @@ if (typeof Object.create !== 'function') {
 
         t.parent.$obj.off('lazyLoad.cbp');
 
-        t.parent.$obj.find('.cbp-slider-inline').each(function (index, el) {
+        t.parent.$obj.find('.cbp-slider-inline').each(function(index, el) {
             var slider = $(el);
 
             slider.removeClass('cbp-slider-inline-ready');
@@ -3561,11 +3559,11 @@ if (typeof Object.create !== 'function') {
         });
     };
 
-    CubePortfolio.plugins.inlineSlider = function (parent) {
+    CubePortfolio.plugins.inlineSlider = function(parent) {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var options = {
@@ -3586,14 +3584,14 @@ if (typeof Object.create !== 'function') {
 
         t.options = $.extend({}, options, t.parent.options.plugins.lazyLoad);
 
-        parent.registerEvent('initFinish', function () {
+        parent.registerEvent('initFinish', function() {
             t.loadImages();
 
-            parent.registerEvent('resizeMainContainer', function () {
+            parent.registerEvent('resizeMainContainer', function() {
                 t.loadImages();
             });
 
-            parent.registerEvent('filterFinish', function () {
+            parent.registerEvent('filterFinish', function() {
                 t.loadImages();
             });
 
@@ -3605,7 +3603,7 @@ if (typeof Object.create !== 'function') {
 
     }
 
-    Plugin.prototype.loadImages = function () {
+    Plugin.prototype.loadImages = function() {
         var t = this;
 
         var imgs = t.parent.$obj.find('img').filter('[data-cbp-src]');
@@ -3616,7 +3614,7 @@ if (typeof Object.create !== 'function') {
 
         t.screenHeight = $window.height();
 
-        imgs.each(function (index, el) {
+        imgs.each(function(index, el) {
             var parentNode = $(el.parentNode);
 
             if (!t.isElementInScreen(el)) {
@@ -3631,14 +3629,14 @@ if (typeof Object.create !== 'function') {
                 parentNode.removeClass(t.options.loadingClass);
             } else {
                 parentNode.addClass(t.options.loadingClass);
-                $('<img>').on('load.cbp error.cbp', function () {
+                $('<img>').on('load.cbp error.cbp', function() {
                     t.removeLazyLoad(el, dataSrc, parentNode);
                 }).attr('src', dataSrc); // for ie8
             }
         });
     };
 
-    Plugin.prototype.removeLazyLoad = function (el, dataSrc, parentNode) {
+    Plugin.prototype.removeLazyLoad = function(el, dataSrc, parentNode) {
         var t = this;
 
         el.src = dataSrc;
@@ -3650,7 +3648,7 @@ if (typeof Object.create !== 'function') {
 
         if (parentNode) {
             if (CubePortfolio.private.modernBrowser) {
-                $(el).one(CubePortfolio.private.transitionend, function () {
+                $(el).one(CubePortfolio.private.transitionend, function() {
                     parentNode.removeClass(t.options.loadingClass);
                 });
             } else {
@@ -3659,7 +3657,7 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    Plugin.prototype.isElementInScreen = function (el) {
+    Plugin.prototype.isElementInScreen = function(el) {
         var t = this;
 
         var bound = el.getBoundingClientRect();
@@ -3669,15 +3667,15 @@ if (typeof Object.create !== 'function') {
         return bottom >= 0 && bottom <= screenHeight;
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         CubePortfolio.private.lazyLoadScroll.destroyEvent(this);
     };
 
-    CubePortfolio.plugins.lazyLoad = function (parent) {
+    CubePortfolio.plugins.lazyLoad = function(parent) {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var options = {
@@ -3723,8 +3721,8 @@ if (typeof Object.create !== 'function') {
             t.loadMore.addClass('cbp-l-loadMore-stop');
         }
 
-        parent.registerEvent('filterStart', function (filter) {
-            t.populateItems().then(function () {
+        parent.registerEvent('filterStart', function(filter) {
+            t.populateItems().then(function() {
                 var itemsLen = t.items.filter(filter).length;
 
                 if (itemsLen > 0) {
@@ -3739,7 +3737,7 @@ if (typeof Object.create !== 'function') {
         t[t.options.action]();
     }
 
-    Plugin.prototype.populateItems = function () {
+    Plugin.prototype.populateItems = function() {
         var t = this;
 
         if (t.items) {
@@ -3753,8 +3751,8 @@ if (typeof Object.create !== 'function') {
             url: t.loadMore.attr('href'),
             type: 'GET',
             dataType: 'HTML'
-        }).done(function (result) {
-            var resultFlat = $.map(result.split(/\r?\n/), function (item, index) {
+        }).done(function(result) {
+            var resultFlat = $.map(result.split(/\r?\n/), function(item, index) {
                 return $.trim(item);
             }).join('');
 
@@ -3762,30 +3760,30 @@ if (typeof Object.create !== 'function') {
                 return;
             }
 
-            $.each($.parseHTML(resultFlat), function (index, el) {
+            $.each($.parseHTML(resultFlat), function(index, el) {
                 if ($(el).hasClass('cbp-item')) {
                     t.items = t.items.add(el);
                 } else {
-                    $.each(el.children, function (index, el2) {
+                    $.each(el.children, function(index, el2) {
                         if ($(el2).hasClass('cbp-item')) {
                             t.items = t.items.add(el2);
                         }
                     });
                 }
             });
-        }).fail(function () {
+        }).fail(function() {
             t.items = null;
             t.loadMore.removeClass('cbp-l-loadMore-loading');
         });
     };
 
-    Plugin.prototype.populateInsertItems = function (callback) {
+    Plugin.prototype.populateInsertItems = function(callback) {
         var t = this;
         var insertItems = [];
         var filter = t.parent.defaultFilter;
 
         var foundItem = 0;
-        t.items.each(function (index, el) {
+        t.items.each(function(index, el) {
             if (foundItem === t.options.loadItems) {
                 return false;
             }
@@ -3805,7 +3803,7 @@ if (typeof Object.create !== 'function') {
             }
         });
 
-        t.items = t.items.map(function (index, el) {
+        t.items = t.items.map(function(index, el) {
             return el;
         });
 
@@ -3818,10 +3816,10 @@ if (typeof Object.create !== 'function') {
         t.parent.$obj.cubeportfolio('append', insertItems, callback);
     }
 
-    Plugin.prototype.click = function () {
+    Plugin.prototype.click = function() {
         var t = this;
 
-        t.loadMore.on('click.cbp', function (e) {
+        t.loadMore.on('click.cbp', function(e) {
             e.preventDefault();
 
             if (t.parent.isAnimating || t.loadMore.hasClass('cbp-l-loadMore-stop')) {
@@ -3831,7 +3829,7 @@ if (typeof Object.create !== 'function') {
             // set loading status
             t.loadMore.addClass('cbp-l-loadMore-loading');
 
-            t.populateItems().then(function () {
+            t.populateItems().then(function() {
                 t.populateInsertItems(appendCallback);
             });
         });
@@ -3858,7 +3856,7 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    Plugin.prototype.auto = function () {
+    Plugin.prototype.auto = function() {
         var t = this;
         var $window = $(window);
         var isActive = false;
@@ -3866,17 +3864,17 @@ if (typeof Object.create !== 'function') {
         // add scroll event to page for loadMore
         CubePortfolio.private.loadMoreScroll = new CubePortfolio.private.publicEvents('scroll.loadMore', 100);
 
-        t.parent.$obj.one('initComplete.cbp', function () {
+        t.parent.$obj.one('initComplete.cbp', function() {
             // add events for scroll
             t.loadMore
                 .addClass('cbp-l-loadMore-loading')
-                .on('click.cbp', function (e) {
+                .on('click.cbp', function(e) {
                     e.preventDefault();
                 });
 
             CubePortfolio.private.loadMoreScroll.initEvent({
                 instance: t,
-                fn: function () {
+                fn: function() {
                     if (!t.parent.isAnimating) {
                         // get new items on scroll
                         getNewItems();
@@ -3885,7 +3883,7 @@ if (typeof Object.create !== 'function') {
             });
 
             // when the filter is completed
-            t.parent.$obj.on('filterComplete.cbp', function () {
+            t.parent.$obj.on('filterComplete.cbp', function() {
                 getNewItems();
             });
 
@@ -3909,9 +3907,9 @@ if (typeof Object.create !== 'function') {
             // this job is now busy
             isActive = true;
 
-            t.populateItems().then(function () {
+            t.populateItems().then(function() {
                 t.populateInsertItems(appendCallback);
-            }).fail(function () {
+            }).fail(function() {
                 // make the job inactive
                 isActive = false;
             });
@@ -3947,7 +3945,7 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         this.loadMore.off('.cbp');
 
         if (CubePortfolio.private.loadMoreScroll) {
@@ -3955,7 +3953,7 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    CubePortfolio.plugins.loadMore = function (parent) {
+    CubePortfolio.plugins.loadMore = function(parent) {
         var plugins = parent.options.plugins;
 
         // backward compatibility
@@ -3983,7 +3981,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -3998,7 +3996,7 @@ if (typeof Object.create !== 'function') {
          * @param cubeportfolio = cubeportfolio instance
          * @param type =  'lightbox' or 'singlePage'
          */
-        init: function (cubeportfolio, type) {
+        init: function(cubeportfolio, type) {
             var t = this,
                 currentBlock;
 
@@ -4014,7 +4012,7 @@ if (typeof Object.create !== 'function') {
             t.options = t.cubeportfolio.options;
 
             if (type === 'lightbox') {
-                t.cubeportfolio.registerEvent('resizeWindow', function () {
+                t.cubeportfolio.registerEvent('resizeWindow', function() {
                     t.resizeImage();
                 });
 
@@ -4027,7 +4025,7 @@ if (typeof Object.create !== 'function') {
                 // create markup, css and add events for SinglePageInline
                 t.createMarkupSinglePageInline();
 
-                t.cubeportfolio.registerEvent('resizeGrid', function () {
+                t.cubeportfolio.registerEvent('resizeGrid', function() {
                     if (t.isOpen) {
                         // @todo must add support for this features in the future
                         t.close(); // workaround
@@ -4044,8 +4042,8 @@ if (typeof Object.create !== 'function') {
                     var links = t.url.split('#cbpi=');
                     var url = links.shift(); // remove first item
 
-                    $.each(links, function (index, link) {
-                        t.cubeportfolio.blocksOn.each(function (index1, el) {
+                    $.each(links, function(index, link) {
+                        t.cubeportfolio.blocksOn.each(function(index1, el) {
                             var singlePageInline = $(el).find(t.options.singlePageInlineDelegate + '[href="' + link + '"]');
 
                             if (singlePageInline.length) {
@@ -4060,7 +4058,7 @@ if (typeof Object.create !== 'function') {
                     });
 
                     if (currentBlock) {
-                        t.cubeportfolio.registerEvent('initFinish', function () {
+                        t.cubeportfolio.registerEvent('initFinish', function() {
                             t.openSinglePageInline(t.cubeportfolio.blocksOn, currentBlock[0]);
                         }, true);
                     }
@@ -4075,7 +4073,7 @@ if (typeof Object.create !== 'function') {
             t.createMarkup();
 
             if (type === 'singlePage') {
-                t.cubeportfolio.registerEvent('resizeWindow', function () {
+                t.cubeportfolio.registerEvent('resizeWindow', function() {
                     if (t.options.singlePageStickyNavigation) {
 
                         var width = t.contentWrap[0].clientWidth;
@@ -4100,8 +4098,8 @@ if (typeof Object.create !== 'function') {
                     var links = t.url.split('#cbp=');
                     var url = links.shift(); // remove first item
 
-                    $.each(links, function (index, link) {
-                        t.cubeportfolio.blocksOn.each(function (index1, el) {
+                    $.each(links, function(index, link) {
+                        t.cubeportfolio.blocksOn.each(function(index1, el) {
                             var singlePage = $(el).find(t.options.singlePageDelegate + '[href="' + link + '"]');
 
                             if (singlePage.length) {
@@ -4125,11 +4123,11 @@ if (typeof Object.create !== 'function') {
                         if (gallery) {
                             blocks = self.closest($('.cbp-item')).find('[data-cbp-singlePage="' + gallery + '"]');
                         } else {
-                            t.cubeportfolio.blocksOn.each(function (index, el) {
+                            t.cubeportfolio.blocksOn.each(function(index, el) {
                                 var item = $(el);
 
                                 if (item.not('.cbp-item-off')) {
-                                    item.find(t.options.singlePageDelegate).each(function (index2, el2) {
+                                    item.find(t.options.singlePageDelegate).each(function(index2, el2) {
                                         if (!$(el2).attr('data-cbp-singlePage')) {
                                             blocks.push(el2);
                                         }
@@ -4153,7 +4151,7 @@ if (typeof Object.create !== 'function') {
         /**
          * Create markup, css and add events
          */
-        createMarkup: function () {
+        createMarkup: function() {
             var t = this,
                 animationCls = '';
 
@@ -4167,7 +4165,7 @@ if (typeof Object.create !== 'function') {
             t.wrap = $('<div/>', {
                 'class': 'cbp-popup-wrap cbp-popup-' + t.type + animationCls,
                 'data-action': (t.type === 'lightbox') ? 'close' : ''
-            }).on('click.cbp', function (e) {
+            }).on('click.cbp', function(e) {
                 if (t.stopEvents) {
                     return;
                 }
@@ -4267,7 +4265,7 @@ if (typeof Object.create !== 'function') {
                     t.counter.text('');
                 }
 
-                t.content.on('click.cbp', t.options.singlePageDelegate, function (e) {
+                t.content.on('click.cbp', t.options.singlePageDelegate, function(e) {
                     e.preventDefault();
 
                     var i,
@@ -4305,12 +4303,12 @@ if (typeof Object.create !== 'function') {
                 });
 
                 // if there are some events than overrides the default scroll behaviour don't go to them
-                t.contentWrap.on('mousewheel.cbp' + ' DOMMouseScroll.cbp', function (e) {
+                t.contentWrap.on('mousewheel.cbp' + ' DOMMouseScroll.cbp', function(e) {
                     e.stopImmediatePropagation();
                 });
             }
 
-            $(document).on('keydown.cbp', function (e) {
+            $(document).on('keydown.cbp', function(e) {
                 // if is not open => return
                 if (!t.isOpen) {
                     return;
@@ -4335,13 +4333,13 @@ if (typeof Object.create !== 'function') {
             });
         },
 
-        createMarkupSinglePageInline: function () {
+        createMarkupSinglePageInline: function() {
             var t = this;
 
             // wrap element
             t.wrap = $('<div/>', {
                 'class': 'cbp-popup-singlePageInline'
-            }).on('click.cbp', function (e) {
+            }).on('click.cbp', function(e) {
                 if (t.stopEvents) {
                     return;
                 }
@@ -4377,7 +4375,7 @@ if (typeof Object.create !== 'function') {
             }).appendTo(t.navigation);
         },
 
-        destroy: function () {
+        destroy: function() {
             var t = this,
                 body = $('body');
 
@@ -4401,7 +4399,7 @@ if (typeof Object.create !== 'function') {
             t.wrap.remove();
         },
 
-        openLightbox: function (blocks, currentBlock) {
+        openLightbox: function(blocks, currentBlock) {
             var t = this,
                 i = 0,
                 currentBlockHref, tempHref = [],
@@ -4430,7 +4428,7 @@ if (typeof Object.create !== 'function') {
                 throw new Error('HEI! Your clicked element doesn\'t have a href attribute.');
             }
 
-            $.each(blocks, function (index, item) {
+            $.each(blocks, function(index, item) {
                 var href = item.getAttribute('href'),
                     src = href, // default if element is image
                     type = 'isImage', // default if element is image
@@ -4549,7 +4547,7 @@ if (typeof Object.create !== 'function') {
             t[element.type](element);
         },
 
-        openSinglePage: function (blocks, currentBlock) {
+        openSinglePage: function(blocks, currentBlock) {
             var t = this,
                 i = 0,
                 currentBlockHref, tempHref = [];
@@ -4580,7 +4578,7 @@ if (typeof Object.create !== 'function') {
                 throw new Error('HEI! Your clicked element doesn\'t have a href attribute.');
             }
 
-            $.each(blocks, function (index, item) {
+            $.each(blocks, function(index, item) {
                 var href = item.getAttribute('href');
 
                 if ($.inArray(href, tempHref) === -1) {
@@ -4626,7 +4624,7 @@ if (typeof Object.create !== 'function') {
 
             // if transitionend is not fulfilled
             t.navigationMobile = $();
-            t.wrap.one(CubePortfolio.private.transitionend, function () {
+            t.wrap.one(CubePortfolio.private.transitionend, function() {
                 $('html').css({
                     overflow: 'hidden',
                     marginRight: window.innerWidth - $(document).width()
@@ -4660,7 +4658,7 @@ if (typeof Object.create !== 'function') {
                 if (t.options.singlePageStickyNavigation) {
                     t.navigationWrap.width(t.contentWrap[0].clientWidth);
 
-                    setTimeout(function () {
+                    setTimeout(function() {
                         t.wrap.addClass('cbp-popup-singlePage-sticky');
                     }, 1000);
                 }
@@ -4691,7 +4689,7 @@ if (typeof Object.create !== 'function') {
             if (CubePortfolio.private.browser === 'ios') {
                 var element = t.contentWrap[0];
 
-                element.addEventListener('touchstart', function () {
+                element.addEventListener('touchstart', function() {
                     var top = element.scrollTop,
                         totalScroll = element.scrollHeight,
                         currentScroll = top + element.offsetHeight;
@@ -4705,7 +4703,7 @@ if (typeof Object.create !== 'function') {
             }
         },
 
-        openSinglePageInline: function (blocks, currentBlock, fromOpen) {
+        openSinglePageInline: function(blocks, currentBlock, fromOpen) {
             var t = this,
                 start = 0,
                 currentBlockHref,
@@ -4756,7 +4754,7 @@ if (typeof Object.create !== 'function') {
 
             cbpitem = $(currentBlock).closest('.cbp-item')[0];
 
-            blocks.each(function (index, el) {
+            blocks.each(function(index, el) {
                 if (cbpitem === el) {
                     t.current = index;
                 }
@@ -4791,7 +4789,7 @@ if (typeof Object.create !== 'function') {
 
                 t.blocksToMove = $();
 
-                blocks.each(function (index, el) {
+                blocks.each(function(index, el) {
                     var element = $(el);
 
                     var topEl = element.data('cbp').top;
@@ -4824,7 +4822,7 @@ if (typeof Object.create !== 'function') {
 
                 t.blocksToMove = $();
 
-                blocks.each(function (index, el) {
+                blocks.each(function(index, el) {
                     var element = $(el);
                     var height = element.height();
 
@@ -4864,10 +4862,10 @@ if (typeof Object.create !== 'function') {
 
                 if (t.scrollTop !== goToScroll) {
                     $('html,body').animate({
-                        scrollTop: goToScroll
-                    }, 350)
+                            scrollTop: goToScroll
+                        }, 350)
                         .promise()
-                        .then(function () {
+                        .then(function() {
                             t.resizeSinglePageInline();
                             t.deferredInline.resolve();
                         });
@@ -4899,14 +4897,14 @@ if (typeof Object.create !== 'function') {
             }
         },
 
-        resizeSinglePageInline: function () {
+        resizeSinglePageInline: function() {
             var t = this;
 
             t.height = ((t.top === 0) || (t.top === t.cubeportfolio.height)) ? t.wrap.outerHeight(true) : t.wrap.outerHeight(true) - t.options.gapHorizontal;
 
             t.height += t.topDifference;
 
-            t.storeBlocks.each(function (index, el) {
+            t.storeBlocks.each(function(index, el) {
                 if (CubePortfolio.private.modernBrowser) {
                     el.style[CubePortfolio.private.transform] = '';
                 } else {
@@ -4914,7 +4912,7 @@ if (typeof Object.create !== 'function') {
                 }
             });
 
-            t.blocksToMove.each(function (index, el) {
+            t.blocksToMove.each(function(index, el) {
                 if (CubePortfolio.private.modernBrowser) {
                     el.style[CubePortfolio.private.transform] = 'translate3d(0px, ' + t.height + 'px, 0)';
                 } else {
@@ -4925,13 +4923,13 @@ if (typeof Object.create !== 'function') {
             t.cubeportfolio.obj.style.height = t.cubeportfolio.height + t.height + 'px';
         },
 
-        revertResizeSinglePageInline: function () {
+        revertResizeSinglePageInline: function() {
             var t = this;
 
             // reset deferred object
             t.deferredInline = $.Deferred();
 
-            t.storeBlocks.each(function (index, el) {
+            t.storeBlocks.each(function(index, el) {
                 if (CubePortfolio.private.modernBrowser) {
                     el.style[CubePortfolio.private.transform] = '';
                 } else {
@@ -4942,17 +4940,17 @@ if (typeof Object.create !== 'function') {
             t.cubeportfolio.obj.style.height = t.cubeportfolio.height + 'px';
         },
 
-        appendScriptsToWrap: function (scripts) {
+        appendScriptsToWrap: function(scripts) {
             var t = this,
                 index = 0,
-                loadScripts = function (item) {
+                loadScripts = function(item) {
                     var script = document.createElement('script'),
                         src = item.src;
 
                     script.type = 'text/javascript';
 
                     if (script.readyState) { // ie
-                        script.onreadystatechange = function () {
+                        script.onreadystatechange = function() {
                             if (script.readyState == 'loaded' || script.readyState == 'complete') {
                                 script.onreadystatechange = null;
                                 index++;
@@ -4962,7 +4960,7 @@ if (typeof Object.create !== 'function') {
                             }
                         };
                     } else {
-                        script.onload = function () {
+                        script.onload = function() {
                             index++;
                             if (scripts[index]) {
                                 loadScripts(scripts[index]);
@@ -4983,7 +4981,7 @@ if (typeof Object.create !== 'function') {
             loadScripts(scripts[0]);
         },
 
-        updateSinglePage: function (html, scripts, isWrap) {
+        updateSinglePage: function(html, scripts, isWrap) {
             var t = this,
                 counterMarkup,
                 animationFinish;
@@ -5012,7 +5010,7 @@ if (typeof Object.create !== 'function') {
             }
         },
 
-        updateSinglePageIsOpen: function () {
+        updateSinglePageIsOpen: function() {
             var t = this,
                 selectorSlider;
 
@@ -5057,7 +5055,7 @@ if (typeof Object.create !== 'function') {
             t.cubeportfolio.$obj.trigger('updateSinglePageComplete.cbp');
         },
 
-        checkForSocialLinks: function (content) {
+        checkForSocialLinks: function(content) {
             var t = this;
 
             t.createFacebookShare(content.find('.cbp-social-fb'));
@@ -5066,25 +5064,25 @@ if (typeof Object.create !== 'function') {
             t.createPinterestShare(content.find('.cbp-social-pinterest'));
         },
 
-        createFacebookShare: function (item) {
+        createFacebookShare: function(item) {
             if (item.length && !item.attr('onclick')) {
                 item.attr('onclick', "window.open('http://www.facebook.com/sharer.php?u=" + encodeURIComponent(window.location.href) + "', '_blank', 'top=100,left=100,toolbar=0,status=0,width=620,height=400'); return false;");
             }
         },
 
-        createTwitterShare: function (item) {
+        createTwitterShare: function(item) {
             if (item.length && !item.attr('onclick')) {
                 item.attr('onclick', "window.open('https://twitter.com/intent/tweet?source=" + encodeURIComponent(window.location.href) + "&text=" + encodeURIComponent(document.title) + "', '_blank', 'top=100,left=100,toolbar=0,status=0,width=620,height=300'); return false;");
             }
         },
 
-        createGooglePlusShare: function (item) {
+        createGooglePlusShare: function(item) {
             if (item.length && !item.attr('onclick')) {
                 item.attr('onclick', "window.open('https://plus.google.com/share?url=" + encodeURIComponent(window.location.href) + "', '_blank', 'top=100,left=100,toolbar=0,status=0,width=620,height=450'); return false;");
             }
         },
 
-        createPinterestShare: function (item) {
+        createPinterestShare: function(item) {
             if (item.length && !item.attr('onclick')) {
                 var media = '';
                 var firstImg = this.content.find('img')[0];
@@ -5097,7 +5095,7 @@ if (typeof Object.create !== 'function') {
             }
         },
 
-        updateSinglePageInline: function (html, scripts) {
+        updateSinglePageInline: function(html, scripts) {
             var t = this;
 
             t.content.html(html);
@@ -5110,7 +5108,7 @@ if (typeof Object.create !== 'function') {
             t.cubeportfolio.$obj.trigger('updateSinglePageInlineStart.cbp');
 
             if (t.localOptions.delay !== 0) {
-                setTimeout(function () {
+                setTimeout(function() {
                     t.singlePageInlineIsOpen.call(t);
                 }, t.localOptions.delay)
             } else {
@@ -5118,7 +5116,7 @@ if (typeof Object.create !== 'function') {
             }
         },
 
-        singlePageInlineIsOpen: function () {
+        singlePageInlineIsOpen: function() {
             var t = this;
 
             function finishLoading() {
@@ -5132,18 +5130,18 @@ if (typeof Object.create !== 'function') {
             }
 
             // wait to load all images
-            t.cubeportfolio.loadImages(t.wrap, function () {
+            t.cubeportfolio.loadImages(t.wrap, function() {
                 // instantiate slider if exists
                 var selectorSlider = t.content.find('.cbp-slider');
 
                 if (selectorSlider.length) {
                     selectorSlider.find('.cbp-slider-item').addClass('cbp-item');
 
-                    selectorSlider.one('initComplete.cbp', function () {
+                    selectorSlider.one('initComplete.cbp', function() {
                         t.deferredInline.done(finishLoading);
                     });
 
-                    selectorSlider.on('pluginResize.cbp', function () {
+                    selectorSlider.on('pluginResize.cbp', function() {
                         t.deferredInline.done(finishLoading);
                     });
 
@@ -5169,50 +5167,50 @@ if (typeof Object.create !== 'function') {
             });
         },
 
-        isImage: function (el) {
+        isImage: function(el) {
             var t = this,
                 img = new Image();
 
             t.tooggleLoading(true);
 
-            t.cubeportfolio.loadImages($('<div><img src="' + el.src + '"></div>'), function () {
+            t.cubeportfolio.loadImages($('<div><img src="' + el.src + '"></div>'), function() {
                 t.updateImagesMarkup(el.src, el.title, t.getCounterMarkup(t.options.lightboxCounter, t.current + 1, t.counterTotal));
 
                 t.tooggleLoading(false);
             });
         },
 
-        isVimeo: function (el) {
+        isVimeo: function(el) {
             var t = this;
             t.updateVideoMarkup(el.src, el.title, t.getCounterMarkup(t.options.lightboxCounter, t.current + 1, t.counterTotal));
         },
 
-        isYoutube: function (el) {
+        isYoutube: function(el) {
             var t = this;
             t.updateVideoMarkup(el.src, el.title, t.getCounterMarkup(t.options.lightboxCounter, t.current + 1, t.counterTotal));
         },
 
-        isTed: function (el) {
+        isTed: function(el) {
             var t = this;
             t.updateVideoMarkup(el.src, el.title, t.getCounterMarkup(t.options.lightboxCounter, t.current + 1, t.counterTotal));
         },
 
-        isSoundCloud: function (el) {
+        isSoundCloud: function(el) {
             var t = this;
             t.updateVideoMarkup(el.src, el.title, t.getCounterMarkup(t.options.lightboxCounter, t.current + 1, t.counterTotal));
         },
 
-        isSelfHostedVideo: function (el) {
+        isSelfHostedVideo: function(el) {
             var t = this;
             t.updateSelfHostedVideo(el.src, el.title, t.getCounterMarkup(t.options.lightboxCounter, t.current + 1, t.counterTotal));
         },
 
-        isSelfHostedAudio: function (el) {
+        isSelfHostedAudio: function(el) {
             var t = this;
             t.updateSelfHostedAudio(el.src, el.title, t.getCounterMarkup(t.options.lightboxCounter, t.current + 1, t.counterTotal));
         },
 
-        getCounterMarkup: function (markup, current, total) {
+        getCounterMarkup: function(markup, current, total) {
             if (!markup.length) {
                 return '';
             }
@@ -5222,12 +5220,12 @@ if (typeof Object.create !== 'function') {
                 total: total
             };
 
-            return markup.replace(/\{\{current}}|\{\{total}}/gi, function (matched) {
+            return markup.replace(/\{\{current}}|\{\{total}}/gi, function(matched) {
                 return mapObj[matched.slice(2, -2)];
             });
         },
 
-        updateSelfHostedVideo: function (src, title, counter) {
+        updateSelfHostedVideo: function(src, title, counter) {
             var t = this,
                 i;
 
@@ -5259,7 +5257,7 @@ if (typeof Object.create !== 'function') {
             t.preloadNearbyImages();
         },
 
-        updateSelfHostedAudio: function (src, title, counter) {
+        updateSelfHostedAudio: function(src, title, counter) {
             var t = this,
                 i;
 
@@ -5281,7 +5279,7 @@ if (typeof Object.create !== 'function') {
             t.preloadNearbyImages();
         },
 
-        updateVideoMarkup: function (src, title, counter) {
+        updateVideoMarkup: function(src, title, counter) {
             var t = this;
             t.wrap.addClass('cbp-popup-lightbox-isIframe');
 
@@ -5298,7 +5296,7 @@ if (typeof Object.create !== 'function') {
             t.preloadNearbyImages();
         },
 
-        updateImagesMarkup: function (src, title, counter) {
+        updateImagesMarkup: function(src, title, counter) {
             var t = this;
 
             t.wrap.removeClass('cbp-popup-lightbox-isIframe');
@@ -5317,17 +5315,17 @@ if (typeof Object.create !== 'function') {
             t.preloadNearbyImages();
         },
 
-        next: function () {
+        next: function() {
             var t = this;
             t[t.type + 'JumpTo'](1);
         },
 
-        prev: function () {
+        prev: function() {
             var t = this;
             t[t.type + 'JumpTo'](-1);
         },
 
-        lightboxJumpTo: function (index) {
+        lightboxJumpTo: function(index) {
             var t = this,
                 el;
 
@@ -5340,7 +5338,7 @@ if (typeof Object.create !== 'function') {
             t[el.type](el);
         },
 
-        singlePageJumpTo: function (index) {
+        singlePageJumpTo: function(index) {
             var t = this;
 
             t.current = t.getIndex(t.current + index);
@@ -5366,7 +5364,7 @@ if (typeof Object.create !== 'function') {
             }
         },
 
-        resetWrap: function () {
+        resetWrap: function() {
             var t = this;
 
             if (t.type === 'singlePage' && t.options.singlePageDeeplinking) {
@@ -5378,7 +5376,7 @@ if (typeof Object.create !== 'function') {
             }
         },
 
-        getIndex: function (index) {
+        getIndex: function(index) {
             var t = this;
 
             // go to interval [0, (+ or -)this.counterTotal.length - 1]
@@ -5392,7 +5390,7 @@ if (typeof Object.create !== 'function') {
             return index;
         },
 
-        close: function (method, data) {
+        close: function(method, data) {
             var t = this;
 
             function finishClose() {
@@ -5424,10 +5422,10 @@ if (typeof Object.create !== 'function') {
 
                 if (t.options.singlePageInlineInFocus && method !== 'promise') {
                     $('html,body').animate({
-                        scrollTop: t.scrollTop
-                    }, 350)
+                            scrollTop: t.scrollTop
+                        }, 350)
                         .promise()
-                        .then(function () {
+                        .then(function() {
                             finishClose();
                         });
                 } else {
@@ -5452,7 +5450,7 @@ if (typeof Object.create !== 'function') {
                     t.cubeportfolio.$obj.find('.cbp-item').removeClass('cbp-singlePageInline-active');
 
                     if (CubePortfolio.private.modernBrowser) {
-                        t.wrap.one(CubePortfolio.private.transitionend, function () {
+                        t.wrap.one(CubePortfolio.private.transitionend, function() {
                             checkFocusInline();
                         });
                     } else {
@@ -5488,7 +5486,7 @@ if (typeof Object.create !== 'function') {
                     t.wrap.detach();
                 }
 
-                t.wrap.one(CubePortfolio.private.transitionend, function () {
+                t.wrap.one(CubePortfolio.private.transitionend, function() {
                     // remove resize event
                     if (t.slider) {
                         CubePortfolio.private.resize.destroyEvent($.data(t.slider[0], 'cubeportfolio'));
@@ -5527,14 +5525,14 @@ if (typeof Object.create !== 'function') {
             }
         },
 
-        tooggleLoading: function (state) {
+        tooggleLoading: function(state) {
             var t = this;
 
             t.stopEvents = state;
             t.wrap[(state) ? 'addClass' : 'removeClass']('cbp-popup-loading');
         },
 
-        resizeImage: function () {
+        resizeImage: function() {
             // if lightbox is not open go out
             if (!this.isOpen) {
                 return;
@@ -5547,7 +5545,7 @@ if (typeof Object.create !== 'function') {
             img.css('max-height', height + 'px');
         },
 
-        preloadNearbyImages: function () {
+        preloadNearbyImages: function() {
             var t = this;
             var arr = [
                 t.getIndex(t.current + 1),
@@ -5582,7 +5580,7 @@ if (typeof Object.create !== 'function') {
         }
 
         // @todo - schedule this in  future
-        parent.registerEvent('initStartRead', function () {
+        parent.registerEvent('initStartRead', function() {
             t.run();
         }, true);
     }
@@ -5592,7 +5590,7 @@ if (typeof Object.create !== 'function') {
     var lightboxInit = false;
     var singlePageInit = false;
 
-    Plugin.prototype.run = function () {
+    Plugin.prototype.run = function() {
         var t = this,
             p = t.parent,
             body = $(document.body);
@@ -5608,7 +5606,7 @@ if (typeof Object.create !== 'function') {
             p.lightbox = Object.create(popup);
             p.lightbox.init(p, 'lightbox');
 
-            body.on('click.cbp', p.options.lightboxDelegate, function (e) {
+            body.on('click.cbp', p.options.lightboxDelegate, function(e) {
                 e.preventDefault();
 
                 var self = $(this),
@@ -5619,11 +5617,11 @@ if (typeof Object.create !== 'function') {
 
                 // is inside a cbp
                 if (cbp) {
-                    cbp.blocksOn.each(function (index, el) {
+                    cbp.blocksOn.each(function(index, el) {
                         var item = $(el);
 
                         if (item.not('.cbp-item-off')) {
-                            item.find(p.options.lightboxDelegate).each(function (index2, el2) {
+                            item.find(p.options.lightboxDelegate).each(function(index2, el2) {
                                 if (gallery) {
                                     if ($(el2).attr('data-cbp-lightbox') === gallery) {
                                         blocks.push(el2);
@@ -5657,7 +5655,7 @@ if (typeof Object.create !== 'function') {
             p.singlePage = Object.create(popup);
             p.singlePage.init(p, 'singlePage');
 
-            body.on('click.cbp', p.options.singlePageDelegate, function (e) {
+            body.on('click.cbp', p.options.singlePageDelegate, function(e) {
                 e.preventDefault();
 
                 var self = $(this),
@@ -5668,11 +5666,11 @@ if (typeof Object.create !== 'function') {
 
                 // is inside a cbp
                 if (cbp) {
-                    cbp.blocksOn.each(function (index, el) {
+                    cbp.blocksOn.each(function(index, el) {
                         var item = $(el);
 
                         if (item.not('.cbp-item-off')) {
-                            item.find(p.options.singlePageDelegate).each(function (index2, el2) {
+                            item.find(p.options.singlePageDelegate).each(function(index2, el2) {
                                 if (gallery) {
                                     if ($(el2).attr('data-cbp-singlePage') === gallery) {
                                         blocks.push(el2);
@@ -5704,7 +5702,7 @@ if (typeof Object.create !== 'function') {
 
             p.singlePageInline.init(p, 'singlePageInline');
 
-            p.$obj.on('click.cbp', p.options.singlePageInlineDelegate, function (e) {
+            p.$obj.on('click.cbp', p.options.singlePageInlineDelegate, function(e) {
                 e.preventDefault();
 
                 var oldDate = $.data(this, 'cbp-locked'),
@@ -5717,7 +5715,7 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    Plugin.prototype.detectScope = function (item) {
+    Plugin.prototype.detectScope = function(item) {
         var singlePageInline,
             singlePage,
             cbp;
@@ -5739,7 +5737,7 @@ if (typeof Object.create !== 'function') {
 
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         var p = this.parent;
 
         $(document.body).off('click.cbp');
@@ -5764,11 +5762,11 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    CubePortfolio.plugins.popUp = function (parent) {
+    CubePortfolio.plugins.popUp = function(parent) {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var CubePortfolio = $.fn.cubeportfolio.constructor;
@@ -5780,7 +5778,7 @@ if (typeof Object.create !== 'function') {
 
         t.searchInput = $(parent.options.search);
 
-        t.searchInput.each(function (index, el) {
+        t.searchInput.each(function(index, el) {
             var selector = el.getAttribute('data-search');
 
             if (!selector) {
@@ -5795,13 +5793,13 @@ if (typeof Object.create !== 'function') {
 
         var timeout = null;
 
-        t.searchInput.on('keyup.cbp paste.cbp', function (e) {
+        t.searchInput.on('keyup.cbp paste.cbp', function(e) {
             e.preventDefault();
 
             var el = $(this);
 
             clearTimeout(timeout);
-            timeout = setTimeout(function () {
+            timeout = setTimeout(function() {
                 t.runEvent.call(t, el);
             }, 350);
         });
@@ -5810,14 +5808,14 @@ if (typeof Object.create !== 'function') {
         t.searchNothingHeight = null;
         t.searchNothingHTML = t.searchNothing.html();
 
-        t.searchInput.siblings('.cbp-search-icon').on('click.cbp', function (e) {
+        t.searchInput.siblings('.cbp-search-icon').on('click.cbp', function(e) {
             e.preventDefault();
 
             t.runEvent.call(t, $(this).prev().val(''));
         });
     }
 
-    Plugin.prototype.runEvent = function (el) {
+    Plugin.prototype.runEvent = function(el) {
         var t = this,
             value = el.val(),
             searchData = el.data('searchData'),
@@ -5835,8 +5833,8 @@ if (typeof Object.create !== 'function') {
             el.removeAttr('value');
         }
 
-        t.parent.$obj.cubeportfolio('filter', function (blocks) {
-            var blocksNew = blocks.filter(function (index, block) {
+        t.parent.$obj.cubeportfolio('filter', function(blocks) {
+            var blocksNew = blocks.filter(function(index, block) {
                 var text = $(block).find(searchData.el).text();
 
                 if (text.search(reg) > -1) {
@@ -5854,7 +5852,7 @@ if (typeof Object.create !== 'function') {
                     t.searchNothingHeight = t.searchNothing.outerHeight(true);
                 }
 
-                t.parent.registerEvent('resizeMainContainer', function () {
+                t.parent.registerEvent('resizeMainContainer', function() {
                     t.parent.height = t.parent.height + t.searchNothingHeight;
                     t.parent.obj.style.height = t.parent.height + 'px';
                 }, true);
@@ -5866,23 +5864,23 @@ if (typeof Object.create !== 'function') {
             t.parent.triggerEvent('resetFiltersVisual');
 
             return blocksNew;
-        }, function () {
+        }, function() {
             el.trigger('keyup.cbp');
         });
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         var t = this;
 
         t.searchInput.off('.cbp');
         t.searchInput.next('.cbp-search-icon').off('.cbp');
 
-        t.searchInput.each(function (index, el) {
+        t.searchInput.each(function(index, el) {
             $.removeData(el);
         });
     };
 
-    CubePortfolio.plugins.search = function (parent) {
+    CubePortfolio.plugins.search = function(parent) {
         if (parent.options.search === '') {
             return null;
         }
@@ -5890,7 +5888,7 @@ if (typeof Object.create !== 'function') {
         return new Plugin(parent);
     };
 })(jQuery, window, document);
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     var options = {
@@ -5918,7 +5916,7 @@ if (typeof Object.create !== 'function') {
             t.parent.customPaginationItems = customPagination.children();
             t.parent.customPaginationClass = t.options.paginationClass;
 
-            t.parent.customPaginationItems.on('click.cbp', function (e) {
+            t.parent.customPaginationItems.on('click.cbp', function(e) {
                 e.preventDefault();
                 e.stopImmediatePropagation();
                 e.stopPropagation();
@@ -5931,10 +5929,10 @@ if (typeof Object.create !== 'function') {
             });
         }
 
-        t.parent.registerEvent('gridAdjust', function () {
+        t.parent.registerEvent('gridAdjust', function() {
             t.sliderMarkup.call(t.parent);
 
-            t.parent.registerEvent('gridAdjust', function () {
+            t.parent.registerEvent('gridAdjust', function() {
                 t.updateSlider.call(t.parent);
             });
         }, true);
@@ -5943,14 +5941,14 @@ if (typeof Object.create !== 'function') {
     /**
      * Create mark-up for slider layout
      */
-    Plugin.prototype.sliderMarkup = function () {
+    Plugin.prototype.sliderMarkup = function() {
         var t = this;
 
         t.sliderStopEvents = false;
 
         t.sliderActive = 0;
 
-        t.$obj.one('initComplete.cbp', function () {
+        t.$obj.one('initComplete.cbp', function() {
             t.$obj.addClass('cbp-mode-slider');
         });
 
@@ -5958,7 +5956,7 @@ if (typeof Object.create !== 'function') {
             'class': 'cbp-nav'
         });
 
-        t.nav.on('click.cbp', '[data-slider-action]', function (e) {
+        t.nav.on('click.cbp', '[data-slider-action]', function(e) {
             e.preventDefault();
             e.stopImmediatePropagation();
             e.stopPropagation();
@@ -6008,10 +6006,10 @@ if (typeof Object.create !== 'function') {
         if (t.options.auto) {
             if (t.options.autoPauseOnHover) {
                 t.mouseIsEntered = false;
-                t.$obj.on('mouseenter.cbp', function (e) {
+                t.$obj.on('mouseenter.cbp', function(e) {
                     t.mouseIsEntered = true;
                     t.stopSliderAuto();
-                }).on('mouseleave.cbp', function (e) {
+                }).on('mouseleave.cbp', function(e) {
                     t.mouseIsEntered = false;
                     t.startSliderAuto();
                 });
@@ -6025,7 +6023,7 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    Plugin.prototype.updateSlider = function () {
+    Plugin.prototype.updateSlider = function() {
         var t = this;
 
         t.updateSliderPosition();
@@ -6033,7 +6031,7 @@ if (typeof Object.create !== 'function') {
         t.updateSliderPagination();
     };
 
-    Plugin.prototype.destroy = function () {
+    Plugin.prototype.destroy = function() {
         var t = this;
 
         if (t.parent.customPaginationItems) {
@@ -6046,7 +6044,7 @@ if (typeof Object.create !== 'function') {
         }
     };
 
-    CubePortfolio.plugins.slider = function (parent) {
+    CubePortfolio.plugins.slider = function(parent) {
         if (parent.options.layoutMode !== 'slider') {
             return null;
         }

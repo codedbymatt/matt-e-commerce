@@ -6,25 +6,25 @@
  *
  */
 ;(function ($) {
-    'use strict';
+  'use strict';
 
-    $.HSCore.helpers.HSHeightCalc = {
-        /**
-         * Rating.
-         *
-         * @return undefined
-         */
-        init: function () {
-            var collection = $('[data-calc-target]');
+  $.HSCore.helpers.HSHeightCalc = {
+    /**
+     * Rating.
+     *
+     * @return undefined
+     */
+    init: function () {
+      var collection = $('[data-calc-target]');
 
-            if (!collection.length) return;
+      if (!collection.length) return;
 
-            collection.each(function () {
-                var $this = $(this),
-                    $target = $this.data('calc-target');
+      collection.each(function () {
+        var $this = $(this),
+          $target = $this.data('calc-target');
 
-                $this.css('height', 'calc(100vh - ' + $($target).outerHeight() + 'px)');
-            });
-        }
-    };
+        $this.css('height', 'calc(100vh - ' + $($target).outerHeight() + 'px)');
+      });
+    }
+  };
 })(jQuery);

@@ -24,7 +24,6 @@ a {
   color: $g-color-primary;
   outline: none;
 }
-
 a:focus,
 a:hover {
   color: $g-color-primary-dark-v2;
@@ -33,7 +32,6 @@ a:hover {
 .nav-link {
   color: $g-color-main;
 }
-
 .nav-link:focus,
 .nav-link:hover {
   color: $g-color-main;
@@ -50,7 +48,6 @@ figure {
 h1, h2, h3, h4, h5, h6 {
   line-height: 1.4;
 }
-
 .h7 {
   font-size: .75rem;
 }
@@ -71,7 +68,6 @@ h1, h2, h3, h4, h5, h6 {
   color: $g-color-white;
   background-color: $g-color-primary;
 }
-
 ::selection {
   color: $g-color-white;
   background-color: $g-color-primary;
@@ -81,7 +77,6 @@ h1, h2, h3, h4, h5, h6 {
   color: $g-color-primary;
   background-color: $g-color-white;
 }
-
 .g-bg-primary ::selection {
   color: $g-color-primary;
   background-color: $g-color-white;

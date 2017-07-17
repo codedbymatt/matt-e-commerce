@@ -5,7 +5,6 @@
   @include px-to-rem(width, 44px);
   border-top-width: 2px;
 }
-
 .u-heading-v2-1 {
   &--bottom::after {
     @extend %u-heading-v2;

@@ -21,6 +21,7 @@
   }
 }
 
+
 // Print utilities
 //
 // Media queries are placed on the inside to be mixin-friendly.
@@ -32,7 +33,6 @@
     display: block !important;
   }
 }
-
 .visible-print-inline {
   display: none !important;
 
@@ -40,7 +40,6 @@
     display: inline !important;
   }
 }
-
 .visible-print-inline-block {
   display: none !important;
 

@@ -4,19 +4,19 @@
 
 .u-compressed-form {
 
-  display: inline-block;
-  overflow: hidden;
+	display: inline-block;
+	overflow: hidden;
 
-  @include px-to-rem(width, 280px);
+	@include px-to-rem(width, 280px);
 
-  transition: all .35s ease;
+	transition: all .35s ease;
 
-  &--hidden {
-    @include px-to-rem(width, 80px);
-  }
+	&--hidden {
+		@include px-to-rem(width, 80px);
+	}
 
-  .input-group {
-    display: block;
-    float: right;
-  }
+	.input-group {
+		display: block;
+		float: right;
+	}
 }

@@ -1,4 +1,4 @@
-(function ($, window, document, undefined) {
+(function($, window, document, undefined) {
     'use strict';
 
     // init cubeportfolio
@@ -33,20 +33,20 @@
         singlePageDeeplinking: true,
         singlePageStickyNavigation: true,
         singlePageCounter: '<div class="cbp-popup-singlePage-counter">{{current}} of {{total}}</div>',
-        singlePageCallback: function (url, element) {
+        singlePageCallback: function(url, element) {
             // to update singlePage content use the following method: this.updateSinglePage(yourContent)
             var t = this;
 
             $.ajax({
-                url: url,
-                type: 'GET',
-                dataType: 'html',
-                timeout: 30000
-            })
-                .done(function (result) {
+                    url: url,
+                    type: 'GET',
+                    dataType: 'html',
+                    timeout: 30000
+                })
+                .done(function(result) {
                     t.updateSinglePage(result);
                 })
-                .fail(function () {
+                .fail(function() {
                     t.updateSinglePage('AJAX Error! Please refresh the page!');
                 });
         },

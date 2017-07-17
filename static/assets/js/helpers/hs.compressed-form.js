@@ -4,52 +4,52 @@
  * @author Htmlstream
  * @version 1.0
  */
-;(function ($) {
-    'use strict';
+;(function($){
+	'use strict';
 
-    $.HSCore.helpers.HSCompressedForm = {
-
-
-        init: function (collection) {
-
-            if (!collection || !collection.length) return;
-            this.collection = collection;
-            this.collection.addClass('u-compressed-form--hidden');
-
-            this.bindEvents();
-
-        },
-
-        bindEvents: function () {
-
-            var self = this;
-
-            this.collection.on('click', function (e) {
-
-                var $this = $(this);
-
-                if (!$this.hasClass('u-prevented')) {
+	$.HSCore.helpers.HSCompressedForm = {
 
 
-                    e.preventDefault();
-                    $this.removeClass('u-compressed-form--hidden').addClass('u-prevented');
+		init: function(collection){
 
-                    $this.find('input').focus();
+			if(!collection || !collection.length) return;
+			this.collection = collection;
+			this.collection.addClass('u-compressed-form--hidden');
 
-                }
+			this.bindEvents();
 
-            });
+		},
 
-            $(document).on('click.uSearchform', function (e) {
+		bindEvents: function(){
 
-                if ($(e.target).closest('.u-compressed-form').length) return;
+			var self = this;
 
-                self.collection.addClass('u-compressed-form--hidden').removeClass('u-prevented');
+			this.collection.on('click', function(e){
 
-            });
+				var $this = $(this);
 
-        }
+				if(!$this.hasClass('u-prevented')){
 
-    };
+
+					e.preventDefault();
+					$this.removeClass('u-compressed-form--hidden').addClass('u-prevented');
+
+					$this.find('input').focus();
+
+				}
+
+			});
+
+			$(document).on('click.uSearchform', function(e){
+
+				if( $(e.target).closest('.u-compressed-form').length ) return;
+
+				self.collection.addClass('u-compressed-form--hidden').removeClass('u-prevented');
+
+			});
+
+		}
+
+	};
 
 })(jQuery);

@@ -62,6 +62,7 @@
   }
 }
 
+
 //
 // Optional textual caps
 //
@@ -89,6 +90,7 @@
   }
 }
 
+
 //
 // Header navs
 //
@@ -105,6 +107,7 @@
   margin-left: -($card-spacer-x / 2);
 }
 
+
 //
 // Background variations
 //
@@ -112,19 +115,15 @@
 .card-primary {
   @include card-variant($brand-primary, $brand-primary);
 }
-
 .card-success {
   @include card-variant($brand-success, $brand-success);
 }
-
 .card-info {
   @include card-variant($brand-info, $brand-info);
 }
-
 .card-warning {
   @include card-variant($brand-warning, $brand-warning);
 }
-
 .card-danger {
   @include card-variant($brand-danger, $brand-danger);
 }
@@ -133,23 +132,18 @@
 .card-outline-primary {
   @include card-outline-variant($btn-primary-bg);
 }
-
 .card-outline-secondary {
   @include card-outline-variant($btn-secondary-border);
 }
-
 .card-outline-info {
   @include card-outline-variant($btn-info-bg);
 }
-
 .card-outline-success {
   @include card-outline-variant($btn-success-bg);
 }
-
 .card-outline-warning {
   @include card-outline-variant($btn-warning-bg);
 }
-
 .card-outline-danger {
   @include card-outline-variant($btn-danger-bg);
 }
@@ -177,7 +171,6 @@
   // margin: -1.325rem;
   @include border-radius($card-border-radius-inner);
 }
-
 .card-img-overlay {
   position: absolute;
   top: 0;
@@ -187,14 +180,16 @@
   padding: $card-img-overlay-padding;
 }
 
+
+
 // Card image caps
 .card-img-top {
   @include border-top-radius($card-border-radius-inner);
 }
-
 .card-img-bottom {
   @include border-bottom-radius($card-border-radius-inner);
 }
+
 
 // Card set
 //
@@ -308,6 +303,7 @@
     }
   }
 }
+
 
 //
 // Card

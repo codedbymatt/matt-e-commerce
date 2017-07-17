@@ -10,9 +10,11 @@
 ------------------------------------*/
 @include margin-spaces(xs);
 
+
 /* Margin Spaces (sm)
 ------------------------------------*/
 @include margin-spaces(sm);
+
 
 /* Margin Spaces (md)
 ------------------------------------*/
@@ -26,27 +28,25 @@
 ------------------------------------*/
 @include margin-spaces(xl);
 
+
 /* Margins Around
 ------------------------------------*/
 .g-ma-1 {
   @include px-to-rem(margin, 1px !important);
 }
-
 .g-ma-3 {
   @include px-to-rem(margin, 3px !important);
 }
-
 .g-ma-5 {
   @include px-to-rem(margin, 5px !important);
 }
-
 .g-ma-10 {
   @include px-to-rem(margin, 10px !important);
 }
-
 .g-ma-20 {
   @include px-to-rem(margin, 20px !important);
 }
+
 
 /* Minus Margins
 ------------------------------------*/
@@ -54,35 +54,27 @@
 .g-mt-minus-1 {
   @include px-to-rem(margin-top, -1px);
 }
-
 .g-mt-minus-20 {
   @include px-to-rem(margin-top, -20px);
 }
-
 .g-mt-minus-25 {
   @include px-to-rem(margin-top, -25px);
 }
-
 .g-mt-minus-30 {
   @include px-to-rem(margin-top, -30px);
 }
-
 .g-mt-minus-40 {
   @include px-to-rem(margin-top, -40px);
 }
-
 .g-mt-minus-70 {
   @include px-to-rem(margin-top, -70px);
 }
-
 .g-mt-minus-120 {
   @include px-to-rem(margin-top, -120px);
 }
-
 .g-mt-minus-200 {
   @include px-to-rem(margin-top, -200px);
 }
-
 .g-mt-minus-300 {
   @include px-to-rem(margin-top, -300px);
 }
@@ -96,35 +88,27 @@
 .g-ml-minus-20 {
   @include px-to-rem(margin-left, -20px);
 }
-
 .g-ml-minus-35 {
   @include px-to-rem(margin-left, -35px);
 }
-
 .g-ml-minus-55 {
   @include px-to-rem(margin-left, -55px);
 }
-
 .g-ml-minus-25 {
   @include px-to-rem(margin-left, -25px);
 }
-
 .g-ml-minus-82 {
   @include px-to-rem(margin-left, -82px);
 }
-
 .g-ml-minus-90 {
   @include px-to-rem(margin-left, -90px);
 }
-
 .g-ml-minus-100 {
   @include px-to-rem(margin-left, -100px);
 }
-
 .g-ml-minus-118 {
   @include px-to-rem(margin-left, -118px);
 }
-
 .g-ml-minus-142 {
   @include px-to-rem(margin-left, -142px);
 }
@@ -133,7 +117,6 @@
 .g-mr-minus-50 {
   @include px-to-rem(margin-right, -50px);
 }
-
 .g-mr-minus-100 {
   @include px-to-rem(margin-right, -100px);
 }
@@ -143,36 +126,31 @@
   @include px-to-rem(margin-left, -1px);
   @include px-to-rem(margin-right, -1px);
 }
-
 .g-mx-minus-2 {
   @include px-to-rem(margin-left, -2px);
   @include px-to-rem(margin-right, -2px);
 }
-
 .g-mx-minus-4 {
   @include px-to-rem(margin-left, -4px);
   @include px-to-rem(margin-right, -4px);
 }
-
 .g-mx-minus-5 {
   @include px-to-rem(margin-left, -5px);
   @include px-to-rem(margin-right, -5px);
 }
-
 .g-mx-minus-15 {
   @include px-to-rem(margin-left, -15px);
   @include px-to-rem(margin-right, -15px);
 }
-
 .g-mx-minus-25 {
   @include px-to-rem(margin-left, -25px);
   @include px-to-rem(margin-right, -25px);
 }
-
 .g-mx-minus-30 {
   @include px-to-rem(margin-left, -30px);
   @include px-to-rem(margin-right, -30px);
 }
+
 
 /* Custon Spaces
 ------------------------------------*/
@@ -181,11 +159,9 @@
 .g-mt-10x {
   margin-top: 10%; /* O */
 }
-
 .g-mt-22 {
   @include px-to-rem(margin-top, 22px);
 }
-
 .g-mt-500 {
   @include px-to-rem(margin-top, 500px);
 }
@@ -194,7 +170,6 @@
 .g-mb-28 {
   @include px-to-rem(margin-bottom, 28px);
 }
-
 .g-mb-500 {
   @include px-to-rem(margin-bottom, 500px);
 }
@@ -203,55 +178,42 @@
 .g-ml-10x {
   margin-left: 10%; /* O */
 }
-
 .g-ml-12 {
   @include px-to-rem(margin-left, 12px);
 }
-
 .g-ml-13 {
   @include px-to-rem(margin-left, 13px);
 }
-
 .g-ml-20 {
   @include px-to-rem(margin-left, 20px);
 }
-
 .g-ml-25 {
   @include px-to-rem(margin-left, 25px);
 }
-
 .g-ml-35 {
   @include px-to-rem(margin-left, 35px);
 }
-
 .g-ml-43 {
   @include px-to-rem(margin-left, 43px);
 }
-
 .g-ml-60 {
   @include px-to-rem(margin-left, 60px);
 }
-
 .g-ml-75 {
   @include px-to-rem(margin-left, 75px);
 }
-
 .g-ml-82 {
   @include px-to-rem(margin-left, 82px);
 }
-
 .g-ml-85 {
   @include px-to-rem(margin-left, 85px);
 }
-
 .g-ml-105 {
   @include px-to-rem(margin-left, 105px);
 }
-
 .g-ml-118 {
   @include px-to-rem(margin-left, 118px);
 }
-
 .g-ml-142 {
   @include px-to-rem(margin-left, 142px);
 }
@@ -260,23 +222,18 @@
 .g-mr-12 {
   @include px-to-rem(margin-right, 12px);
 }
-
 .g-mr-60 {
   @include px-to-rem(margin-right, 60px);
 }
-
 .g-mr-63 {
   @include px-to-rem(margin-right, 63px);
 }
-
 .g-mr-minus-10 {
   @include px-to-rem(margin-right, -10px);
 }
-
 .g-mr-minus-15 {
   @include px-to-rem(margin-right, -15px);
 }
-
 .g-mr-minus-30 {
   @include px-to-rem(margin-right, -30px);
 }
@@ -286,22 +243,18 @@
   @include px-to-rem(margin-left, -10px);
   @include px-to-rem(margin-right, -10px);
 }
-
 .g-mx-minus-15 {
   @include px-to-rem(margin-left, -15px);
   @include px-to-rem(margin-right, -15px);
 }
-
 .g-mx-minus-20 {
   @include px-to-rem(margin-left, -20px);
   @include px-to-rem(margin-right, -20px);
 }
-
 .g-mx-minus-25 {
   @include px-to-rem(margin-left, -25px);
   @include px-to-rem(margin-right, -25px);
 }
-
 .g-mx-minus-30 {
   @include px-to-rem(margin-left, -30px);
   @include px-to-rem(margin-right, -30px);
@@ -312,7 +265,6 @@
   @include px-to-rem(margin-top, -2px);
   @include px-to-rem(margin-bottom, -2px);
 }
-
 .g-my-minus-10 {
   @include px-to-rem(margin-top, -10px);
   @include px-to-rem(margin-bottom, -10px);

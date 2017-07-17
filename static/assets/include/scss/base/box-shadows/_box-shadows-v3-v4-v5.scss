@@ -4,7 +4,6 @@
 %box-shadow {
   position: relative;
 }
-
 %box-shadow--after-before {
   content: "";
   position: absolute;
@@ -16,13 +15,11 @@
   background: rgba($g-color-black, .2);
   z-index: -1;
 }
-
 .u-shadow-v3,
 .u-shadow-v4,
 .u-shadow-v5 {
   @extend %box-shadow;
 }
-
 .u-shadow-v3::after,
 .u-shadow-v3::before,
 .u-shadow-v4::before,
@@ -31,7 +28,6 @@
   box-shadow: 0 15px 10px rgba($g-color-black, .2);
   transform: rotate(-3deg);
 }
-
 .u-shadow-v3::after,
 .u-shadow-v5::after {
   @extend %box-shadow--after-before;

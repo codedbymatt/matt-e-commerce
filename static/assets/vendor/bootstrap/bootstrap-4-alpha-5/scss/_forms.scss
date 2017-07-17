@@ -87,6 +87,7 @@ select.form-control {
   display: block;
 }
 
+
 //
 // Labels
 //
@@ -111,6 +112,7 @@ select.form-control {
   font-size: $font-size-sm;
 }
 
+
 //
 // Legends
 //
@@ -123,6 +125,7 @@ select.form-control {
   margin-bottom: 0;
   font-size: $font-size-base;
 }
+
 
 // Static form control text
 //
@@ -142,6 +145,7 @@ select.form-control {
     padding-left: 0;
   }
 }
+
 
 // Form control sizing
 //
@@ -175,6 +179,7 @@ select.form-control-lg {
   }
 }
 
+
 // Form groups
 //
 // Designed to help with the organization and spacing of vertical forms. For
@@ -188,6 +193,7 @@ select.form-control-lg {
   display: block;
   margin-top: ($spacer * .25);
 }
+
 
 // Checkboxes and radios
 //
@@ -246,6 +252,7 @@ select.form-control-lg {
   }
 }
 
+
 // Form control feedback states
 //
 // Apply contextual and semantic states to individual form controls.
@@ -287,6 +294,7 @@ select.form-control-lg {
     background-image: $form-icon-danger;
   }
 }
+
 
 // Inline forms
 //

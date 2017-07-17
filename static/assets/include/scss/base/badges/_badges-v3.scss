@@ -6,16 +6,16 @@
   line-height: 1;
   color: $g-color-white;
   text-shadow: 0 1px 1px $g-color-main,
-  0 -1px 1px $g-color-main,
-  1px 0 1px $g-color-main,
-  -1px 0 1px $g-color-main;
+    0 -1px 1px $g-color-main,
+    1px 0 1px $g-color-main,
+    -1px 0 1px $g-color-main;
 }
 
 .u-badge-v3 {
   @include px-to-rem("font-size", $g-font-primary-size);
 
   &--xs {
-    @include px-to-rem("font-size", ($g-font-primary-size - 4));
+    @include px-to-rem("font-size",  ($g-font-primary-size - 4));
   }
 
   &--sm {
@@ -27,10 +27,10 @@
   }
 
   &--lg {
-    @include px-to-rem("font-size", ($g-font-primary-size + 2));
+    @include px-to-rem("font-size",  ($g-font-primary-size + 2));
   }
 
   &--xl {
-    @include px-to-rem("font-size", ($g-font-primary-size + 2));
+    @include px-to-rem("font-size",  ($g-font-primary-size + 2));
   }
 }

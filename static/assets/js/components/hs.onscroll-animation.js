@@ -3,191 +3,188 @@
  *
  * @author Htmlstream
  * @version 1.0
- * @requires appear.js
+ * @requires appear.js 
  *
  */
 ;
-(function ($) {
-    'use strict';
+(function($) {
+  'use strict';
 
-    $.HSCore.components.HSOnScrollAnimation = {
+  $.HSCore.components.HSOnScrollAnimation = {
 
-        /**
-         * Base configuration.
-         *
-         * @var Object _baseConfig
-         */
-        _baseConfig: {
-            bounds: -100,
-            debounce: 50,
-            inViewportClass: 'u-in-viewport',
-            animation: 'fadeInUp',
-            animationOut: false,
-            animationDelay: 0,
-            animationDuration: 1000,
-            afterShow: function () {
-            },
-            onShown: function () {
-            },
-            onHidded: function () {
-            }
+    /**
+     * Base configuration.
+     *
+     * @var Object _baseConfig
+     */
+    _baseConfig: {
+      bounds: -100,
+      debounce: 50,
+      inViewportClass: 'u-in-viewport',
+      animation: 'fadeInUp',
+      animationOut: false,
+      animationDelay: 0,
+      animationDuration: 1000,
+      afterShow: function(){},
+      onShown: function(){},
+      onHidded: function(){}
+    },
+
+    /**
+     * Collection of all instances of the page.
+     *
+     * @var jQuery _pageCollection
+     */
+    _pageCollection: $(),
+
+
+    /**
+     * Initialization of animation.
+     *
+     * @param jQuery selector (optional)
+     * @param Object config (optional)
+     *
+     * @return jQuery _pageCollection - collection of initialized items.
+     */
+    init: function(selector, config) {
+
+      if( !selector || !$(selector).length ) return;
+
+      var self = this;
+
+      this.config = config && $.isPlainObject(config) ? $.extend(true, {}, this._baseConfig, config) : this._baseConfig;
+
+      appear({
+        bounds: self.config['bounds'],
+        reappear: false,
+        debounce: self.config['debounce'],
+        elements: function(){
+          return document.querySelectorAll(selector);
         },
+        init: function() {
+          $(selector).each(function(i, el){
 
-        /**
-         * Collection of all instances of the page.
-         *
-         * @var jQuery _pageCollection
-         */
-        _pageCollection: $(),
+            var $this = $(el);
 
+            if(!$this.data('HSAnimationElement')) {
+              $this.data('HSAnimationElement', new HSAnimationElement( $this, self.config ));
 
-        /**
-         * Initialization of animation.
-         *
-         * @param jQuery selector (optional)
-         * @param Object config (optional)
-         *
-         * @return jQuery _pageCollection - collection of initialized items.
-         */
-        init: function (selector, config) {
+              self._pageCollection = self._pageCollection.add($this);
+            }
 
-            if (!selector || !$(selector).length) return;
+          });
+        },
+        appear: function(el) {
 
-            var self = this;
-
-            this.config = config && $.isPlainObject(config) ? $.extend(true, {}, this._baseConfig, config) : this._baseConfig;
-
-            appear({
-                bounds: self.config['bounds'],
-                reappear: false,
-                debounce: self.config['debounce'],
-                elements: function () {
-                    return document.querySelectorAll(selector);
-                },
-                init: function () {
-                    $(selector).each(function (i, el) {
-
-                        var $this = $(el);
-
-                        if (!$this.data('HSAnimationElement')) {
-                            $this.data('HSAnimationElement', new HSAnimationElement($this, self.config));
-
-                            self._pageCollection = self._pageCollection.add($this);
-                        }
-
-                    });
-                },
-                appear: function (el) {
-
-                    var $el = $(el);
-
-                    if (!$el.hasClass(self.config.inViewportClass)) {
-                        $el.data('HSAnimationElement').show();
-                    }
-                }
-
-            })
-
-
-            return this._pageCollection;
-
+          var $el = $(el);
+          
+          if(!$el.hasClass( self.config.inViewportClass )) {
+            $el.data('HSAnimationElement').show();
+          }
         }
+
+      })
+
+
+      return this._pageCollection;
 
     }
 
-    /**
-     * HSAnimationElement constructor function.
-     *
-     * @param jQuery element
-     * @param Object config
-     *
-     * @return undefined
-     */
-    function HSAnimationElement(element, config) {
+  }
 
-        if (!element || !element.length) return;
+  /**
+   * HSAnimationElement constructor function.
+   * 
+   * @param jQuery element
+   * @param Object config
+   *
+   * @return undefined
+   */
+  function HSAnimationElement(element, config) {
 
-        var self = this;
+    if( !element || !element.length ) return;
 
-        this.element = element;
-        this.config = config && $.isPlainObject(config) ? $.extend(true, {}, config, element.data()) : element.data();
+    var self = this;
 
-        if (!isFinite(this.config.animationDelay)) this.config.animationDelay = 0;
-        if (!isFinite(this.config.animationDuration)) this.config.animationDuration = 1000;
+    this.element = element;
+    this.config = config && $.isPlainObject(config) ? $.extend(true, {}, config, element.data()) : element.data();
 
-        element.css({
-            'animation-duration': self.config.animationDuration + 'ms'
-        });
+    if( !isFinite( this.config.animationDelay ) ) this.config.animationDelay = 0;
+    if( !isFinite( this.config.animationDuration ) ) this.config.animationDuration = 1000;
 
+    element.css({
+      'animation-duration': self.config.animationDuration + 'ms'
+    });
+
+  }
+
+  /**
+   * Shows element.
+   * 
+   * @return undefined
+   */
+  HSAnimationElement.prototype.show = function() {
+
+    var self = this;
+
+    if(this.config.animationDelay) {
+      this.timeOutId = setTimeout( function(){
+
+        self.element
+            .removeClass(self.config.animationOut)
+            .addClass(self.config.animation + ' ' + self.config.inViewportClass);
+        self.config.afterShow.call( self.element );
+
+        self.callbackTimeoutId = setTimeout( function(){
+          self.config.onShown.call( self.element );
+        }, self.config.animationDuration );
+
+      }, this.config.animationDelay );
+    }
+    else {
+      this.element
+          .removeClass(this.config.animationOut)
+          .addClass(this.config.animation + ' ' + this.config.inViewportClass);
+      this.config.afterShow.call( this.element );
+
+      this.callbackTimeoutId = setTimeout( function(){
+        self.config.onShown.call( self.element );
+      }, this.config.animationDuration );
     }
 
-    /**
-     * Shows element.
-     *
-     * @return undefined
-     */
-    HSAnimationElement.prototype.show = function () {
+  }
 
-        var self = this;
+  /**
+   * Hides element.
+   * 
+   * @return undefined
+   */
+  HSAnimationElement.prototype.hide = function() {
 
-        if (this.config.animationDelay) {
-            this.timeOutId = setTimeout(function () {
+    var self = this;
 
-                self.element
-                    .removeClass(self.config.animationOut)
-                    .addClass(self.config.animation + ' ' + self.config.inViewportClass);
-                self.config.afterShow.call(self.element);
+    if( !this.element.hasClass(this.config.inViewportClass) ) return;
 
-                self.callbackTimeoutId = setTimeout(function () {
-                    self.config.onShown.call(self.element);
-                }, self.config.animationDuration);
+    if( this.config.animationOut ) {
 
-            }, this.config.animationDelay);
-        }
-        else {
-            this.element
-                .removeClass(this.config.animationOut)
-                .addClass(this.config.animation + ' ' + this.config.inViewportClass);
-            this.config.afterShow.call(this.element);
+      this.element
+        .removeClass( this.config.animation )
+        .addClass( this.config.animationOut );
 
-            this.callbackTimeoutId = setTimeout(function () {
-                self.config.onShown.call(self.element);
-            }, this.config.animationDuration);
-        }
+      this.callbackTimeoutId = setTimeout(function(){
+
+        self.element.removeClass(self.config.inViewportClass);
+        self.config.onHidded.call( self.element );
+
+      }, this.config.animationDuration);
 
     }
+    else {
 
-    /**
-     * Hides element.
-     *
-     * @return undefined
-     */
-    HSAnimationElement.prototype.hide = function () {
-
-        var self = this;
-
-        if (!this.element.hasClass(this.config.inViewportClass)) return;
-
-        if (this.config.animationOut) {
-
-            this.element
-                .removeClass(this.config.animation)
-                .addClass(this.config.animationOut);
-
-            this.callbackTimeoutId = setTimeout(function () {
-
-                self.element.removeClass(self.config.inViewportClass);
-                self.config.onHidded.call(self.element);
-
-            }, this.config.animationDuration);
-
-        }
-        else {
-
-            this.element.removeClass(this.config.inViewportClass + ' ' + this.config.animation);
-            this.config.onHidded.call(this.element);
-        }
-
+      this.element.removeClass(this.config.inViewportClass + ' ' + this.config.animation);
+      this.config.onHidded.call( this.element );
     }
+
+  }
 
 })(jQuery);

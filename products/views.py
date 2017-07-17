@@ -1,21 +1,9 @@
-from django.shortcuts import render
-from rest_framework import viewsets
+from django.shortcuts import render, get_object_or_404
 
 from .models import Product
-from .serializers import ProductSerializer
 
 
 # Create your views here.
-def all_products(request):
-    products = Product.objects.all()
-    # args = {}
-    # args.update(csrf(request))
-    return render(request, "categories.html", {"products": products})
-
-
-class ProductViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+def product_details(request, id):
+    product = get_object_or_404(Product,pk=id)
+    return render(request, "product.html", {"product": product})
