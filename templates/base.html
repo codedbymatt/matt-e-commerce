@@ -88,9 +88,21 @@
                             <li class="nav-item g-mx-12--lg g-mb-7 g-mb-0--lg">
                                 <a href="#products" class="nav-link">Products</a>
                             </li>
-                            <li class="nav-item g-ml-12--lg">
+                            <li class="nav-item g-mx-12--lg g-mb-7 g-mb-0--lg">
                                 <a href="#contact" class="nav-link">Contact</a>
                             </li>
+	                        {% if user.is_authenticated %}
+	                        <li class="nav-item g-mx-12--lg g-mb-7 g-mb-0--lg">
+                                <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                            </li>
+	                        {% else %}
+	                        <li class="nav-item g-mx-12--lg g-mb-7 g-mb-0--lg">
+                                <a href="{% url 'login' %}" class="nav-link">Login</a>
+                            </li>
+		                        <li class="nav-item g-mx-12--lg g-mb-7 g-mb-0--lg">
+                                <a href="{% url 'register' %}" class="nav-link">Register</a>
+                            </li>
+	                        {% endif %}
                         </ul>
                     </div>
                     <!-- End Navigation -->
