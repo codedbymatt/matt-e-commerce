@@ -328,8 +328,8 @@
 
                     $gMap.setCenter(latlng.lat(), latlng.lng());
                     $gMap.addMarker({
-                      lat: latlng.lat(),
-                      lng: latlng.lng()
+                      lat: latlng.lat(25.034280),
+                      lng: latlng.lng(-77.396280)
                     });
                   }
                 }
