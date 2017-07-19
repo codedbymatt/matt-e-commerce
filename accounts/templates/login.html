@@ -1,13 +1,19 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
 {% block content %}
-    <form role="form" method="post" action="{% url 'login' %}?next={{ next }}">
-        <legend>Login</legend>
-        {% csrf_token %}
-        {{ form | as_bootstrap }}
-        <p><a href="{% url 'password_reset' %}">Forgot my password</a></p>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Login</button>
-        </div>
-    </form>
+	<div style="background-image: url('../../static/e_commerce/assets/img-temp/2100x1416/img1.jpg')">
+		<div class="container" style="padding-top: 10%; padding-bottom: 20%">
+			<div class="container" style="padding: 1%; background: transparent; color: lightgrey">
+				<form role="form" method="post" action="{% url 'login' %}?next={{ next }}">
+					<legend>Login</legend>
+					{% csrf_token %}
+					{{ form | as_bootstrap }}
+					<p><a href="{% url 'password_reset' %}">Forgot my password</a></p>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Login</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 {% endblock %}
