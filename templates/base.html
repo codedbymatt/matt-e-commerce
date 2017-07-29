@@ -36,8 +36,12 @@
 
 	<!-- CSS Customization -->
 	<link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
-</head>
 
+	<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/jquery.easing/js/jquery.easing.js' %}"></script>
+
+	{% block head_js %}
+	{% endblock %}
 <body>
 <main>
 	<!-- Header -->
@@ -126,6 +130,15 @@
 			</nav>
 		</div>
 	</header>
+	{% if messages %}
+		<div class="alert alert-success">
+			<div class="messages">
+				{% for message in messages %}
+					{{ message }}
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
 	<!-- End Header -->
 	{% block content %}
 	{% endblock content %}
@@ -211,8 +224,6 @@
 	<!-- End Footer -->
 
 	<!-- JS Global Compulsory -->
-	<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
-	<script src="{% static 'assets/vendor/jquery.easing/js/jquery.easing.js' %}"></script>
 	<script src="{% static 'assets/vendor/tether.min.js' %}"></script>
 	<script src="{% static 'assets/vendor/bootstrap/bootstrap.min.js' %}"></script>
 
