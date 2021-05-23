@@ -5,7 +5,7 @@ chardet==3.0.4
 click==6.7
 dj-database-url==0.4.2
 dj-stripe==0.8.0
-Django==1.11.3
+Django==1.11.29
 django-bootstrap3==9.0.0
 django-braces==1.11.0
 django-dashing==0.3.3
